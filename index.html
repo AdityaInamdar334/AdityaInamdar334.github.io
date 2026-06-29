@@ -40,8 +40,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Bootstrap Grid CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-grid.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -158,100 +158,112 @@
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title reveal mb-5">Technical Arsenal</h2>
-            <div class="bento-grid">
+            <div class="row g-4">
                 <!-- AI & Machine Learning -->
-                <div class="bento-item bento-large bento-card">
-                    <div class="skill-header">
-                        <i class="fas fa-brain"></i>
-                        <h3>AI & ML Frameworks</h3>
+                <div class="col-12 col-lg-6 d-flex">
+                    <div class="bento-item bento-card w-100 p-4 p-md-5">
+                        <div class="skill-header">
+                            <i class="fas fa-brain"></i>
+                            <h3>AI & ML Frameworks</h3>
+                        </div>
+                        <ul class="skill-tags">
+                            <li>PyTorch</li>
+                            <li>TensorFlow</li>
+                            <li>MLX</li>
+                            <li>Transformers</li>
+                            <li>LangChain</li>
+                            <li>ChromaDB</li>
+                        </ul>
                     </div>
-                    <ul class="skill-tags">
-                        <li>PyTorch</li>
-                        <li>TensorFlow</li>
-                        <li>MLX</li>
-                        <li>Transformers</li>
-                        <li>LangChain</li>
-                        <li>ChromaDB</li>
-                    </ul>
                 </div>
 
                 <!-- Languages -->
-                <div class="bento-item bento-tall bento-card">
-                    <div class="skill-header">
-                        <i class="fas fa-code"></i>
-                        <h3>Languages</h3>
+                <div class="col-12 col-md-6 col-lg-3 d-flex">
+                    <div class="bento-item bento-card w-100 p-4 p-md-5">
+                        <div class="skill-header">
+                            <i class="fas fa-code"></i>
+                            <h3>Languages</h3>
+                        </div>
+                        <ul class="skill-tags">
+                            <li>Python (expert)</li>
+                            <li>TypeScript</li>
+                            <li>JavaScript</li>
+                            <li>Java</li>
+                            <li>C++</li>
+                            <li>SQL</li>
+                        </ul>
                     </div>
-                    <ul class="skill-tags">
-                        <li>Python (expert)</li>
-                        <li>TypeScript</li>
-                        <li>JavaScript</li>
-                        <li>Java</li>
-                        <li>C++</li>
-                        <li>SQL</li>
-                    </ul>
                 </div>
 
                 <!-- Specialized Areas -->
-                <div class="bento-item bento-tall bento-card">
-                    <div class="skill-header">
-                        <i class="fas fa-network-wired"></i>
-                        <h3>Specialized Areas</h3>
+                <div class="col-12 col-md-6 col-lg-3 d-flex">
+                    <div class="bento-item bento-card w-100 p-4 p-md-5">
+                        <div class="skill-header">
+                            <i class="fas fa-network-wired"></i>
+                            <h3>Specialized Areas</h3>
+                        </div>
+                        <ul class="skill-tags">
+                            <li>RAG</li>
+                            <li>Agentic Workflows</li>
+                            <li>Prompt Engineering</li>
+                            <li>LoRA / DPO / SFT</li>
+                            <li>Graph ML</li>
+                            <li>Real-time Systems</li>
+                        </ul>
                     </div>
-                    <ul class="skill-tags">
-                        <li>RAG</li>
-                        <li>Agentic Workflows</li>
-                        <li>Prompt Engineering</li>
-                        <li>LoRA / DPO / SFT</li>
-                        <li>Graph ML</li>
-                        <li>Real-time Systems</li>
-                    </ul>
                 </div>
 
                 <!-- Backend & Infrastructure -->
-                <div class="bento-item bento-wide bento-card">
-                    <div class="skill-header">
-                        <i class="fas fa-server"></i>
-                        <h3>Backend & Infra</h3>
+                <div class="col-12 col-lg-6 d-flex">
+                    <div class="bento-item bento-card w-100 p-4 p-md-5">
+                        <div class="skill-header">
+                            <i class="fas fa-server"></i>
+                            <h3>Backend & Infra</h3>
+                        </div>
+                        <ul class="skill-tags">
+                            <li>FastAPI</li>
+                            <li>Node.js</li>
+                            <li>Docker</li>
+                            <li>AWS / GCP</li>
+                            <li>PostgreSQL</li>
+                            <li>Render / Vercel</li>
+                        </ul>
                     </div>
-                    <ul class="skill-tags">
-                        <li>FastAPI</li>
-                        <li>Node.js</li>
-                        <li>Docker</li>
-                        <li>AWS / GCP</li>
-                        <li>PostgreSQL</li>
-                        <li>Render / Vercel</li>
-                    </ul>
                 </div>
 
                 <!-- Frontend -->
-                <div class="bento-item bento-card">
-                    <div class="skill-header">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Frontend</h3>
+                <div class="col-12 col-md-6 col-lg-3 d-flex">
+                    <div class="bento-item bento-card w-100 p-4 p-md-5">
+                        <div class="skill-header">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Frontend</h3>
+                        </div>
+                        <ul class="skill-tags">
+                            <li>React</li>
+                            <li>Next.js</li>
+                            <li>React Native</li>
+                            <li>TypeScript</li>
+                            <li>Tailwind CSS</li>
+                            <li>React Flow</li>
+                        </ul>
                     </div>
-                    <ul class="skill-tags">
-                        <li>React</li>
-                        <li>Next.js</li>
-                        <li>React Native</li>
-                        <li>TypeScript</li>
-                        <li>Tailwind CSS</li>
-                        <li>React Flow</li>
-                    </ul>
                 </div>
 
                 <!-- Developer Tools -->
-                <div class="bento-item bento-card">
-                    <div class="skill-header">
-                        <i class="fas fa-tools"></i>
-                        <h3>Developer Tools</h3>
+                <div class="col-12 col-md-6 col-lg-3 d-flex">
+                    <div class="bento-item bento-card w-100 p-4 p-md-5">
+                        <div class="skill-header">
+                            <i class="fas fa-tools"></i>
+                            <h3>Developer Tools</h3>
+                        </div>
+                        <ul class="skill-tags">
+                            <li>Git & Linux</li>
+                            <li>CI/CD</li>
+                            <li>Jira</li>
+                            <li>MPS acceleration</li>
+                            <li>ITIL/SLA</li>
+                        </ul>
                     </div>
-                    <ul class="skill-tags">
-                        <li>Git & Linux</li>
-                        <li>CI/CD</li>
-                        <li>Jira</li>
-                        <li>MPS acceleration</li>
-                        <li>ITIL/SLA</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -1413,6 +1425,8 @@
         // Fallback
         setTimeout(hidePreloader, 2000);
     </script>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="script.js" defer></script>
 </body>
 
