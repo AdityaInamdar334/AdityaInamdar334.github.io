@@ -34,7 +34,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -50,6 +50,9 @@
 </head>
 
 <body>
+    <!-- Interactive Canvas Particle Constellation Background -->
+    <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; opacity: 0.65;"></canvas>
+
     <!-- Premium Preloader -->
     <div id="preloader">
         <div class="loader-content">
@@ -60,208 +63,429 @@
         </div>
     </div>
 
-    <div class="cursor-glow"></div>
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor-dot"></div>
-    <div class="custom-cursor-ring"></div>
-
     <!-- Scroll Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
     </div>
 
-    <!-- Floating Action Bar -->
-    <div class="floating-action-bar">
-        <a href="mailto:adityainamdar334@gmail.com" class="fab-item" aria-label="Email Me"><i class="fas fa-envelope"></i></a>
-        <a href="https://adityainamdar.com" class="fab-item" aria-label="Website" target="_blank"><i class="fas fa-globe"></i></a>
-        <a href="https://www.linkedin.com/in/adityainamdar1/" class="fab-item" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://github.com/AdityaInamdar334" class="fab-item" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://medium.com/@inamdaraditya" class="fab-item" aria-label="Medium" target="_blank"><i class="fab fa-medium-m"></i></a>
-        <a href="https://adityainamdar.substack.com/" class="fab-item" aria-label="Substack" target="_blank"><i class="fas fa-bookmark"></i></a>
-        <a href="https://youtube.com/@CyberSocratic" class="fab-item" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://leetcode.com/u/AdityaInamdar334" class="fab-item" aria-label="LeetCode" target="_blank"><i class="fas fa-code"></i></a>
-        <a href="Resume (1).pdf" class="fab-item download-cv" aria-label="Download CV" download><i class="fas fa-file-download"></i></a>
-    </div>
-
-    <nav class="navbar">
-        <div class="logo">PORTFOLIO<span class="dot">.</span></div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#volunteering">Volunteering</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#podcasts">Podcasts</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
-            <i class="fas fa-moon"></i>
-        </button>
-    </nav>
-    <a href="#contact" class="hire-me-badge">
-        <i class="fas fa-briefcase"></i> Available for Work
-    </a>
-
-    <header id="hero">
-        <!-- Interactive Particle Background Container -->
-        <div id="tsparticles"></div>
-        <div class="hero-content text-center text-md-start">
-            <span class="greeting">Hello, I'm</span>
-            <h1 class="glitch display-4 fw-bold" data-text="Aditya Inamdar">Aditya Inamdar</h1>
-            <h2 class="subtitle">AI/ML Engineer | Full-Stack Developer</h2>
-            <p class="bio-short lead my-4">I build machine learning systems, AI applications, and developer tools across the full stack. My interests include large language models, agentic AI systems, retrieval-augmented generation (RAG), reinforcement learning, and scalable backend infrastructure.<br><br>I enjoy taking projects from research and experimentation to deployable applications, with a focus on performance, reliability, and user experience.</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn primary">View Work</a>
-                <a href="Resume (1).pdf" class="btn secondary" download>Download CV <i class="fas fa-download"></i></a>
+    <header class="shrink-0 z-40 bg-background/95 backdrop-blur-md border-bottom border-white/10 sticky-top">
+        <div class="max-w-5xl mx-auto px-4 py-2.5 d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <span class="d-flex align-items-center gap-2">
+                <span class="font-serif text-accent fs-5 select-none" aria-hidden="true">❋</span>
+                <span class="font-serif fs-5 tracking-tight text-foreground fw-medium">Aditya Inamdar</span>
+                <span class="badge bg-success/20 text-success border border-success/30 font-mono text-xs px-2 py-1 rounded-pill ms-1 d-none d-sm-inline-flex align-items-center gap-1">
+                    <span class="pulse-dot-green">●</span> Available for AI/ML Roles
+                </span>
+            </span>
+            <nav class="d-none d-md-flex align-items-center gap-3 font-mono text-xs">
+                <a href="#about" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">01</span>About</a>
+                <a href="#experience" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">02</span>Experience</a>
+                <a href="#skills" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">03</span>Arsenal</a>
+                <a href="#projects" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">04</span>Work</a>
+                <a href="#education" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">05</span>Education</a>
+                <a href="#contact" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">06</span>Contact</a>
+            </nav>
+            <div class="d-flex align-items-center gap-2">
+                <button id="audio-toggle-btn" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1.5 text-silver" title="Toggle Haptic UI Audio FX">
+                    <i class="fas fa-volume-up text-accent" id="audio-icon"></i> <span id="audio-status-text" class="d-none d-sm-inline">Audio: On</span>
+                </button>
+                <button id="cmd-palette-trigger" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1.5 text-silver" title="Quick Actions (⌘K or /)">
+                    <kbd class="bg-white/10 border border-white/20 px-1 py-0.5 rounded text-accent font-mono text-xs">⌘K</kbd> Quick Actions
+                </button>
+                <a href="Aditya_Inamdar_Resume.pdf" target="_blank" download class="btn btn-outline-warning btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1">
+                    <i class="fas fa-file-pdf"></i> Resume PDF
+                </a>
+                <a class="btn-kunj-browse" href="#about">Browse site →</a>
             </div>
-        </div>
-        <div class="hero-visual">
-            <div class="abstract-shape shape1"></div>
-            <div class="abstract-shape shape2"></div>
         </div>
     </header>
 
+    <main class="d-flex flex-column align-items-center justify-content-center px-3 min-vh-100 py-5 relative z-10">
+        <div class="w-full max-w-2xl text-center">
+            <p class="font-serif display-5 text-accent select-none mb-2" aria-hidden="true">❋</p>
+            <h1 class="font-serif display-6 fw-normal leading-tight tracking-tight text-foreground mb-3">
+                Aditya Inamdar — AI engineer &amp; researcher.
+            </h1>
+            <p class="font-sans italic text-muted-foreground text-balance text-lg mb-4">
+                Building AI systems. RAG, agents &amp; world models by research. A small model living in this page has read his collected works — ask it anything.
+            </p>
+
+            <!-- Kunj-Style Prompt Textarea Card -->
+            <div class="kunj-prompt-card text-start mb-4">
+                <textarea id="webgpu-input" rows="2" placeholder="Ask anything about Aditya…" class="kunj-textarea form-control"></textarea>
+                
+                <!-- Streaming Response Container -->
+                <div id="webgpu-response-box" class="webgpu-response-box px-4 py-3 font-mono text-sm border-top border-white/10" style="display: none;">
+                    <div id="webgpu-response-content"></div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between px-4 py-2 border-top border-white/5">
+                    <span class="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                        <span class="text-accent me-1">○</span> <span id="webgpu-engine-name">Qwen2.5 · 0.5B · q4f16</span> · runs in your browser
+                    </span>
+                    <button id="webgpu-send-btn" aria-label="Send" class="btn btn-accent rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prompt Suggestion Chips -->
+            <div class="prompt-chips d-flex flex-wrap justify-content-center gap-2 mb-4">
+                <button class="chip-btn">💼 Why hire Aditya for AI/ML roles?</button>
+                <button class="chip-btn">🎓 What is his education &amp; MS CS GPA?</button>
+                <button class="chip-btn">⚡ What did he ship at Mainly.ai &amp; GSoC?</button>
+                <button class="chip-btn">✉ How do I contact him for interviews?</button>
+            </div>
+
+            <p class="font-mono text-xs text-muted-foreground text-center opacity-75 mt-4">
+                † Qwen2.5-0.5B-Instruct-q4f16_1 via WebLLM &amp; WebGPU — weights download once (~350 MB), then run locally. No server, no logging, occasionally no idea.
+            </p>
+
+            <!-- Scroll Down Indicator -->
+            <div class="mt-5">
+                <a href="#about" class="text-muted text-decoration-none font-mono text-xs hover-accent">
+                    Scroll for full portfolio &amp; paper CV ↓
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Document Page Folio 1 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 1 ·</p>
+    </div>
+
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title reveal mb-5">About Me</h2>
-            <div class="row align-items-center g-5 about-content reveal">
-                <div class="col-12 col-lg-5 about-image text-center mb-4 mb-lg-0">
-                    <!-- Placeholder for profile image -->
-                    <div class="img-placeholder"><i class="fas fa-user-astronaut"></i></div>
-                </div>
-                <div class="col-12 col-lg-7 about-text">
-                    <p>I am an AI/ML Engineer and full-stack developer with hands-on experience building production AI systems from scratch. I turn research into working products that real people use. My work spans RAG assistants, real-time voice agents, GPU-optimized world models, and LLM alignment pipelines.</p>
-                    <p>I thrive in customer-facing, ambiguous environments and take ownership of outcomes from discovery to deployment. I am currently pursuing my Master's in Computer Science at <strong>Felician University</strong>.</p>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-number">4+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Major Projects</span>
+            <div class="rule-double mb-3"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between font-mono text-xs tracking-wider uppercase text-muted mb-3">
+                <span>No. AI-2026.05</span>
+                <span>New Jersey — NY Metro Area</span>
+                <span>Portfolio · Preprint · May 2026</span>
+            </div>
+
+            <!-- Preprint Headline Title -->
+            <h1 class="font-serif text-4xl md:text-5xl tracking-tight mb-4 mt-3">
+                <span class="text-gradient-silver">Systems that retrieve, reason,</span><br/>
+                <em class="text-gradient-gold">&amp; remember.</em>
+            </h1>
+
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-4">
+                <span class="section-mark">§1</span>
+                <h2 class="font-serif text-2xl md:text-3xl tracking-tight d-inline">About Me</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">biography &amp; research focus</span>
+            </div>
+            
+            <div class="paper-card p-4 md:p-5">
+                <div class="row align-items-center g-4">
+                    <div class="col-12 col-lg-4 text-center mb-3 mb-lg-0">
+                        <div class="paper-profile-frame p-3 border border-border bg-card/40 rounded-3">
+                            <img src="assets/images/aditya_profile.jpg" alt="Aditya Inamdar" class="profile-img rounded-circle border border-accent shadow my-2" style="width: 130px; height: 130px; object-fit: cover;">
+                            <h3 class="font-serif text-xl mt-2 mb-1 text-white">Aditya Inamdar</h3>
+                            <p class="font-mono text-xs text-silver">AI Engineer &amp; Developer</p>
+                            <div class="font-mono text-xs text-silver mt-2 border-top pt-2 border-white/10">
+                                <div><sup class="text-accent">1</sup> Felician University</div>
+                                <div><sup class="text-accent">2</sup> Mainly.ai</div>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-8">
+                        <p class="font-sans text-base leading-relaxed text-white">I am an AI/ML Engineer and full-stack developer with hands-on experience building production AI systems from scratch. I turn research into working products that real people use. My work spans RAG assistants, real-time voice agents, GPU-optimized world models, and LLM alignment pipelines.</p>
+                        <p class="font-sans text-base leading-relaxed text-white mt-3">I thrive in customer-facing, ambiguous environments and take ownership of outcomes from discovery to deployment. I completed my Master's in Computer Science at <strong class="text-accent">Felician University</strong> (May 2026).</p>
+                        
+                        <!-- Executive Recruiter Callout Box -->
+                        <div class="mt-4 p-3 border border-amber-500/30 bg-amber-500/10 rounded-3 border-shimmer-gold">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                                <div>
+                                    <p class="font-mono text-xs text-accent uppercase tracking-wider mb-1"><i class="fas fa-briefcase me-1"></i> Target Roles &amp; Availability</p>
+                                    <p class="font-sans text-sm text-white mb-0"><strong>AI/ML Engineer · Applied ML Scientist · Software Engineer</strong> | NY Metro / NJ (Open to Relocation &amp; Remote)</p>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="Aditya_Inamdar_Resume.pdf" target="_blank" download class="btn btn-warning text-dark font-mono text-xs px-3 py-2 fw-semibold rounded-2 d-inline-flex align-items-center gap-1.5 shadow-sm">
+                                        <i class="fas fa-file-pdf"></i> Download Resume (PDF) ↗
+                                    </a>
+                                    <a href="mailto:adityainamdar74@gmail.com" class="btn btn-outline-light font-mono text-xs px-3 py-2 rounded-2 d-inline-flex align-items-center gap-1.5">
+                                        <i class="fas fa-envelope"></i> Email Aditya
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-top border-white/10 d-flex flex-wrap gap-3 font-mono text-xs text-silver">
+                            <span class="text-accent font-semibold">Available at:</span>
+                            <a href="https://github.com/AdityaInamdar334" target="_blank" class="ref-link text-accent">[GitHub]</a>
+                            <a href="https://linkedin.com/in/adityainamdar1/" target="_blank" class="ref-link text-accent">[LinkedIn]</a>
+                            <a href="https://adityainamdar.substack.com/" target="_blank" class="ref-link text-accent">[Substack]</a>
+                            <a href="Aditya_Inamdar_Resume.pdf" download class="ref-link text-accent">[Resume PDF]</a>
+                            <a href="#contact" class="ref-link text-accent">[Contact]</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Executive Impact Metrics Grid -->
+            <div class="mt-4 border-top border-bottom border-white/10 py-4 row text-center text-md-start" id="metrics-grid">
+                <div class="col-6 col-md-3 py-2 border-end border-white/10">
+                    <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="15" data-prefix="+" data-suffix="%">+15%</p>
+                    <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">Bone Cancer CNN Accuracy</p>
+                </div>
+                <div class="col-6 col-md-3 py-2 border-end border-white/10">
+                    <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="27.4" data-decimals="1" data-suffix="x">27.4x</p>
+                    <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">MPS World Model Acceleration</p>
+                </div>
+                <div class="col-6 col-md-3 py-2 border-end border-white/10">
+                    <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="30" data-suffix="%">30%</p>
+                    <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">Medical Image Pipeline Speedup</p>
+                </div>
+                <div class="col-6 col-md-3 py-2">
+                    <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="3.78" data-decimals="2">3.78</p>
+                    <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">MS CS GPA (Felician)</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Document Page Folio 2 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 2 ·</p>
+    </div>
 
-    <section id="skills" class="section">
+    <section id="experience" class="section scroll-mt-20">
         <div class="container">
-            <h2 class="section-title reveal mb-5">Technical Arsenal</h2>
-            <div class="row g-4">
-                <!-- AI & Machine Learning -->
-                <div class="col-12 col-lg-6 d-flex">
-                    <div class="bento-item bento-card w-100 p-4 p-md-5">
-                        <div class="skill-header">
-                            <i class="fas fa-brain"></i>
-                            <h3>AI & ML Frameworks</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>PyTorch</li>
-                            <li>TensorFlow</li>
-                            <li>MLX</li>
-                            <li>Transformers</li>
-                            <li>LangChain</li>
-                            <li>ChromaDB</li>
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
+                <span class="section-mark">§2</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Experience</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">industry, research, campus — 2023 to present</span>
+            </div>
+
+            <div class="paper-timeline space-y-6">
+                <!-- Job 1 -->
+                <article class="paper-article group row py-4 border-top border-border">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0 text-md-end font-mono text-xs text-muted">
+                        <p class="tabular text-foreground font-semibold">Jan 2026 — May 2026</p>
+                        <p class="text-muted text-xs mt-1">Stockholm, Sweden (Remote)</p>
+                    </div>
+                    <div class="col-12 col-md-9 ps-md-4">
+                        <h3 class="font-serif text-xl leading-snug group-hover:text-accent transition-colors">Machine Learning Systems Intern</h3>
+                        <p class="font-sans italic text-muted text-sm mt-0.5">Mainly.ai · Stockholm, Sweden</p>
+                        <ul class="list-unstyled mt-3 mb-3">
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Deconstructed Transformer and Hierarchical Risk Model (HRM) architectures using PyTorch to analyze layer-wise attention weights, improving model interpretability for high-dimensional financial and scientific datasets.</span>
+                            </li>
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Engineered automated visualization pipelines within a Graph-based IDE using Deep Graph Library (DGL) to track complex data lineage and multi-dimensional system dependencies.</span>
+                            </li>
+                        </ul>
+                        <p class="font-mono text-xs text-muted mt-3">
+                            <span><span class="text-accent/60">[</span>PyTorch<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Transformers<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>HRMs<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>DGL<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Graph ML<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Python<span class="text-accent/60">]</span></span>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Job 2 -->
+                <article class="paper-article group row py-4 border-top border-border">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0 text-md-end font-mono text-xs text-muted">
+                        <p class="tabular text-foreground font-semibold">Jan 2025 — May 2026</p>
+                        <p class="text-muted text-xs mt-1">Rutherford, NJ</p>
+                    </div>
+                    <div class="col-12 col-md-9 ps-md-4">
+                        <h3 class="font-serif text-xl leading-snug group-hover:text-accent transition-colors">Graduate Assistant (IT Operations &amp; Lead Administration)</h3>
+                        <p class="font-sans italic text-muted text-sm mt-0.5">Felician University · Rutherford, NJ</p>
+                        <ul class="list-unstyled mt-3 mb-3">
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Manage campus IT helpdesk operations, supervising a team of 4 student technicians across enterprise systems.</span>
+                            </li>
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Optimized internal knowledge base and incident workflows, cutting average ticket resolution time by 15% across the university.</span>
+                            </li>
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Maintain 95%+ user satisfaction rate through consistent service quality and rapid issue resolution.</span>
+                            </li>
+                        </ul>
+                        <p class="font-mono text-xs text-muted mt-3">
+                            <span><span class="text-accent/60">[</span>ITIL/SLA<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Helpdesk Lead<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Knowledge Base<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>System Administration<span class="text-accent/60">]</span></span>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Job 3 -->
+                <article class="paper-article group row py-4 border-top border-border">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0 text-md-end font-mono text-xs text-muted">
+                        <p class="tabular text-foreground font-semibold">Jan 2024 — May 2024</p>
+                        <p class="text-muted text-xs mt-1">Pune, India</p>
+                    </div>
+                    <div class="col-12 col-md-9 ps-md-4">
+                        <h3 class="font-serif text-xl leading-snug group-hover:text-accent transition-colors">Application Developer Intern</h3>
+                        <p class="font-sans italic text-muted text-sm mt-0.5">ISKCON · Pune, India</p>
+                        <ul class="list-unstyled mt-3 mb-3">
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Led a cross-functional team of 4 developers to build, test, and deploy a secure mobile application using React Native, cutting the launch timeline by 30% using Agile sprints.</span>
+                            </li>
+                        </ul>
+                        <p class="font-mono text-xs text-muted mt-3">
+                            <span><span class="text-accent/60">[</span>React Native<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Mobile Dev<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Agile/Scrum<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>TypeScript<span class="text-accent/60">]</span></span>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Job 4 -->
+                <article class="paper-article group row py-4 border-top border-border">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0 text-md-end font-mono text-xs text-muted">
+                        <p class="tabular text-foreground font-semibold">June 2023 — Dec 2023</p>
+                        <p class="text-muted text-xs mt-1">Remote</p>
+                    </div>
+                    <div class="col-12 col-md-9 ps-md-4">
+                        <h3 class="font-serif text-xl leading-snug group-hover:text-accent transition-colors">Machine Learning Intern — Bone Cancer Detection</h3>
+                        <p class="font-sans italic text-muted text-sm mt-0.5">Google Summer of Code (GSoC) '23 · Remote</p>
+                        <ul class="list-unstyled mt-3 mb-3">
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Developed a Bone Cancer Detection model using Convolutional Neural Networks (CNNs), achieving a 15% increase in diagnostic accuracy over legacy baseline models.</span>
+                            </li>
+                            <li class="d-flex align-items-start gap-2 mb-2">
+                                <span class="text-accent font-mono flex-shrink-0" style="color: #f59e0b; font-weight: 500;">—</span>
+                                <span>Engineered a high-throughput data preprocessing pipeline, reducing medical image analysis time by 30%.</span>
+                            </li>
+                        </ul>
+                        <p class="font-mono text-xs text-muted mt-3">
+                            <span><span class="text-accent/60">[</span>CNNs<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>Medical AI<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>TensorFlow<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>OpenCV<span class="text-accent/60">]</span> </span>
+                            <span><span class="text-accent/60">[</span>GSoC '23<span class="text-accent/60">]</span></span>
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document Page Folio 3 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 3 ·</p>
+    </div>
+
+    <section id="skills" class="section scroll-mt-20">
+        <div class="container">
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-4">
+                <span class="section-mark">§3</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Technical Arsenal</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">taxonomy of frameworks, languages &amp; systems</span>
+            </div>
+
+            <!-- Arsenal Category Filter Pills -->
+            <div class="d-flex flex-wrap gap-2 mb-4 font-mono text-xs" id="arsenal-filters">
+                <button class="btn btn-sm btn-warning text-dark fw-semibold arsenal-filter-btn active" data-filter="all">All Taxonomy</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="ai">AI &amp; ML</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="lang">Languages</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="infra">Backend &amp; Infra</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="tools">Ops &amp; Tools</button>
+            </div>
+
+            <div class="row g-4 font-mono text-xs">
+                <!-- AI & ML -->
+                <div class="col-12 col-md-6 col-lg-4 arsenal-card-col" data-category="ai">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">§3.1 AI &amp; ML Frameworks</p>
+                        <ul class="list-unstyled space-y-2 mb-0">
+                            <li><span class="text-accent">[PyTorch]</span> Deep learning &amp; autograd</li>
+                            <li><span class="text-accent">[TensorFlow]</span> Model training &amp; CNNs</li>
+                            <li><span class="text-accent">[MLX]</span> Apple Silicon optimization</li>
+                            <li><span class="text-accent">[Transformers]</span> Hugging Face ecosystem</li>
+                            <li><span class="text-accent">[LangChain]</span> Agentic &amp; RAG chains</li>
+                            <li><span class="text-accent">[ChromaDB]</span> Vector indexing &amp; search</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Languages -->
-                <div class="col-12 col-md-6 col-lg-3 d-flex">
-                    <div class="bento-item bento-card w-100 p-4 p-md-5">
-                        <div class="skill-header">
-                            <i class="fas fa-code"></i>
-                            <h3>Languages</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>Python (expert)</li>
-                            <li>TypeScript</li>
-                            <li>JavaScript</li>
-                            <li>Java</li>
-                            <li>C++</li>
-                            <li>SQL</li>
+                <div class="col-12 col-md-6 col-lg-4 arsenal-card-col" data-category="lang">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">§3.2 Core Languages</p>
+                        <ul class="list-unstyled space-y-2 mb-0">
+                            <li><span class="text-accent">[Python]</span> Expert (Systems &amp; ML)</li>
+                            <li><span class="text-accent">[TypeScript]</span> Full-stack applications</li>
+                            <li><span class="text-accent">[JavaScript]</span> ES6+ / Node.js</li>
+                            <li><span class="text-accent">[C++]</span> Low-level algorithms</li>
+                            <li><span class="text-accent">[Java]</span> Enterprise backend</li>
+                            <li><span class="text-accent">[SQL]</span> Relational data queries</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Specialized Areas -->
-                <div class="col-12 col-md-6 col-lg-3 d-flex">
-                    <div class="bento-item bento-card w-100 p-4 p-md-5">
-                        <div class="skill-header">
-                            <i class="fas fa-network-wired"></i>
-                            <h3>Specialized Areas</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>RAG</li>
-                            <li>Agentic Workflows</li>
-                            <li>Prompt Engineering</li>
-                            <li>LoRA / DPO / SFT</li>
-                            <li>Graph ML</li>
-                            <li>Real-time Systems</li>
+                <div class="col-12 col-md-6 col-lg-4 arsenal-card-col" data-category="ai">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">§3.3 Specializations</p>
+                        <ul class="list-unstyled space-y-2 mb-0">
+                            <li><span class="text-accent">[RAG Systems]</span> Hybrid vector search</li>
+                            <li><span class="text-accent">[LoRA / DPO]</span> LLM alignment &amp; SFT</li>
+                            <li><span class="text-accent">[Hierarchical Models]</span> HRM interpretability</li>
+                            <li><span class="text-accent">[Real-time Voice]</span> WebSockets &amp; Audio</li>
+                            <li><span class="text-accent">[Graph ML]</span> Deep Graph Library (DGL)</li>
+                            <li><span class="text-accent">[WebGPU]</span> In-browser LLM inference</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Backend & Infrastructure -->
-                <div class="col-12 col-lg-6 d-flex">
-                    <div class="bento-item bento-card w-100 p-4 p-md-5">
-                        <div class="skill-header">
-                            <i class="fas fa-server"></i>
-                            <h3>Backend & Infra</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>FastAPI</li>
-                            <li>Node.js</li>
-                            <li>Docker</li>
-                            <li>AWS / GCP</li>
-                            <li>PostgreSQL</li>
-                            <li>Render / Vercel</li>
+                <!-- Backend & Infra -->
+                <div class="col-12 col-md-6 col-lg-4 arsenal-card-col" data-category="infra">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">§3.4 Backend &amp; Infra</p>
+                        <ul class="list-unstyled space-y-2 mb-0">
+                            <li><span class="text-accent">[FastAPI]</span> High-throughput microservices</li>
+                            <li><span class="text-accent">[Node.js]</span> Asynchronous backends</li>
+                            <li><span class="text-accent">[Docker]</span> Containerization</li>
+                            <li><span class="text-accent">[AWS / GCP]</span> Cloud deployments</li>
+                            <li><span class="text-accent">[PostgreSQL]</span> Relational storage</li>
+                            <li><span class="text-accent">[Redis]</span> High-speed caching</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Frontend -->
-                <div class="col-12 col-md-6 col-lg-3 d-flex">
-                    <div class="bento-item bento-card w-100 p-4 p-md-5">
-                        <div class="skill-header">
-                            <i class="fas fa-laptop-code"></i>
-                            <h3>Frontend</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>React</li>
-                            <li>Next.js</li>
-                            <li>React Native</li>
-                            <li>TypeScript</li>
-                            <li>Tailwind CSS</li>
-                            <li>React Flow</li>
+                <div class="col-12 col-md-6 col-lg-4 arsenal-card-col" data-category="infra">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">§3.5 Frontend UI/UX</p>
+                        <ul class="list-unstyled space-y-2 mb-0">
+                            <li><span class="text-accent">[React]</span> Component architectures</li>
+                            <li><span class="text-accent">[Next.js]</span> SSR &amp; App Router</li>
+                            <li><span class="text-accent">[React Native]</span> Cross-platform mobile</li>
+                            <li><span class="text-accent">[Tailwind CSS]</span> Modern styling</li>
+                            <li><span class="text-accent">[React Flow]</span> Graph visualization</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Developer Tools -->
-                <div class="col-12 col-md-6 col-lg-3 d-flex">
-                    <div class="bento-item bento-card w-100 p-4 p-md-5">
-                        <div class="skill-header">
-                            <i class="fas fa-tools"></i>
-                            <h3>Developer Tools</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>Git & Linux</li>
-                            <li>CI/CD</li>
-                            <li>Jira</li>
-                            <li>MPS acceleration</li>
-                            <li>ITIL/SLA</li>
+                <div class="col-12 col-md-6 col-lg-4 arsenal-card-col" data-category="tools">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">§3.6 Tooling &amp; Ops</p>
+                        <ul class="list-unstyled space-y-2 mb-0">
+                            <li><span class="text-accent">[Git &amp; Linux]</span> Version control &amp; shell</li>
+                            <li><span class="text-accent">[CI/CD]</span> Automated pipelines</li>
+                            <li><span class="text-accent">[Apple MPS]</span> Metal performance shaders</li>
+                            <li><span class="text-accent">[ITIL/SLA]</span> Service management</li>
+                            <li><span class="text-accent">[Jira/Agile]</span> Sprint orchestration</li>
                         </ul>
                     </div>
                 </div>
@@ -269,1109 +493,597 @@
         </div>
     </section>
 
-    <section id="experience" class="section">
+    <section id="volunteering" class="section scroll-mt-20">
         <div class="container">
-            <h2 class="section-title reveal mb-5">Experience</h2>
-            <div class="timeline">
-                <!-- Job 1 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Jan 2026 – May 2026</div>
-                    <div class="timeline-content">
-                        <h3>Machine Learning Systems Intern</h3>
-                        <h4>MainlyAI | Stockholm, Sweden (Remote)</h4>
-                        <p>Deconstructed Transformer and Hierarchical Risk Model (HRM) architectures using PyTorch to analyze layer-wise attention weights, improving model interpretability for high-dimensional financial and scientific datasets.<br><br>Engineered automated visualization pipelines within a Graph-based IDE using Deep Graph Library (DGL) to track complex data lineage and multi-dimensional system dependencies.</p>
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
+                <span class="section-mark">§3.7</span>
+                <h2 class="font-serif text-2xl md:text-3xl tracking-tight d-inline">Leadership &amp; Community Outreach</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">community building &amp; student leadership</span>
+            </div>
+            
+            <div class="paper-timeline space-y-6">
+                <article class="paper-article group row py-4 border-top border-border">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0 text-md-end font-mono text-xs text-muted">
+                        <p class="tabular text-foreground font-semibold">Jul 2023 — Feb 2024</p>
+                        <p class="text-muted text-xs mt-1">Pune, India</p>
                     </div>
-                </div>
-                <!-- Job 2 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Jan 2025 – Present</div>
-                    <div class="timeline-content">
-                        <h3>Graduate Assistant (IT Operations & Lead Administration)</h3>
-                        <h4>Felician University | Rutherford, NJ</h4>
-                        <p>Manage campus IT helpdesk operations, supervising a team of 4 student technicians.<br>Optimized internal knowledge base and incident workflows, cutting average ticket resolution time by 15% across the university.<br>Maintain 95%+ user satisfaction rate through consistent service quality and rapid issue resolution.<br>Audit and maintain campus computer labs, deploy software updates, and manage enterprise licensing.</p>
+                    <div class="col-12 col-md-9 ps-md-4">
+                        <h3 class="font-serif text-xl leading-snug group-hover:text-accent transition-colors">President — Hack-X MIT-WPU</h3>
+                        <p class="font-sans italic text-muted text-sm mt-0.5">Science and Technology Division</p>
+                        <ul class="paper-bullet-list">
+                            <li class="paper-bullet-item" style="position: relative; padding-left: 1.6rem; margin-bottom: 0.6rem; list-style: none;">
+                                <span class="paper-bullet-dash" style="position: absolute; left: 0; top: 0; color: #f59e0b; font-family: monospace; font-weight: 500;">—</span>
+                                Spearheaded developer community growth, hosted hackathons, initiated the Cyber Socratic podcast, and orchestrated corporate sponsorships.
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <!-- Job 3 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Jan 2024 – May 2024</div>
-                    <div class="timeline-content">
-                        <h3>Application Developer Intern</h3>
-                        <h4>ISKCON | Pune, India</h4>
-                        <p>Led a cross-functional team of 4 developers to build, test, and deploy a secure mobile application using React Native, cutting the launch timeline by 30% using Agile sprints.</p>
+                </article>
+
+                <article class="paper-article group row py-4 border-top border-border">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0 text-md-end font-mono text-xs text-muted">
+                        <p class="tabular text-foreground font-semibold">Jan 2023 — Dec 2023</p>
+                        <p class="text-muted text-xs mt-1">Pune, India</p>
                     </div>
-                </div>
-                <!-- Job 4 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">June 2023 – Dec 2023</div>
-                    <div class="timeline-content">
-                        <h3>Machine Learning Intern</h3>
-                        <h4>Google Summer of Code (GSoC) '23 | Remote</h4>
-                        <p>Developed a Bone Cancer Detection model using Convolutional Neural Networks (CNNs), achieving a 15% increase in diagnostic accuracy over legacy baseline models.<br>Engineered a high-throughput data preprocessing pipeline, reducing medical image analysis time by 30%.</p>
+                    <div class="col-12 col-md-9 ps-md-4">
+                        <h3 class="font-serif text-xl leading-snug group-hover:text-accent transition-colors">Core Engineer — Google Developer Student Clubs</h3>
+                        <p class="font-sans italic text-muted text-sm mt-0.5">GDSC MIT-WPU</p>
+                        <ul class="paper-bullet-list">
+                            <li class="paper-bullet-item" style="position: relative; padding-left: 1.6rem; margin-bottom: 0.6rem; list-style: none;">
+                                <span class="paper-bullet-dash" style="position: absolute; left: 0; top: 0; color: #f59e0b; font-family: monospace; font-weight: 500;">—</span>
+                                Organized GDSC WOW &amp; Cloud Native Days, participated in Google Cloud Jam, and delivered guest lectures on distributed systems.
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <section id="volunteering" class="section">
-        <div class="container">
-            <h2 class="section-title reveal mb-5">Volunteering</h2>
-            <div class="timeline">
-                <!-- Volunteer 1 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Jul 2023 – Feb 2024</div>
-                    <div class="timeline-content">
-                        <h3>President</h3>
-                        <h4>Hack-X MIT-WPU | Science and Technology</h4>
-                        <p>Built the community, started podcast, collaborated with companies, managed events.</p>
-                    </div>
-                </div>
-                <!-- Volunteer 2 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Jan 2023 – Dec 2023</div>
-                    <div class="timeline-content">
-                        <h3>Core Engineer</h3>
-                        <h4>Google Developer Student Clubs MIT-WPU | Science and Technology</h4>
-                        <p>Collaborated with communities such as Kubernetes, organized events like GDSC WOW and Cloud
-                            Native Days, participated in Google Cloud Jam, delivered a guest lecture on blockchain in
-                            Andhra Pradesh, and took part in hackathons.</p>
-                    </div>
-                </div>
-                <!-- Volunteer 3 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Dec 2022 – May 2023</div>
-                    <div class="timeline-content">
-                        <h3>App Developer Lead</h3>
-                        <h4>MIT-WPU Texephyr | Science and Technology</h4>
-                        <p>Led a team of three to develop user and admin apps for managing the Texephyr event.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Document Page Folio 4 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 4 ·</p>
+    </div>
 
-    <!-- GitHub Live Stats Section -->
-    <section id="github-stats" class="section github-section" style="padding-top: 0; padding-bottom: 3rem;">
+    <!-- GitHub Activity Section -->
+    <section id="github-stats" class="section github-section py-4">
         <div class="container">
-            <div class="stats-wrapper">
-                <img src="https://github-readme-streak-stats.herokuapp.com/?user=AdityaInamdar334&theme=dark&background=00000000&ring=7b2cbf&fire=00b4d8&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=7b2cbf&sideLabels=a0a0a0&dates=a0a0a0&hide_border=true"
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-4">
+                <span class="section-mark">§3.8</span>
+                <h2 class="font-serif text-2xl tracking-tight d-inline">Open Source Velocity</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">real-time GitHub contribution telemetry</span>
+            </div>
+            <div class="stats-wrapper border border-border p-4 bg-card/40 rounded-3">
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=AdityaInamdar334&theme=dark&background=00000000&ring=818cf8&fire=38bdf8&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=818cf8&sideLabels=94a3b8&dates=94a3b8&hide_border=true"
                     alt="GitHub Streak Stats" class="github-widget" loading="lazy" />
-                <div class="github-widget"
-                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; padding: 1rem 1.5rem;">
-                    <h3
-                        style="color: #7b2cbf; font-size: 1.1rem; margin-bottom: 0.5rem; text-align: left; width: 100%;">
-                        GitHub Activity Heatmap</h3>
-                    <img src="https://ghchart.rshah.org/7b2cbf/AdityaInamdar334" alt="GitHub Contribution Chart"
-                        style="width: 100%; max-width: 600px; filter: brightness(0.9) contrast(1.2);" loading="lazy" />
+                <div class="github-widget d-flex flex-column align-items-center justify-content-center bg-transparent p-3">
+                    <p class="font-mono text-xs text-accent uppercase tracking-wider mb-2 w-100 text-start">GitHub Contribution Heatmap</p>
+                    <img src="https://ghchart.rshah.org/818cf8/AdityaInamdar334" alt="GitHub Contribution Chart"
+                        style="width: 100%; max-width: 650px; filter: brightness(0.95) contrast(1.15);" loading="lazy" />
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="section">
+    <!-- Document Page Folio 5 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 5 ·</p>
+    </div>
+
+    <section id="projects" class="section scroll-mt-20">
         <div class="container">
-            <h2 class="section-title reveal mb-5">Featured Projects</h2>
-            <div class="featured-projects">
-                <!-- Project 1 -->
-                <div class="project-showcase reveal" data-tilt data-tilt-max="2" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="project-image" style="background: url('assets/images/medical_ai.png') center/cover no-repeat;">
-                        <div class="project-overlay">
-                            <a href="https://nih-dataset-image-ml-model-ajsudumesy56vbikf5vwsc.streamlit.app/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/AdityaInamdar334/NIH-dataset-image-ml-model" target="_blank" class="github-link"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>AI Medical Image Analysis</h3>
-                        <p class="project-affiliation">End-to-End MLOps Pipeline</p>
-                        <p>An end-to-end production-ready AI system for automated chest X-ray interpretation using deep learning, explainable AI (Grad-CAM), and LLMs for structured radiology reports.</p>
-                        <div class="tags">
-                            <span>PyTorch</span>
-                            <span>FastAPI</span>
-                            <span>Streamlit</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-showcase reveal" data-tilt data-tilt-max="2" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="project-image" style="background: url('assets/images/llama_alignment.png') center/cover no-repeat;">
-                        <div class="project-overlay">
-                            <a href="https://github.com/AdityaInamdar334/llama-mlx-alignment" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/AdityaInamdar334/llama-mlx-alignment" target="_blank" class="github-link"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>LLaMA Alignment Pipeline</h3>
-                        <p class="project-affiliation">SFT + DPO on Apple Silicon</p>
-                        <p>Developed an end-to-end alignment pipeline for fine-tuning LLaMA models using Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO), optimized for Apple Silicon hardware.</p>
-                        <div class="tags">
-                            <span>MLX</span>
-                            <span>LoRA / DPO</span>
-                            <span>Hugging Face</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-showcase reveal" data-tilt data-tilt-max="2" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="project-image" style="background: url('assets/images/rssm_world_model.png') center/cover no-repeat;">
-                        <div class="project-overlay">
-                            <a href="https://adityainamdar334.github.io/cheetah-rssm-world-model" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/AdityaInamdar334/cheetah-rssm-world-model" target="_blank" class="github-link"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>RSSM World Model</h3>
-                        <p class="project-affiliation">Dreamer-Style Reinforcement Learning</p>
-                        <p>Implemented a Dreamer-inspired Recurrent State Space Model (RSSM) trained on pixel observations. 5M-parameter model with 27.4x training acceleration using Apple Silicon MPS.</p>
-                        <div class="tags">
-                            <span>PyTorch</span>
-                            <span>MPS</span>
-                            <span>World Models</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-showcase reveal" data-tilt data-tilt-max="2" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="project-image" style="background: url('assets/images/nexus_graph.png') center/cover no-repeat;">
-                        <div class="project-overlay">
-                            <a href="https://nexus-graph-prz0b82qs-adityainamdar334s-projects.vercel.app" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/AdityaInamdar334/Nexus-Graph-RAG" target="_blank" class="github-link"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Nexus Graph RAG</h3>
-                        <p class="project-affiliation">Research Assistant</p>
-                        <p>Built a retrieval-augmented research assistant capable of answering questions from document collections while generating interactive knowledge graphs from extracted entities.</p>
-                        <div class="tags">
-                            <span>Next.js</span>
-                            <span>FastAPI</span>
-                            <span>LangChain</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-showcase reveal" data-tilt data-tilt-max="2" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="project-image" style="background: url('assets/images/voice_ai.png') center/cover no-repeat;">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Real-Time Voice AI Agent</h3>
-                        <p class="project-affiliation">Conversational AI</p>
-                        <p>Developed a real-time conversational voice agent supporting bidirectional streaming, tool invocation, interruption handling, and telephony integration with Twilio.</p>
-                        <div class="tags">
-                            <span>FastAPI</span>
-                            <span>WebSockets</span>
-                            <span>Twilio</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div class="project-showcase reveal" data-tilt data-tilt-max="2" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.1">
-                    <div class="project-image" style="background: url('assets/images/gpt_transformers.png') center/cover no-repeat;">
-                        <div class="project-overlay">
-                            <a href="https://github.com/AdityaInamdar334/gpt-from-scratch" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/AdityaInamdar334/transformer-from-scratch" target="_blank" class="github-link"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>GPT & Transformers From Scratch</h3>
-                        <p class="project-affiliation">Educational & Research</p>
-                        <p>Implemented GPT-style transformer architectures and sequence-to-sequence models from first principles to deepen understanding of attention mechanisms and autoregressive modeling.</p>
-                        <div class="tags">
-                            <span>PyTorch</span>
-                            <span>NumPy</span>
-                            <span>NLP</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="research" class="section">
-        <div class="container">
-            <h2 class="section-title reveal mb-5">Research Papers & Implementations</h2>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">A collection of advanced
-                deep learning architectures and algorithms built from scratch.</p>
-
-            <div class="horizontal-scroll-wrapper">
-                <!-- Transformers -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #1fa2ff, #12d8fa, #a6ffcb);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Transformers</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementations of various Transformer architectures including Multi-headed attention,
-                            Transformer XL, GPT, MLP-Mixer, ViT, and Switch Transformer.</p>
-                        <div class="tags">
-                            <span>Transformers</span>
-                            <span>Attention</span>
-                            <span>NLP</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recurrent Highway Networks -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #ff416c, #ff4b2b);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Recurrent Highway Networks</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of Recurrent Highway Networks with enhanced depth and sequential processing
-                            capabilities.</p>
-                        <div class="tags">
-                            <span>RNN</span>
-                            <span>Sequence Models</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- LSTM -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #f7971e, #ffd200);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>LSTM</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Deep learning models utilizing Long Short-Term Memory networks for processing sequential
-                            data.</p>
-                        <div class="tags">
-                            <span>LSTM</span>
-                            <span>RNN</span>
-                            <span>Sequence</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- HyperNetworks -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #00b4db, #0083b0);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>HyperNetworks</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of HyperLSTM - utilizing a smaller network to generate weights for a larger
-                            LSTM network.</p>
-                        <div class="tags">
-                            <span>HyperNetworks</span>
-                            <span>LSTM</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ResNet -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #8e2de2, #4a00e0);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>ResNet</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of Residual Networks to train extremely deep neural networks via shortcut
-                            connections.</p>
-                        <div class="tags">
-                            <span>ResNet</span>
-                            <span>Vision</span>
-                            <span>CNN</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ConvMixer -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #11998e, #38ef7d);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>ConvMixer</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of ConvMixer, substituting convolutions for self-attention and MLP operations
-                            in vision tasks.</p>
-                        <div class="tags">
-                            <span>ConvMixer</span>
-                            <span>Vision</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Capsule Networks -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #fc466b, #3f5efb);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Capsule Networks</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of Capsule Networks to better model hierarchical relationships in image
-                            classification.</p>
-                        <div class="tags">
-                            <span>Capsule Nets</span>
-                            <span>Vision</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Generative Adversarial Networks -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Generative Adversarial Networks</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementations of GAN architectures including Original GAN, Deep Convolutional GAN, Cycle
-                            GAN, Wasserstein GAN, and StyleGAN 2.</p>
-                        <div class="tags">
-                            <span>GAN</span>
-                            <span>Generative</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Diffusion Models -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #c31432, #240b36);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Diffusion Models</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementations of Generative Diffusion models including Denoising Diffusion Probabilistic
-                            Models (DDPM).</p>
-                        <div class="tags">
-                            <span>Diffusion</span>
-                            <span>Generative</span>
-                            <span>DDPM</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sketch RNN -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Sketch RNN</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of Sketch RNN for generating vector-based drawings using seq2seq VAEs.</p>
-                        <div class="tags">
-                            <span>Sketch RNN</span>
-                            <span>Generative</span>
-                            <span>RNN</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Graph Neural Networks -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #1c92d2, #f2fcfe);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Graph Neural Networks</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementations of Graph Attention Networks (GAT) and Graph Attention Networks v2 (GATv2).
-                        </p>
-                        <div class="tags">
-                            <span>GNN</span>
-                            <span>GAT</span>
-                            <span>Graph</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Counterfactual Regret Minimization -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #000000, #434343);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Counterfactual Regret Minimization</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Solving games with incomplete information, such as Kuhn Poker, using Counterfactual Regret
-                            Minimization (CFR).</p>
-                        <div class="tags">
-                            <span>CFR</span>
-                            <span>Game Theory</span>
-                            <span>RL</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Reinforcement Learning -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #7b4397, #dc2430);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Reinforcement Learning</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementations of RL algorithms like PPO, Deep Q Networks, Prioritized Replay, and Dueling
-                            Networks.</p>
-                        <div class="tags">
-                            <span>RL</span>
-                            <span>PPO</span>
-                            <span>DQN</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Optimizers -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #5c258d, #4389a2);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Optimizers</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of deep learning optimizers including Adam, AMSGrad, Adam with warmup, Noam,
-                            Rectified Adam, and AdaBelief.</p>
-                        <div class="tags">
-                            <span>Optimizers</span>
-                            <span>Training</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Normalization Layers -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #4776e6, #8e54e9);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Normalization Layers</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementations of Batch, Layer, Instance, Group, Batch-Channel Normalizations, and Weight
-                            Standardization.</p>
-                        <div class="tags">
-                            <span>Normalization</span>
-                            <span>DL</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Distillation -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #1d976c, #93f9b9);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Distillation</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of Knowledge Distillation techniques to transfer knowledge to efficient
-                            models.</p>
-                        <div class="tags">
-                            <span>Distillation</span>
-                            <span>Compression</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Adaptive Computation -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #eb3349, #f45c43);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Adaptive Computation</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Implementation of Adaptive Computation models like PonderNet to dynamically adjust
-                            computation steps.</p>
-                        <div class="tags">
-                            <span>Adaptive</span>
-                            <span>PonderNet</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Uncertainty -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image" style="background: linear-gradient(45deg, #dd5e89, #f7bb97);">
-                        <div class="project-overlay" style="display: flex; justify-content: center; align-items: center;">
-                            <span style="color: white; font-weight: 600; background: rgba(0,0,0,0.6); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(4px);">Coming Soon</span>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Uncertainty</h3>
-                        <p class="project-affiliation">Implementation of Research Paper</p>
-                        <p>Utilizing Evidential Deep Learning to thoroughly quantify classification uncertainty in
-                            neural networks.</p>
-                        <div class="tags">
-                            <span>Uncertainty</span>
-                            <span>Evidential</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
+                <span class="section-mark">§4</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Selected Work</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">figures 01–06, in order of recency</span>
             </div>
 
-            <div class="swipe-indicator">
-                Swipe / Scroll to explore <i class="fas fa-arrow-right"></i>
-            </div>
-        </div>
-    </section>
-
-    <section id="education" class="section">
-        <div class="container">
-            <h2 class="section-title reveal mb-5">Education</h2>
-            <div class="row g-4 education-grid">
-                <div class="col-12 col-lg-6">
-                    <div class="education-card h-100">
-                        <h3>MS, Computer Science (GPA: 3.78/4.0)</h3>
-                        <h4>Felician University | Rutherford, NJ</h4>
-                        <span class="edu-date">May 2026</span>
-                        <p><strong>Relevant Coursework:</strong> Data Science, Data Mining, Artificial Intelligence</p>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div class="education-card h-100">
-                        <h3>BTech, Computer Science & Engineering (GPA: 3.98/4.0)</h3>
-                        <h4>Maharashtra Institute Of Technology | Pune, India</h4>
-                        <span class="edu-date">May 2024</span>
-                        <p><strong>Relevant Coursework:</strong> Deep Learning, Linear Algebra, Calculus</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="insights" class="section">
-        <div class="container">
-            <h2 class="section-title reveal mb-5">Insights & Articles</h2>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;" class="reveal">
-                My latest technical writings and thoughts published on Substack.
-            </p>
-
-            <div id="medium-articles-grid" class="projects-grid">
-                <!-- Articles will be injected here via Javascript -->
-                <div class="skeleton-loader reveal"
-                    style="width: 100%; text-align: center; padding: 2rem; color: var(--text-secondary); grid-column: 1 / -1;">
-                    <i class="fas fa-spinner fa-spin"
-                        style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-                    <p>Fetching latest articles...</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;" class="reveal">
-                <a href="https://adityainamdar.substack.com/" target="_blank" class="btn secondary">
-                    View All on Substack <i class="fas fa-bookmark"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="podcasts" class="section">
-        <div class="container">
-            <h2 class="section-title reveal mb-5">Podcasts & Talks</h2>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-                Exploring the intersection of AI, Quantum Computing, and Philosophy on <a
-                    href="https://www.youtube.com/@cybersocratic/podcasts" target="_blank"
-                    style="color: var(--secondary-accent);">Cyber Socratic</a>.
-            </p>
-
-            <div class="horizontal-scroll-wrapper">
-                <!-- Episode 1 -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image"
-                        style="background-image: url('https://img.youtube.com/vi/kD_E8IlXCls/hqdefault.jpg'); background-size: cover; background-position: center;">
-                        <div class="project-overlay">
-                            <a href="https://www.youtube.com/watch?v=kD_E8IlXCls&list=PL_fFj3MQ57a1y4Yn7YTdm1GMHKw6mDaSF"
-                                class="project-link" target="_blank"><i class="fas fa-play"></i></a>
-                            <a href="https://www.youtube.com/@cybersocratic" class="github-link" target="_blank"><i
-                                    class="fab fa-youtube"></i></a>
+            <div class="row g-4">
+                <!-- Fig 01 -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 01 — Medical MLOps</figcaption>
+                            <span class="font-mono text-xs text-muted">MLOps Pipeline</span>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>C++ to AI: Bridging Tech Eras</h3>
-                        <p class="project-affiliation">The Socratic Embers</p>
-                        <p>A deep dive with Kristofer A exploring the evolution from low-level systems programming to
-                            modern artificial intelligence paradigms.</p>
-                        <div class="tags">
-                            <span>AI Evolution</span>
-                            <span>C++</span>
-                            <span>Interview</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Episode 2 -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image"
-                        style="background-image: url('https://img.youtube.com/vi/fVfTEk5JfXA/hqdefault.jpg'); background-size: cover; background-position: center;">
-                        <div class="project-overlay">
-                            <a href="https://www.youtube.com/watch?v=fVfTEk5JfXA&list=PL_fFj3MQ57a1y4Yn7YTdm1GMHKw6mDaSF"
-                                class="project-link" target="_blank"><i class="fas fa-play"></i></a>
-                            <a href="https://www.youtube.com/@cybersocratic" class="github-link" target="_blank"><i
-                                    class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Bridging AI Realities: Jeff Smith</h3>
-                        <p class="project-affiliation">The Socratic Embers</p>
-                        <p>Discussion with Jeff Smith, founding leader at PyTorch, covering Open Source and Startup
-                            Innovation in the AI landscape.</p>
-                        <div class="tags">
-                            <span>PyTorch</span>
-                            <span>Open Source</span>
-                            <span>Innovation</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Episode 3 -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image"
-                        style="background-image: url('https://img.youtube.com/vi/IC8V5_-FEk0/hqdefault.jpg'); background-size: cover; background-position: center;">
-                        <div class="project-overlay">
-                            <a href="https://www.youtube.com/watch?v=IC8V5_-FEk0&list=PL_fFj3MQ57a1y4Yn7YTdm1GMHKw6mDaSF"
-                                class="project-link" target="_blank"><i class="fas fa-play"></i></a>
-                            <a href="https://www.youtube.com/@cybersocratic" class="github-link" target="_blank"><i
-                                    class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>The Path to Financial Freedom</h3>
-                        <p class="project-affiliation">The Socratic Embers</p>
-                        <p>Kevin Talcott shares insights integrating economic strategy with tech philosophy for scaling
-                            sustainable success.</p>
-                        <div class="tags">
-                            <span>Finance</span>
-                            <span>Strategy</span>
-                            <span>Growth</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Episode 4 -->
-                <div class="project-card horizontal-scroll-card reveal" data-tilt data-tilt-max="10"
-                    data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-tilt-scale="1.02">
-                    <div class="project-image"
-                        style="background-image: url('https://img.youtube.com/vi/bibXTvz46j4/hqdefault.jpg'); background-size: cover; background-position: center;">
-                        <div class="project-overlay">
-                            <a href="https://www.youtube.com/watch?v=bibXTvz46j4&list=PL_fFj3MQ57a1y4Yn7YTdm1GMHKw6mDaSF"
-                                class="project-link" target="_blank"><i class="fas fa-play"></i></a>
-                            <a href="https://www.youtube.com/@cybersocratic" class="github-link" target="_blank"><i
-                                    class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Finding Solitude in a Noisy World</h3>
-                        <p class="project-affiliation">The Socratic Embers</p>
-                        <p>Discussing the mental frameworks needed to build clarity and focus amid rapid technological
-                            distractions.</p>
-                        <div class="tags">
-                            <span>Philosophy</span>
-                            <span>Focus</span>
-                            <span>Mindset</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swipe-indicator">
-                Swipe / Scroll to explore <i class="fas fa-arrow-right"></i>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;" class="reveal">
-                <a href="https://www.youtube.com/@cybersocratic/podcasts" target="_blank" class="btn secondary">
-                    View All Episodes <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="certifications" class="section">
-        <div class="container">
-            <h2 class="section-title reveal mb-5">Certifications</h2>
-            <div class="row g-4 certs-grid">
-                <!-- Certifications List -->
-                <!-- Deep Learning Specialization -->
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/D7Z3LNL091A0"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
-                        <div class="cert-details">
-                            <h4>Deep Learning Specialization</h4>
-                            <p class="cert-issuer">DeepLearning.AI</p>
-                            <p class="cert-date">Issued Jun 2020</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/QV6THZU9DQNP" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-microchip"></i></div>
-                        <div class="cert-details">
-                            <h4>Sequence Models</h4>
-                            <p class="cert-issuer">DeepLearning.AI</p>
-                            <p class="cert-date">Issued Apr 2025</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/certificate/ONBGAC6FF69M" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-eye"></i></div>
-                        <div class="cert-details">
-                            <h4>Convolutional Neural Networks</h4>
-                            <p class="cert-issuer">DeepLearning.AI</p>
-                            <p class="cert-date">Issued Apr 2025</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/R1GSY85A6W7D?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-project-diagram"></i></div>
-                        <div class="cert-details">
-                            <h4>Structuring Machine Learning Projects</h4>
-                            <p class="cert-issuer">DeepLearning.AI</p>
-                            <p class="cert-date">Issued Mar 2025</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/S41VJUMVSREK" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
-                        <div class="cert-details">
-                            <h4>Improving Deep Neural Networks</h4>
-                            <p class="cert-issuer">DeepLearning.AI</p>
-                            <p class="cert-date">Issued Mar 2025</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-brain"></i></div>
-                        <div class="cert-details">
-                            <h4>Neural Networks and Deep Learning</h4>
-                            <p class="cert-issuer">DeepLearning.AI</p>
-                            <p class="cert-date">Issued Feb 2025</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Stanford Machine Learning -->
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/P0LE5IRPHXR0"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <div class="cert-details">
-                            <h4>Machine Learning Specialization</h4>
-                            <p class="cert-issuer">Stanford Online</p>
-                            <p class="cert-date">Issued Jul 2022</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/KEQRH4RG0XVA" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-robot"></i></div>
-                        <div class="cert-details">
-                            <h4>Unsupervised Learning & Recommenders</h4>
-                            <p class="cert-issuer">Stanford Online</p>
-                            <p class="cert-date">Issued Nov 5, 2024</p>
-                            <p class="cert-grade">Grade: 98.20%</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/629TOPAQBV2Y" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-code-branch"></i></div>
-                        <div class="cert-details">
-                            <h4>Advanced Learning Algorithms</h4>
-                            <p class="cert-issuer">Stanford Online</p>
-                            <p class="cert-date">Issued Nov 4, 2024</p>
-                            <p class="cert-grade">Grade: 100%</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/39K35Z7JULJF" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
-                        <div class="cert-details">
-                            <h4>Supervised Machine Learning</h4>
-                            <p class="cert-issuer">Stanford Online</p>
-                            <p class="cert-date">Issued Oct 31, 2024</p>
-                            <p class="cert-grade">Grade: 99.60%</p>
-                        </div>
-                    </a></div>
-
-                <!-- Cloud & Security -->
-                <div class="col-12 col-md-6 col-lg-4"><a href="https://www.theforage.com/badges/eMgPsCf8xbWXgcaTj"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fab fa-aws"></i></div>
-                        <div class="cert-details">
-                            <h4>Solutions Architecture Virtual Experience</h4>
-                            <p class="cert-issuer">Amazon Web Services (AWS)</p>
-                            <p class="cert-date">Issued Jul 2023</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/MXT4K2R5BYYA"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fab fa-google"></i></div>
-                        <div class="cert-details">
-                            <h4>Cloud Security Engineer Specialization</h4>
-                            <p class="cert-issuer">Google Cloud (Coursera)</p>
-                            <p class="cert-date">Issued Sep 2022</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/B2HX5X3BMA66" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="cert-details">
-                            <h4>Security Best Practices in Google Cloud</h4>
-                            <p class="cert-issuer">Google Cloud (Coursera)</p>
-                            <p class="cert-date">Issued Jun 2022</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a href="https://codered.eccouncil.org/certificate/20428"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-bug"></i></div>
-                        <div class="cert-details">
-                            <h4>Android Bug Bounty Hunting</h4>
-                            <p class="cert-issuer">CodeRed</p>
-                            <p class="cert-date">Issued Feb 2023</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a href="https://codered.eccouncil.org/certificate/201358"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-user-secret"></i></div>
-                        <div class="cert-details">
-                            <h4>Ethical Hacking Essentials (EHE)</h4>
-                            <p class="cert-issuer">CodeRed</p>
-                            <p class="cert-date">Issued Feb 2023</p>
-                        </div>
-                    </a></div>
-
-                <!-- Python & Development -->
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/JWF5NW3SHVGX"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fab fa-python"></i></div>
-                        <div class="cert-details">
-                            <h4>Python for Everybody Specialization</h4>
-                            <p class="cert-issuer">University of Michigan</p>
-                            <p class="cert-date">Issued Jun 2020</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/JWF5NW3SHVGX"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fab fa-python"></i></div>
-                        <div class="cert-details">
-                            <h4>Programming for Everybody</h4>
-                            <p class="cert-issuer">University of Michigan</p>
-                            <p class="cert-date">Issued Sep 26, 2022</p>
-                            <p class="cert-grade">Grade: 99.17%</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/JWF5NW3SHVGX"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-code"></i></div>
-                        <div class="cert-details">
-                            <h4>Python Data Structures</h4>
-                            <p class="cert-issuer">University of Michigan</p>
-                            <p class="cert-date">Issued Sep 27, 2022</p>
-                            <p class="cert-grade">Grade: 100%</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/JWF5NW3SHVGX"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-globe"></i></div>
-                        <div class="cert-details">
-                            <h4>Using Python to Access Web Data</h4>
-                            <p class="cert-issuer">University of Michigan</p>
-                            <p class="cert-date">Issued Oct 4, 2022</p>
-                            <p class="cert-grade">Grade: 95.80%</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/W8A3BR8UUEXS" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-database"></i></div>
-                        <div class="cert-details">
-                            <h4>Using Databases with Python</h4>
-                            <p class="cert-issuer">University of Michigan</p>
-                            <p class="cert-date">Issued Nov 2, 2022</p>
-                            <p class="cert-grade">Grade: 96.88%</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/specialization/JWF5NW3SHVGX"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fas fa-project-diagram"></i></div>
-                        <div class="cert-details">
-                            <h4>Capstone: Retrieving, Processing, and Visualizing Data</h4>
-                            <p class="cert-issuer">University of Michigan</p>
-                            <p class="cert-date">Issued Oct 7, 2022</p>
-                            <p class="cert-grade">Grade: 92%</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a
-                        href="https://www.coursera.org/account/accomplishments/verify/4X6R9NDJAXPZ" target="_blank"
-                        class="cert-card">
-                        <div class="cert-icon"><i class="fab fa-wordpress"></i></div>
-                        <div class="cert-details">
-                            <h4>Create a Website Using Wordpress</h4>
-                            <p class="cert-issuer">Coursera</p>
-                            <p class="cert-date">Issued Dec 2022</p>
-                        </div>
-                    </a></div>
-                <div class="col-12 col-md-6 col-lg-4"><a href="https://www.hackerrank.com/certificates/E909DDA4EE8C"
-                        target="_blank" class="cert-card">
-                        <div class="cert-icon"><i class="fab fa-hackerrank"></i></div>
-                        <div class="cert-details">
-                            <h4>Python (Basic)</h4>
-                            <p class="cert-issuer">HackerRank</p>
-                            <p class="cert-date">Issued Jul 2021</p>
-                        </div>
-                    </a></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title reveal mb-5">Get In Touch</h2>
-            <div class="row g-4 align-items-center contact-content">
-                <div class="col-12 col-lg-6">
-                    <div class="contact-info h-100">
-                        <h3>Let's Connect</h3>
-                        <p>I am interested in opportunities related to machine learning engineering, AI infrastructure, agentic systems, full-stack AI development, and forward-deployed engineering.</p>
-                        <div class="contact-methods">
-                            <a href="mailto:inamdara@students.felician.edu" class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>inamdara@students.felician.edu</span>
-                            </a>
-                            <a href="mailto:adityainamdar74@gmail.com" class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>adityainamdar74@gmail.com</span>
-                            </a>
-                            <a href="tel:+18622380508" class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>+1 (862) 238-0508</span>
-                            </a>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Rutherford, NJ 07070</span>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">AI Medical Image Analysis</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">An end-to-end production-ready AI system for automated chest X-ray interpretation using deep learning, explainable AI (Grad-CAM), and LLMs for structured radiology reports.</p>
+                        
+                        <!-- Notebook Code Execution Preview -->
+                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
+                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn" data-target="out-1">In [1] ▶ Run</span>
+                                    <span class="text-xs opacity-75">xray_pipeline.py</span>
+                                </div>
+                                <span class="text-xs text-accent">PyTorch ViT</span>
+                            </div>
+                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">model = ChestXRayViT.from_pretrained(<span class="text-accent">"nih-cxr14"</span>)
+gradcam = GradCAM(model, target_layer=<span class="text-accent">"block_11"</span>)</pre>
+                            <div id="out-1" class="notebook-output-box">
+                                <span class="opacity-75">Out [1]:</span> ViT-B/16 (86.4M params) loaded. Grad-CAM heatmap generated in 14.2ms. Sensitivity: 94.2% AUC.
                             </div>
                         </div>
-                        <div class="social-links">
-                            <a href="https://adityainamdar.com" target="_blank" aria-label="Website"><i class="fas fa-globe"></i></a>
-                            <a href="https://www.linkedin.com/in/adityainamdar1/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://medium.com/@inamdaraditya" target="_blank" aria-label="Medium"><i class="fab fa-medium-m"></i></a>
-                            <a href="https://adityainamdar.substack.com/" target="_blank" aria-label="Substack"><i class="fas fa-bookmark"></i></a>
-                            <a href="https://youtube.com/@CyberSocratic" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                            <a href="https://github.com/AdityaInamdar334" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="https://leetcode.com/u/AdityaInamdar334" target="_blank" aria-label="LeetCode"><i class="fas fa-code"></i></a>
+
+                        <p class="font-mono text-xs text-muted mb-3">PyTorch · FastAPI · Grad-CAM · Streamlit · Python</p>
+                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
+                            <a href="https://nih-dataset-image-ml-model-ajsudumesy56vbikf5vwsc.streamlit.app/" target="_blank" class="ref-link text-accent">demo ↗</a>
+                            <a href="https://github.com/AdityaInamdar334/NIH-dataset-image-ml-model" target="_blank" class="ref-link text-accent">source ↗</a>
                         </div>
-                    </div>
+                    </figure>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <form class="contact-form h-100">
-                        <div class="form-group">
-                            <input type="text" placeholder="Name" required>
+
+                <!-- Fig 02 -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 02 — Alignment &amp; DPO</figcaption>
+                            <span class="font-mono text-xs text-muted">Apple Silicon</span>
                         </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email" required>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">LLaMA Alignment Pipeline</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">End-to-end alignment pipeline for fine-tuning LLaMA models using Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO), optimized for Apple Silicon hardware.</p>
+                        
+                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
+                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn" data-target="out-2">In [2] ▶ Run</span>
+                                    <span class="text-xs opacity-75">mlx_dpo.py</span>
+                                </div>
+                                <span class="text-xs text-accent">MLX Apple Silicon</span>
+                            </div>
+                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">trainer = DPOTrainer(model=llama_3, beta=<span class="text-accent">0.1</span>)
+trainer.train(dataset=<span class="text-accent">"ultrafeedback"</span>)</pre>
+                            <div id="out-2" class="notebook-output-box">
+                                <span class="opacity-75">Out [2]:</span> DPO Step 1200/1200 complete. Loss: 0.142 | Implicit Reward Margin: +2.84 | Speed: 42 tokens/sec (M3 Max).
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <textarea placeholder="Message" rows="5" required></textarea>
+
+                        <p class="font-mono text-xs text-muted mb-3">MLX · LoRA · DPO · Hugging Face · Python</p>
+                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
+                            <a href="https://github.com/AdityaInamdar334/llama-mlx-alignment" target="_blank" class="ref-link text-accent">source ↗</a>
                         </div>
-                        <button type="submit" class="btn primary">Send Message</button>
-                    </form>
+                    </figure>
+                </div>
+
+                <!-- Fig 03 -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 03 — Reinforcement Learning</figcaption>
+                            <span class="font-mono text-xs text-muted">World Model</span>
+                        </div>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">RSSM World Model</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">Implemented a Dreamer-inspired Recurrent State Space Model (RSSM) trained on pixel observations. 5M-parameter model achieving 27.4x training acceleration using Apple Silicon MPS.</p>
+                        
+                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
+                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn" data-target="out-3">In [3] ▶ Run</span>
+                                    <span class="text-xs opacity-75">rssm_world.py</span>
+                                </div>
+                                <span class="text-xs text-accent">MPS Metal GPU</span>
+                            </div>
+                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">rssm = RSSM(stoch=<span class="text-accent">30</span>, deter=<span class="text-accent">200</span>).to(<span class="text-accent">"mps"</span>)
+prior, post = rssm.observe(embed, action)</pre>
+                            <div id="out-3" class="notebook-output-box">
+                                <span class="opacity-75">Out [3]:</span> Latent trajectory imagined over 15 steps. Imagination reward: 894.1 | MPS Speedup: 27.4x vs CPU.
+                            </div>
+                        </div>
+
+                        <p class="font-mono text-xs text-muted mb-3">PyTorch · Metal MPS · World Models · Reinforcement Learning</p>
+                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
+                            <a href="https://adityainamdar334.github.io/cheetah-rssm-world-model" target="_blank" class="ref-link text-accent">demo ↗</a>
+                            <a href="https://github.com/AdityaInamdar334/cheetah-rssm-world-model" target="_blank" class="ref-link text-accent">source ↗</a>
+                        </div>
+                    </figure>
+                </div>
+
+                <!-- Fig 04 -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 04 — Graph Knowledge RAG</figcaption>
+                            <span class="font-mono text-xs text-muted">Retrieval System</span>
+                        </div>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">Nexus Graph RAG</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">A retrieval-augmented research assistant capable of answering complex queries over document collections while dynamically constructing interactive knowledge graphs from extracted entities.</p>
+                        
+                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
+                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn" data-target="out-4">In [4] ▶ Run</span>
+                                    <span class="text-xs opacity-75">graph_rag.py</span>
+                                </div>
+                                <span class="text-xs text-accent">LangChain + Cytoscape</span>
+                            </div>
+                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">graph = KnowledgeGraph.extract(pdf_stream)
+subgraph = graph.query_neighborhood(entity=<span class="text-accent font-semibold">"Transformer"</span>)</pre>
+                            <div id="out-4" class="notebook-output-box">
+                                <span class="opacity-75">Out [4]:</span> Knowledge graph constructed: 1,420 nodes, 3,890 edges. Subgraph retrieved in 18.4ms (p95).
+                            </div>
+                        </div>
+
+                        <p class="font-mono text-xs text-muted mb-3">Next.js · FastAPI · LangChain · Cytoscape.js</p>
+                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
+                            <a href="https://nexus-graph-prz0b82qs-adityainamdar334s-projects.vercel.app" target="_blank" class="ref-link text-accent">demo ↗</a>
+                            <a href="https://github.com/AdityaInamdar334/Nexus-Graph-RAG" target="_blank" class="ref-link text-accent">source ↗</a>
+                        </div>
+                    </figure>
+                </div>
+
+                <!-- Fig 05 -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 05 — Voice AI Agent</figcaption>
+                            <span class="font-mono text-xs text-muted">Conversational Systems</span>
+                        </div>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">Real-Time Voice AI Agent</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">Developed a real-time conversational voice agent supporting bidirectional streaming, tool invocation, interruption handling, and telephony integration with Twilio.</p>
+                        
+                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
+                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn" data-target="out-5">In [5] ▶ Run</span>
+                                    <span class="text-xs opacity-75">voice_stream.py</span>
+                                </div>
+                                <span class="text-xs text-accent">Twilio WebSockets</span>
+                            </div>
+                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">async with websocket.connect(twilio_url) as ws:
+    audio_chunk = await ws.receive_bytes()</pre>
+                            <div id="out-5" class="notebook-output-box">
+                                <span class="opacity-75">Out [5]:</span> Twilio WebSocket audio stream connected. Bidirectional latency: 185ms. Voice VAD active.
+                            </div>
+                        </div>
+
+                        <p class="font-mono text-xs text-muted mb-3">FastAPI · WebSockets · Twilio · Python</p>
+                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
+                            <span class="text-muted">[In Active Development]</span>
+                        </div>
+                    </figure>
+                </div>
+
+                <!-- Fig 06 -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 06 — Transformer Engineering</figcaption>
+                            <span class="font-mono text-xs text-muted">First Principles</span>
+                        </div>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">GPT &amp; Transformers From Scratch</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">Implemented GPT-style transformer architectures and sequence-to-sequence models from first principles in PyTorch to analyze multi-head attention and autoregressive KV-caching.</p>
+                        
+                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
+                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn" data-target="out-6">In [6] ▶ Run</span>
+                                    <span class="text-xs opacity-75">attention_mechanism.py</span>
+                                </div>
+                                <span class="text-xs text-accent">PyTorch Autograd</span>
+                            </div>
+                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">scores = (q @ k.transpose(-2, -1)) / math.sqrt(d_k)
+attn = F.softmax(scores.masked_fill(mask == <span class="text-accent">0</span>, <span class="text-accent">-1e9</span>))</pre>
+                            <div id="out-6" class="notebook-output-box">
+                                <span class="opacity-75">Out [6]:</span> Attention tensor shape: (batch_size=8, n_heads=12, seq_len=512, d_head=64). Softmax output verified.
+                            </div>
+                        </div>
+
+                        <p class="font-mono text-xs text-muted mb-3">PyTorch · NumPy · NLP · Deep Learning</p>
+                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
+                            <a href="https://github.com/AdityaInamdar334/gpt-from-scratch" target="_blank" class="ref-link text-accent">gpt source ↗</a>
+                            <a href="https://github.com/AdityaInamdar334/transformer-from-scratch" target="_blank" class="ref-link text-accent">transformer source ↗</a>
+                        </div>
+                    </figure>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Aditya Inamdar. All Rights Reserved.</p>
+    <!-- Document Page Folio 6 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 6 ·</p>
+    </div>
+
+    <section id="research" class="section scroll-mt-20">
+        <div class="container">
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
+                <span class="section-mark">§5</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Research Implementations</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">deep learning architectures constructed from first principles</span>
+            </div>
+
+            <div class="paper-card p-4">
+                <div class="row g-4 font-mono text-xs">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">Transformers &amp; Attention</p>
+                            <p class="text-foreground/80 mb-2">Multi-head attention, Transformer XL, GPT, ViT, Switch Transformer.</p>
+                            <span class="text-muted">[PyTorch] [NLP/Vision]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">Recurrent Highway Networks</p>
+                            <p class="text-foreground/80 mb-2">Deep sequential recurrent models with gated highway layers.</p>
+                            <span class="text-muted">[PyTorch] [RNN]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">HyperNetworks &amp; HyperLSTM</p>
+                            <p class="text-foreground/80 mb-2">Smaller generator networks synthesizing dynamic weights for target LSTMs.</p>
+                            <span class="text-muted">[PyTorch] [Sequence]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">ResNet &amp; ConvMixer</p>
+                            <p class="text-foreground/80 mb-2">Residual connections &amp; isotropic depthwise patch convolutions.</p>
+                            <span class="text-muted">[Vision] [CNNs]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">Generative Adversarial Nets</p>
+                            <p class="text-foreground/80 mb-2">Original GAN, DCGAN, CycleGAN, WGAN-GP, StyleGAN 2.</p>
+                            <span class="text-muted">[Generative AI]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">Diffusion Models (DDPM)</p>
+                            <p class="text-foreground/80 mb-2">Denoising Diffusion Probabilistic Models with U-Net noise predictors.</p>
+                            <span class="text-muted">[Generative AI]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">Graph Attention Networks</p>
+                            <p class="text-foreground/80 mb-2">GAT and GATv2 for relational graph node classification.</p>
+                            <span class="text-muted">[GNN] [DGL]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">Counterfactual Regret (CFR)</p>
+                            <p class="text-foreground/80 mb-2">Incomplete-information game solving (Kuhn Poker) via CFR.</p>
+                            <span class="text-muted">[Game Theory] [RL]</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-3 rounded bg-card/30 h-100">
+                            <p class="text-accent font-semibold mb-1">Optimizers &amp; Normalization</p>
+                            <p class="text-foreground/80 mb-2">Adam, AMSGrad, AdaBelief, LayerNorm, GroupNorm, BatchChannel.</p>
+                            <span class="text-muted">[PyTorch Autograd]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document Page Folio 7 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 7 ·</p>
+    </div>
+
+    <section id="education" class="section scroll-mt-20">
+        <div class="container">
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
+                <span class="section-mark">§6</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Education &amp; Credentials</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">academic affiliations, honors &amp; degrees</span>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <div class="paper-card p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-baseline border-bottom pb-2 mb-3">
+                            <h3 class="font-serif text-2xl mb-0">MS, Computer Science</h3>
+                            <span class="font-mono text-xs text-accent">May 2026</span>
+                        </div>
+                        <p class="font-sans text-sm font-semibold text-foreground mb-1">Felician University · Rutherford, NJ</p>
+                        <p class="font-mono text-xs text-muted mb-3">GPA: <span class="text-accent font-bold">3.78 / 4.0</span></p>
+                        <p class="font-sans text-xs text-foreground/80 mb-0"><strong>Relevant Coursework:</strong> Data Science, Data Mining, Artificial Intelligence, Machine Learning Systems.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="paper-card p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-baseline border-bottom pb-2 mb-3">
+                            <h3 class="font-serif text-2xl mb-0">BTech, Computer Science</h3>
+                            <span class="font-mono text-xs text-accent">May 2024</span>
+                        </div>
+                        <p class="font-sans text-sm font-semibold text-foreground mb-1">Maharashtra Institute of Technology (MIT-WPU) · Pune, India</p>
+                        <p class="font-mono text-xs text-muted mb-3">GPA: <span class="text-accent font-bold">3.98 / 4.0</span></p>
+                        <p class="font-sans text-xs text-foreground/80 mb-0"><strong>Relevant Coursework:</strong> Deep Learning, Linear Algebra, Calculus, Algorithms, Operating Systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document Page Folio 8 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 8 ·</p>
+    </div>
+
+    <section id="insights" class="section scroll-mt-20">
+        <div class="container">
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
+                <span class="section-mark">§7</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Publications &amp; Talks</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">technical writings on Substack &amp; Cyber Socratic podcast</span>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <!-- Articles Container -->
+                <div class="col-12 col-lg-6">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">Substack Essays &amp; Insights</p>
+                        <div id="medium-articles-grid" class="space-y-3 font-sans text-sm">
+                            <div class="skeleton-loader py-3 text-muted font-mono text-xs">
+                                <i class="fas fa-spinner fa-spin me-2 text-accent"></i> Fetching Substack essays...
+                            </div>
+                        </div>
+                        <div class="border-top pt-3 mt-3 text-center">
+                            <a href="https://adityainamdar.substack.com/" target="_blank" class="ref-link font-mono text-xs text-accent">Read all essays on Substack ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cyber Socratic Podcasts -->
+                <div class="col-12 col-lg-6">
+                    <div class="paper-card p-4 h-100">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-3 border-bottom pb-2">Cyber Socratic Podcast Episodes</p>
+                        <div class="space-y-3 font-sans text-sm">
+                            <div class="border-bottom pb-2">
+                                <a href="https://www.youtube.com/watch?v=kD_E8IlXCls" target="_blank" class="font-serif text-base text-foreground hover:text-accent font-semibold transition-colors">C++ to AI: Bridging Tech Eras</a>
+                                <p class="font-mono text-xs text-muted mb-0">Interview with Kristofer A · Systems to AI paradigms</p>
+                            </div>
+                            <div class="border-bottom pb-2">
+                                <a href="https://www.youtube.com/watch?v=fVfTEk5JfXA" target="_blank" class="font-serif text-base text-foreground hover:text-accent font-semibold transition-colors">Bridging AI Realities: Jeff Smith</a>
+                                <p class="font-mono text-xs text-muted mb-0">PyTorch Founding Leader · Open Source &amp; Innovation</p>
+                            </div>
+                            <div>
+                                <a href="https://www.youtube.com/watch?v=IC8V5_-FEk0" target="_blank" class="font-serif text-base text-foreground hover:text-accent font-semibold transition-colors">Economic Strategy &amp; Tech Philosophy</a>
+                                <p class="font-mono text-xs text-muted mb-0">Discussion with Kevin Talcott</p>
+                            </div>
+                        </div>
+                        <div class="border-top pt-3 mt-3 text-center">
+                            <a href="https://www.youtube.com/@cybersocratic/podcasts" target="_blank" class="ref-link font-mono text-xs text-accent">Listen to Cyber Socratic ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section py-4">
+        <div class="container">
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-4">
+                <span class="section-mark">§7.1</span>
+                <h2 class="font-serif text-2xl tracking-tight d-inline">Certifications &amp; Training</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">DeepLearning.AI, Stanford Online, AWS, Google Cloud</span>
+            </div>
+            
+            <div class="paper-card p-4">
+                <div class="row g-3 font-mono text-xs">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-2.5 rounded bg-card/30">
+                            <a href="https://www.coursera.org/account/accomplishments/specialization/D7Z3LNL091A0" target="_blank" class="text-foreground hover:text-accent font-semibold text-decoration-none">Deep Learning Specialization ↗</a>
+                            <p class="text-muted mb-0">DeepLearning.AI · 5-Course Series</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-2.5 rounded bg-card/30">
+                            <a href="https://www.coursera.org/account/accomplishments/specialization/P0LE5IRPHXR0" target="_blank" class="text-foreground hover:text-accent font-semibold text-decoration-none">Machine Learning Specialization ↗</a>
+                            <p class="text-muted mb-0">Stanford Online · Grade: 99.2%</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-2.5 rounded bg-card/30">
+                            <a href="https://www.theforage.com/badges/eMgPsCf8xbWXgcaTj" target="_blank" class="text-foreground hover:text-accent font-semibold text-decoration-none">AWS Solutions Architecture ↗</a>
+                            <p class="text-muted mb-0">Amazon Web Services (AWS)</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-2.5 rounded bg-card/30">
+                            <a href="https://www.coursera.org/account/accomplishments/specialization/MXT4K2R5BYYA" target="_blank" class="text-foreground hover:text-accent font-semibold text-decoration-none">Cloud Security Engineer ↗</a>
+                            <p class="text-muted mb-0">Google Cloud (Coursera)</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-2.5 rounded bg-card/30">
+                            <a href="https://codered.eccouncil.org/certificate/20428" target="_blank" class="text-foreground hover:text-accent font-semibold text-decoration-none">Android Bug Bounty Hunting ↗</a>
+                            <p class="text-muted mb-0">EC-Council CodeRed</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="border border-border p-2.5 rounded bg-card/30">
+                            <a href="https://www.coursera.org/account/accomplishments/specialization/JWF5NW3SHVGX" target="_blank" class="text-foreground hover:text-accent font-semibold text-decoration-none">Python for Everybody Specialization ↗</a>
+                            <p class="text-muted mb-0">University of Michigan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document Page Folio 9 -->
+    <div class="folio-divider text-center my-5" aria-hidden="true">
+        <p class="folio font-mono text-xs text-muted">· 9 ·</p>
+    </div>
+
+    <!-- Contact & Correspondence Section -->
+    <section id="contact" class="section scroll-mt-20">
+        <div class="container">
+            <div class="rule-double mb-4"></div>
+            <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
+                <span class="section-mark">§8</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Correspondence</h2>
+                <span class="font-sans italic text-sm text-muted ms-auto">get in touch &amp; collaborate</span>
+            </div>
+
+            <div class="paper-card p-4 md:p-5">
+                <div class="row g-4 align-items-center">
+                    <div class="col-12 col-lg-5 border-end-lg pe-lg-4">
+                        <p class="font-mono text-xs uppercase tracking-wider text-accent mb-2">Correspondence details</p>
+                        <h3 class="font-serif text-2xl mb-3">Aditya Inamdar</h3>
+                        <p class="font-sans text-sm text-muted leading-relaxed mb-4">I am actively interested in Machine Learning Engineering, AI Systems, RAG/LLM Infrastructure, and forward-deployed AI roles.</p>
+                        
+                        <div class="font-mono text-xs space-y-2 mb-4">
+                            <div><span class="text-accent font-semibold">Email (Academic):</span> <a href="mailto:inamdara@students.felician.edu" class="text-foreground hover:text-accent">inamdara@students.felician.edu</a></div>
+                            <div><span class="text-accent font-semibold">Email (Personal):</span> <a href="mailto:adityainamdar74@gmail.com" class="text-foreground hover:text-accent">adityainamdar74@gmail.com</a></div>
+                            <div><span class="text-accent font-semibold">Phone:</span> <a href="tel:+18622380508" class="text-foreground hover:text-accent">+1 (862) 238-0508</a></div>
+                            <div><span class="text-accent font-semibold">Location:</span> Rutherford, NJ 07070 (NY Metro Area)</div>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-3 font-mono text-xs border-top pt-3">
+                            <a href="https://www.linkedin.com/in/adityainamdar1/" target="_blank" class="ref-link text-accent">[LinkedIn ↗]</a>
+                            <a href="https://github.com/AdityaInamdar334" target="_blank" class="ref-link text-accent">[GitHub ↗]</a>
+                            <a href="https://adityainamdar.substack.com/" target="_blank" class="ref-link text-accent">[Substack ↗]</a>
+                            <a href="Resume (1).pdf" download class="ref-link text-accent">[Curriculum Vitae PDF ↗]</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-7 ps-lg-4">
+                        <form class="contact-form space-y-3">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6">
+                                    <input type="text" class="form-control bg-card/60 border-border text-foreground font-sans text-sm p-3" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="email" class="form-control bg-card/60 border-border text-foreground font-sans text-sm p-3" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div>
+                                <textarea class="form-control bg-card/60 border-border text-foreground font-sans text-sm p-3" rows="4" placeholder="Your Message or Inquiry..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn primary w-100 p-3 font-mono text-xs tracking-wider uppercase">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manuscript Footer -->
+    <footer class="py-5 border-top border-border mt-5 text-center font-mono text-xs text-muted">
+        <div class="container">
+            <p class="mb-1">No. AI-2026.07 · Aditya Inamdar · Preprint &amp; Collected Works</p>
+            <p class="mb-0 text-muted opacity-75">Built with HTML5, Vanilla CSS, WebGPU local AI engine, and WebLLM · Typeset in Fraunces, Newsreader &amp; IBM Plex Mono</p>
+        </div>
     </footer>
 
 
 
-    <!-- tsParticles -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" defer></script>
 
-    <!-- Chat Widget -->
-    <div class="chat-widget">
-        <button id="chat-toggle" class="chat-toggle">
-            <i class="fas fa-comment-dots"></i>
-        </button>
-        <div class="chat-window" id="chat-window">
-            <div class="chat-header">
-                <h3>Aditya's AI Assistant</h3>
-                <button id="chat-close" class="chat-close"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="chat-messages" id="chat-messages">
-                <div class="message bot-message">
-                    Hi there! I'm an AI assistant trained on Aditya's portfolio. Ask me anything about his skills,
-                    experience, or projects!
-                </div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Type your question..." autocomplete="off">
-                <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
     <!-- ATS / Recruiter Hidden Keywords (SEO Optimization) -->
     <div class="ats-ghost-keywords" aria-hidden="true">
         Machine Learning Engineer, Artificial Intelligence Engineer, Senior AI Developer, ML Researcher, Deep Learning
@@ -1385,6 +1097,66 @@
         Networks (CNN), Reinforcement Learning (RL). Experience with data pipelines, model training, hyperparameter
         tuning, model deployment, API integration, front-end development, responsive design, web performance
         optimization.
+    </div>
+
+    <!-- Executive Command Palette Modal (⌘K) -->
+    <div id="cmd-palette-modal" class="cmd-modal-overlay" style="display: none;">
+        <div class="cmd-modal-card">
+            <div class="d-flex align-items-center border-bottom border-white/10 px-3 py-2.5">
+                <i class="fas fa-search text-accent me-2.5 font-mono text-sm"></i>
+                <input type="text" id="cmd-search-input" class="cmd-search-input font-mono text-sm" placeholder="Type a command or search (e.g., 'resume', 'skills', 'projects', 'email')..." autocomplete="off">
+                <kbd class="bg-white/10 text-silver font-mono text-xs px-2 py-0.5 rounded ms-2 select-none">ESC</kbd>
+            </div>
+            <div class="cmd-options-list py-2" id="cmd-options-container">
+                <div class="cmd-option-item font-mono text-xs p-3 d-flex align-items-center justify-content-between" data-action="resume">
+                    <span><i class="fas fa-file-pdf text-warning me-2.5"></i> Download Official Resume (PDF)</span>
+                    <span class="cmd-shortcut text-muted opacity-75">Aditya_Inamdar_Resume.pdf</span>
+                </div>
+                <div class="cmd-option-item font-mono text-xs p-3 d-flex align-items-center justify-content-between" data-action="email">
+                    <span><i class="fas fa-envelope text-info me-2.5"></i> Send Direct Email to Aditya</span>
+                    <span class="cmd-shortcut text-muted opacity-75">adityainamdar74@gmail.com</span>
+                </div>
+                <div class="cmd-option-item font-mono text-xs p-3 d-flex align-items-center justify-content-between" data-action="work">
+                    <span><i class="fas fa-code text-success me-2.5"></i> View Selected Work &amp; Notebook Executions</span>
+                    <span class="cmd-shortcut text-muted opacity-75">§4 Selected Work</span>
+                </div>
+                <div class="cmd-option-item font-mono text-xs p-3 d-flex align-items-center justify-content-between" data-action="experience">
+                    <span><i class="fas fa-briefcase text-primary me-2.5"></i> View Experience (Mainly.ai, GSoC, Felician)</span>
+                    <span class="cmd-shortcut text-muted opacity-75">§2 Experience</span>
+                </div>
+                <div class="cmd-option-item font-mono text-xs p-3 d-flex align-items-center justify-content-between" data-action="skills">
+                    <span><i class="fas fa-layer-group text-purple me-2.5"></i> View Technical Arsenal &amp; Frameworks</span>
+                    <span class="cmd-shortcut text-muted opacity-75">§3 Technical Arsenal</span>
+                </div>
+                <div class="cmd-option-item font-mono text-xs p-3 d-flex align-items-center justify-content-between" data-action="webgpu">
+                    <span><i class="fas fa-robot text-danger me-2.5"></i> Ask Local In-Browser AI Assistant</span>
+                    <span class="cmd-shortcut text-muted opacity-75">Qwen2.5 WebGPU</span>
+                </div>
+            </div>
+            <div class="cmd-footer border-top border-white/10 px-3 py-2 font-mono text-xs text-muted d-flex justify-content-between">
+                <span>Select: <kbd class="bg-white/10 text-white px-1">↵</kbd> Close: <kbd class="bg-white/10 text-white px-1">ESC</kbd></span>
+                <span class="text-accent">Aditya Inamdar · Portfolio Command Engine</span>
+            </div>
+        </div>
+    <!-- Executive Project Spec Modal -->
+    <div id="project-spec-modal" class="cmd-modal-overlay" style="display: none;">
+        <div class="cmd-modal-card p-4">
+            <div class="d-flex align-items-center justify-content-between border-bottom border-white/10 pb-3 mb-3">
+                <h3 id="modal-project-title" class="font-serif text-2xl text-white mb-0">Project Technical Spec</h3>
+                <button id="close-project-modal" class="btn btn-sm text-silver font-mono text-xs"><kbd class="bg-white/10 text-white px-2 py-1">ESC ✕</kbd></button>
+            </div>
+            <div id="modal-project-body" class="font-sans text-sm text-foreground/90 space-y-3">
+                <p id="modal-project-desc" class="leading-relaxed"></p>
+                <div class="p-3 bg-card/60 border border-amber-500/20 rounded-2 font-mono text-xs">
+                    <p class="text-accent uppercase tracking-wider mb-2"><i class="fas fa-microchip me-1"></i> Technical Telemetry &amp; System Specs</p>
+                    <div id="modal-project-metrics" class="text-silver"></div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap gap-3 border-top border-white/10 pt-3 mt-4 font-mono text-xs">
+                <a id="modal-demo-link" href="#" target="_blank" class="btn btn-warning text-dark px-3 py-1.5 fw-semibold rounded-2"><i class="fas fa-external-link-alt me-1"></i> Open Live App ↗</a>
+                <a id="modal-source-link" href="#" target="_blank" class="btn btn-outline-light px-3 py-1.5 rounded-2"><i class="fab fa-github me-1"></i> View Source Code ↗</a>
+            </div>
+        </div>
     </div>
 
     <!-- Vanilla Tilt for 3D Cards -->
@@ -1408,6 +1180,11 @@
         // Fallback
         setTimeout(hidePreloader, 2000);
     </script>
+    <!-- Floating Back to Top Button -->
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="script.js" defer></script>
