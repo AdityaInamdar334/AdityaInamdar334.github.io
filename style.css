@@ -2635,17 +2635,17 @@ input, textarea {
 }
 
 .kunj-prompt-card {
-    background: rgba(18, 20, 26, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(11, 17, 32, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.2);
     border-radius: 1.4rem;
-    box-shadow: 0 10px 36px -14px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(20px);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 16px 45px -14px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.08);
+    backdrop-filter: blur(24px);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .kunj-prompt-card:focus-within {
-    border-color: rgba(129, 140, 248, 0.6);
-    box-shadow: 0 12px 40px -10px rgba(99, 102, 241, 0.2);
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 16px 50px -10px rgba(56, 189, 248, 0.25);
 }
 
 .kunj-textarea {
@@ -2757,18 +2757,18 @@ input, textarea {
 }
 
 .paper-card {
-    background: rgba(18, 20, 26, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 18px;
-    backdrop-filter: blur(24px);
-    box-shadow: 0 10px 36px -12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    background: rgba(11, 17, 32, 0.78) !important;
+    border: 1px solid rgba(56, 189, 248, 0.16) !important;
+    border-radius: 18px !important;
+    backdrop-filter: blur(24px) !important;
+    box-shadow: 0 10px 36px -12px rgba(0, 0, 0, 0.6) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .paper-card:hover {
-    border-color: rgba(129, 140, 248, 0.45);
-    box-shadow: 0 14px 44px -10px rgba(99, 102, 241, 0.2);
-    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.45) !important;
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.18) !important;
+    transform: translateY(-4px) !important;
 }
 
 .paper-article {
