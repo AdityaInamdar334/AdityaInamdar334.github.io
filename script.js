@@ -667,7 +667,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.vx = (Math.random() - 0.5) * 0.6;
             this.vy = (Math.random() - 0.5) * 0.6;
             this.radius = Math.random() * 1.8 + 1;
-            this.color = Math.random() > 0.4 ? 'rgba(245, 158, 11,' : 'rgba(129, 140, 248,';
+            this.color = Math.random() > 0.4 ? 'rgba(56, 189, 248,' : 'rgba(59, 130, 246,';
             this.alpha = Math.random() * 0.5 + 0.3;
         }
 
@@ -716,11 +716,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
                 if (dist < 130) {
-                    const opacity = (1 - dist / 130) * 0.25;
+                    const opacity = (1 - dist / 130) * 0.28;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(245, 158, 11, ${opacity})`;
+                    ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`;
                     ctx.lineWidth = 0.75;
                     ctx.stroke();
                 }

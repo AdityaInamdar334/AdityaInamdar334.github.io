@@ -12,15 +12,15 @@ html, body {
 }
 
 :root {
-    --bg-color: #0e0e12;
+    --bg-color: #060913;
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
-    --accent-color: #f59e0b;
-    --accent-glow: #fbbf24;
-    --indigo-accent: #818cf8;
-    --secondary-accent: #c084fc;
-    --card-bg: rgba(20, 21, 28, 0.85);
-    --card-border: rgba(255, 255, 255, 0.1);
+    --accent-color: #38bdf8;
+    --accent-glow: #60a5fa;
+    --indigo-accent: #3b82f6;
+    --secondary-accent: #818cf8;
+    --card-bg: rgba(13, 18, 30, 0.85);
+    --card-border: rgba(56, 189, 248, 0.15);
     --glass-blur: blur(24px);
     --font-heading: 'Newsreader', 'Fraunces', Georgia, serif;
     --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
@@ -66,15 +66,15 @@ b {
 .text-accent,
 .section-mark,
 sup.text-accent {
-    color: #f59e0b !important;
+    color: #38bdf8 !important;
 }
 
 body {
-    background-color: #07080a;
+    background-color: #060913;
     background-image:
-        radial-gradient(circle at 50% -10%, rgba(245, 158, 11, 0.12), transparent 50%),
-        radial-gradient(circle at 10% 25%, rgba(129, 140, 248, 0.08), transparent 40%),
-        radial-gradient(circle at 90% 65%, rgba(245, 158, 11, 0.06), transparent 45%);
+        radial-gradient(circle at 50% -10%, rgba(56, 189, 248, 0.14), transparent 55%),
+        radial-gradient(circle at 10% 25%, rgba(59, 130, 246, 0.1), transparent 45%),
+        radial-gradient(circle at 90% 65%, rgba(99, 102, 241, 0.08), transparent 45%);
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
@@ -85,9 +85,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Premium Gold & Silver Gradient Utility Classes */
-.text-gradient-gold {
-    background: linear-gradient(135deg, #ffffff 0%, #fbbf24 60%, #d97706 100%);
+/* Premium Electric Blue & Silver Gradient Utility Classes */
+.text-gradient-gold,
+.text-gradient-blue {
+    background: linear-gradient(135deg, #ffffff 0%, #60a5fa 55%, #38bdf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -105,17 +106,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #07080a;
+    background: #060913;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(56, 189, 248, 0.25);
     border-radius: 4px;
-    border: 2px solid #07080a;
+    border: 2px solid #060913;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #f59e0b;
+    background: #38bdf8;
 }
 
 /* --- Premium Preloader --- */
@@ -3061,26 +3062,28 @@ input, textarea {
     transform: translateX(-50%) translateY(0);
 }
 
-/* Animated Gold Sheen Border Animation */
-.border-shimmer-gold {
+/* Animated Cyan Blue Sheen Border Animation */
+.border-shimmer-gold,
+.border-shimmer-blue {
     position: relative;
     overflow: hidden;
 }
 
-.border-shimmer-gold::before {
+.border-shimmer-gold::before,
+.border-shimmer-blue::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.22), transparent);
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.28), transparent);
     transform: skewX(-25deg);
-    animation: goldSheenSweep 6s infinite ease-in-out;
+    animation: blueSheenSweep 6s infinite ease-in-out;
     pointer-events: none;
 }
 
-@keyframes goldSheenSweep {
+@keyframes blueSheenSweep {
     0% { left: -100%; }
     20% { left: 200%; }
     100% { left: 200%; }
