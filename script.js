@@ -735,6 +735,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- 17. Executive Command Palette (⌘K) & Arsenal Filter Logic ---
 (function initCommandPaletteAndFilters() {
     const trigger = document.getElementById('cmd-palette-trigger');
+    const triggerMobile = document.getElementById('cmd-palette-trigger-mobile');
+    const triggerOffcanvas = document.getElementById('cmd-palette-trigger-offcanvas');
     const modal = document.getElementById('cmd-palette-modal');
     const searchInput = document.getElementById('cmd-search-input');
     const optionItems = document.querySelectorAll('.cmd-option-item');
@@ -753,6 +755,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (trigger) trigger.addEventListener('click', openModal);
+    if (triggerMobile) triggerMobile.addEventListener('click', openModal);
+    if (triggerOffcanvas) triggerOffcanvas.addEventListener('click', openModal);
 
     // Keyboard Shortcuts (⌘K, Ctrl+K)
     document.addEventListener('keydown', (e) => {
@@ -986,21 +990,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let audioEnabled = true;
 
     const toggleBtn = document.getElementById('audio-toggle-btn');
+    const toggleBtnMobile = document.getElementById('audio-toggle-btn-mobile');
     const icon = document.getElementById('audio-icon');
+    const iconMobile = document.getElementById('audio-icon-mobile');
     const text = document.getElementById('audio-status-text');
 
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            audioEnabled = !audioEnabled;
-            if (audioEnabled) {
-                if (icon) icon.className = 'fas fa-volume-up text-accent';
-                if (text) text.textContent = 'Audio: On';
-            } else {
-                if (icon) icon.className = 'fas fa-volume-mute text-muted';
-                if (text) text.textContent = 'Audio: Off';
-            }
-        });
+    function toggleAudio() {
+        audioEnabled = !audioEnabled;
+        if (audioEnabled) {
+            if (icon) icon.className = 'fas fa-volume-up text-accent';
+            if (iconMobile) iconMobile.className = 'fas fa-volume-up text-accent';
+            if (text) text.textContent = 'Audio: On';
+        } else {
+            if (icon) icon.className = 'fas fa-volume-mute text-muted';
+            if (iconMobile) iconMobile.className = 'fas fa-volume-mute text-muted';
+            if (text) text.textContent = 'Audio: Off';
+        }
     }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleAudio);
+    if (toggleBtnMobile) toggleBtnMobile.addEventListener('click', toggleAudio);
 
     function playSoftClick(freq = 800, type = 'sine', duration = 0.03) {
         if (!audioEnabled) return;
@@ -1032,4 +1041,1109 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => playSoftClick(920, 'sine', 0.04));
     });
 })();
+
+// --- 21. Architecture Specs Modal System ---
+(function initArchSpecsModal() {
+    const specsData = {
+        "nexus-graph": {
+            title: "Nexus Graph RAG Architecture",
+            tag: "Fig. 01 — Retrieval Augmented Generation & Knowledge Graph",
+            footer: "Next.js · FastAPI · LangChain · Cytoscape.js · Chroma Vector DB",
+            diagramSvg: `
+                <svg viewBox="0 0 760 140" class="w-100" style="max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8"/>
+                        </marker>
+                    </defs>
+                    <path d="M 120 70 L 175 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 315 70 L 370 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 510 70 L 565 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    
+                    <g transform="translate(10, 35)">
+                        <rect width="110" height="70" class="arch-node" />
+                        <text x="55" y="32" text-anchor="middle" class="arch-node-text">PDF Ingestion</text>
+                        <text x="55" y="48" text-anchor="middle" class="arch-node-sub">FastAPI Async Stream</text>
+                    </g>
+                    <g transform="translate(175, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#38bdf8" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#38bdf8">Vector + Graph DB</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">ChromaDB + LangChain</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">Entity Extraction</text>
+                    </g>
+                    <g transform="translate(370, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#34d399" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#34d399">Cytoscape Visualizer</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">Topological Subgraph</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">18.4ms Retrieval</text>
+                    </g>
+                    <g transform="translate(565, 35)">
+                        <rect width="130" height="70" class="arch-node" stroke="#a78bfa" />
+                        <text x="65" y="32" text-anchor="middle" class="arch-node-text" fill="#a78bfa">LLM Streamer</text>
+                        <text x="65" y="48" text-anchor="middle" class="arch-node-sub">Grounded Context</text>
+                    </g>
+                </svg>
+            `,
+            metrics: [
+                { label: "Retrieval Latency", val: "< 150ms", sub: "p95 vector & graph query", icon: "fa-bolt text-warning" },
+                { label: "Graph Capacity", val: "1,420 Nodes", sub: "3,890 relational edges", icon: "fa-project-diagram text-info" },
+                { label: "Subgraph Extraction", val: "18.4ms", sub: "Interactive neighborhood", icon: "fa-microchip text-success" },
+                { label: "Vector Precision", val: "98.1%", sub: "Top-5 RAG accuracy", icon: "fa-bullseye text-accent" }
+            ],
+            highlights: `
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1.5"><strong>Hybrid Dense + Graph Retrieval:</strong> Blends dense vector search in ChromaDB with structural entity relationship traversing via LangChain.</li>
+                    <li class="mb-1.5"><strong>Real-Time Topological Render:</strong> Streams node adjacency matrices directly into Cytoscape.js canvas rendering graphs live at 60 FPS.</li>
+                    <li><strong>Asynchronous PDF Processing:</strong> Background worker pipeline ingests multi-page technical documents and extracts entities without blocking incoming HTTP requests.</li>
+                </ul>
+            `
+        },
+        "voice-ai": {
+            title: "Real-Time Voice AI Agent Specs",
+            tag: "Fig. 02 — WebSockets + Twilio Bidirectional Voice Streaming",
+            footer: "FastAPI · WebSockets · Twilio Media Streams · Deepgram VAD · ElevenLabs",
+            diagramSvg: `
+                <svg viewBox="0 0 760 140" class="w-100" style="max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8"/>
+                        </marker>
+                    </defs>
+                    <path d="M 115 70 L 165 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 305 70 L 355 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 505 70 L 555 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    
+                    <g transform="translate(10, 35)">
+                        <rect width="105" height="70" class="arch-node" stroke="#c084fc" />
+                        <text x="52" y="32" text-anchor="middle" class="arch-node-text" fill="#c084fc">Twilio Phone/Web</text>
+                        <text x="52" y="48" text-anchor="middle" class="arch-node-sub">Bi-directional Audio</text>
+                    </g>
+                    <g transform="translate(165, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#38bdf8" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#38bdf8">WebSocket Gateway</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">FastAPI Multiplexer</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">VAD Frame Buffer</text>
+                    </g>
+                    <g transform="translate(355, 35)">
+                        <rect width="150" height="70" class="arch-node" stroke="#34d399" />
+                        <text x="75" y="30" text-anchor="middle" class="arch-node-text" fill="#34d399">STT + LLM + Tools</text>
+                        <text x="75" y="46" text-anchor="middle" class="arch-node-sub">Deepgram + Function Call</text>
+                        <text x="75" y="58" text-anchor="middle" class="arch-node-sub">Interruption Handler</text>
+                    </g>
+                    <g transform="translate(555, 35)">
+                        <rect width="135" height="70" class="arch-node" stroke="#f472b6" />
+                        <text x="67" y="32" text-anchor="middle" class="arch-node-text" fill="#f472b6">ElevenLabs TTS</text>
+                        <text x="67" y="48" text-anchor="middle" class="arch-node-sub">&lt;185ms Audio Stream</text>
+                    </g>
+                </svg>
+            `,
+            metrics: [
+                { label: "Bidirectional Latency", val: "< 185ms", sub: "Round-trip voice streaming", icon: "fa-bolt text-warning" },
+                { label: "VAD Accuracy", val: "99.2%", sub: "Voice activity detection", icon: "fa-microphone text-info" },
+                { label: "Barge-in / Interrupt", val: "< 45ms", sub: "Instant buffer flush", icon: "fa-stopwatch text-danger" },
+                { label: "Tool Invocation", val: "Async", sub: "Zero-latency audio drop", icon: "fa-code-branch text-accent" }
+            ],
+            highlights: `
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1.5"><strong>Ultra-Low Latency Streaming:</strong> Built over raw WebSocket multiplexing connecting Twilio Media Streams to Python asyncio loops.</li>
+                    <li class="mb-1.5"><strong>Smart Barge-In Interruption:</strong> Voice Activity Detection (VAD) monitors incoming audio frames continuously, instantly clearing TTS audio queues when the user speaks.</li>
+                    <li><strong>Concurrent Function Calling:</strong> Invokes external APIs (e.g. databases, reservation engines) mid-conversation while synthesizing filler audio cues.</li>
+                </ul>
+            `
+        },
+        "llama-alignment": {
+            title: "LLaMA Alignment Pipeline Specs",
+            tag: "Fig. 03 — SFT + Direct Preference Optimization (DPO)",
+            footer: "MLX · LoRA · DPO · Hugging Face · Apple Silicon M3 Max",
+            diagramSvg: `
+                <svg viewBox="0 0 760 140" class="w-100" style="max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8"/>
+                        </marker>
+                    </defs>
+                    <path d="M 125 70 L 175 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 315 70 L 365 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 505 70 L 555 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    
+                    <g transform="translate(10, 35)">
+                        <rect width="115" height="70" class="arch-node" />
+                        <text x="57" y="32" text-anchor="middle" class="arch-node-text">UltraFeedback</text>
+                        <text x="57" y="48" text-anchor="middle" class="arch-node-sub">Pairwise Preferences</text>
+                    </g>
+                    <g transform="translate(175, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#fbbf24" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#fbbf24">SFT Warmup Stage</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">LLaMA 3 Base Weights</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">4-bit LoRA Adapters</text>
+                    </g>
+                    <g transform="translate(365, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#818cf8" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#818cf8">DPO Loss Engine</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">Implicit Reward (β=0.1)</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">MLX Metal Kernels</text>
+                    </g>
+                    <g transform="translate(555, 35)">
+                        <rect width="145" height="70" class="arch-node" stroke="#34d399" />
+                        <text x="72" y="32" text-anchor="middle" class="arch-node-text" fill="#34d399">Aligned LLaMA Model</text>
+                        <text x="72" y="48" text-anchor="middle" class="arch-node-sub">42 tokens/sec (M3 Max)</text>
+                    </g>
+                </svg>
+            `,
+            metrics: [
+                { label: "Training Speed", val: "42 tok/s", sub: "Apple Silicon M3 Max", icon: "fa-bolt text-warning" },
+                { label: "Reward Margin", val: "+2.84", sub: "Implicit DPO preference", icon: "fa-chart-line text-success" },
+                { label: "Memory Footprint", val: "< 16GB", sub: "Unified memory 4-bit LoRA", icon: "fa-memory text-info" },
+                { label: "Convergence Loss", val: "0.142", sub: "1,200 training steps", icon: "fa-check-circle text-accent" }
+            ],
+            highlights: `
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1.5"><strong>Apple Silicon MLX Optimization:</strong> Implemented entirely using Apple's MLX array framework, taking full advantage of unified memory bandwidth.</li>
+                    <li class="mb-1.5"><strong>Direct Preference Optimization (DPO):</strong> Eliminates separate reward model training by directly optimizing reference and policy log-ratios.</li>
+                    <li><strong>Consumer Hardware Alignment:</strong> Enables full 8B model preference alignment on standard workstation hardware under 16GB VRAM.</li>
+                </ul>
+            `
+        },
+        "medical-ai": {
+            title: "AI Medical Image Analysis Specs",
+            tag: "Fig. 04 — Medical MLOps & Vision Transformer Explainability",
+            footer: "PyTorch · FastAPI · Grad-CAM · Streamlit · NIH CXR-14 Dataset",
+            diagramSvg: `
+                <svg viewBox="0 0 760 140" class="w-100" style="max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8"/>
+                        </marker>
+                    </defs>
+                    <path d="M 115 70 L 165 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 305 70 L 355 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 505 70 L 555 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    
+                    <g transform="translate(10, 35)">
+                        <rect width="105" height="70" class="arch-node" />
+                        <text x="52" y="32" text-anchor="middle" class="arch-node-text">Chest X-Ray DICOM</text>
+                        <text x="52" y="48" text-anchor="middle" class="arch-node-sub">FastAPI Preprocess</text>
+                    </g>
+                    <g transform="translate(165, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#38bdf8" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#38bdf8">PyTorch ViT-B/16</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">86.4M Parameters</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">Multi-label Classifier</text>
+                    </g>
+                    <g transform="translate(355, 35)">
+                        <rect width="150" height="70" class="arch-node" stroke="#f43f5e" />
+                        <text x="75" y="30" text-anchor="middle" class="arch-node-text" fill="#f43f5e">Grad-CAM Explainer</text>
+                        <text x="75" y="46" text-anchor="middle" class="arch-node-sub">Layer 11 Heatmap Map</text>
+                        <text x="75" y="58" text-anchor="middle" class="arch-node-sub">14.2ms Generation</text>
+                    </g>
+                    <g transform="translate(555, 35)">
+                        <rect width="135" height="70" class="arch-node" stroke="#34d399" />
+                        <text x="67" y="32" text-anchor="middle" class="arch-node-text" fill="#34d399">Streamlit UI</text>
+                        <text x="67" y="48" text-anchor="middle" class="arch-node-sub">Radiology Report</text>
+                    </g>
+                </svg>
+            `,
+            metrics: [
+                { label: "Model AUC / Sensitivity", val: "94.2%", sub: "Tested on NIH CXR-14 dataset", icon: "fa-stethoscope text-danger" },
+                { label: "Inference Latency", val: "14.2ms", sub: "Per scan classification", icon: "fa-bolt text-warning" },
+                { label: "Model Architecture", val: "86.4M Params", sub: "Vision Transformer ViT-B/16", icon: "fa-brain text-info" },
+                { label: "Grad-CAM Resolution", val: "224 x 224", sub: "Pixel-level visual attribution", icon: "fa-eye text-success" }
+            ],
+            highlights: `
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1.5"><strong>Explainable Medical AI:</strong> Computes Grad-CAM feature attribution heatmaps to highlight pathological anomalies for radiologist validation.</li>
+                    <li class="mb-1.5"><strong>Vision Transformer Backbone:</strong> Uses fine-tuned ViT-B/16 pretrained weights achieving 94.2% AUC across 14 thoracic disease categories.</li>
+                    <li><strong>Production MLOps Pipeline:</strong> Fully dockerized FastAPI serving layer connected to Streamlit interactive demonstration interface.</li>
+                </ul>
+            `
+        },
+        "rssm-world": {
+            title: "RSSM World Model Specs",
+            tag: "Fig. 05 — Recurrent State Space Model & Reinforcement Learning",
+            footer: "PyTorch · Metal MPS · World Models · Reinforcement Learning · DreamerV2",
+            diagramSvg: `
+                <svg viewBox="0 0 760 140" class="w-100" style="max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8"/>
+                        </marker>
+                    </defs>
+                    <path d="M 125 70 L 175 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 315 70 L 365 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 505 70 L 555 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    
+                    <g transform="translate(10, 35)">
+                        <rect width="115" height="70" class="arch-node" />
+                        <text x="57" y="32" text-anchor="middle" class="arch-node-text">64x64 Pixels</text>
+                        <text x="57" y="48" text-anchor="middle" class="arch-node-sub">CNN Encoder</text>
+                    </g>
+                    <g transform="translate(175, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#a855f7" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#a855f7">RSSM Latent State</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">Stoch: 30 | Deter: 200</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">Transition Model</text>
+                    </g>
+                    <g transform="translate(365, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#38bdf8" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#38bdf8">Latent Imagination</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">15 Step Rollouts</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">Actor-Critic Policy</text>
+                    </g>
+                    <g transform="translate(555, 35)">
+                        <rect width="145" height="70" class="arch-node" stroke="#34d399" />
+                        <text x="72" y="32" text-anchor="middle" class="arch-node-text" fill="#34d399">MPS Acceleration</text>
+                        <text x="72" y="48" text-anchor="middle" class="arch-node-sub">27.4x Speedup vs CPU</text>
+                    </g>
+                </svg>
+            `,
+            metrics: [
+                { label: "Metal Acceleration", val: "27.4x", sub: "MPS Metal vs CPU training", icon: "fa-bolt text-warning" },
+                { label: "Imagination Horizon", val: "15 Steps", sub: "Pure latent trajectory prediction", icon: "fa-compass text-info" },
+                { label: "Model Scale", val: "5.2M Params", sub: "Compact world model", icon: "fa-cube text-accent" },
+                { label: "Imagination Reward", val: "894.1", sub: "Cheetah domain benchmark", icon: "fa-trophy text-success" }
+            ],
+            highlights: `
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1.5"><strong>Recurrent State Space Model (RSSM):</strong> Decomposes state representations into deterministic GRU trajectories and stochastic Categorical latent spaces.</li>
+                    <li class="mb-1.5"><strong>In-Latent Policy Training:</strong> Learns optimal control policies purely inside imagined RSSM latent trajectories without interacting with environment simulators.</li>
+                    <li><strong>Apple Silicon MPS Kernels:</strong> Custom PyTorch Metal performance shader pipeline delivering a 27.4x acceleration over CPU.</li>
+                </ul>
+            `
+        },
+        "gpt-scratch": {
+            title: "GPT & Transformers From Scratch Specs",
+            tag: "Fig. 06 — First-Principles Autoregressive Transformer Engine",
+            footer: "PyTorch · NumPy · Multi-Head Attention · KV-Caching · First Principles",
+            diagramSvg: `
+                <svg viewBox="0 0 760 140" class="w-100" style="max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8"/>
+                        </marker>
+                    </defs>
+                    <path d="M 125 70 L 175 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 315 70 L 365 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    <path d="M 505 70 L 555 70" class="arch-flow-line" marker-end="url(#arrow)" />
+                    
+                    <g transform="translate(10, 35)">
+                        <rect width="115" height="70" class="arch-node" />
+                        <text x="57" y="32" text-anchor="middle" class="arch-node-text">Token + Pos Embed</text>
+                        <text x="57" y="48" text-anchor="middle" class="arch-node-sub">512 Sequence Window</text>
+                    </g>
+                    <g transform="translate(175, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#6366f1" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#6366f1">Multi-Head Attention</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">12 Heads / 768 Dim</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">Causal Softmax Mask</text>
+                    </g>
+                    <g transform="translate(365, 35)">
+                        <rect width="140" height="70" class="arch-node" stroke="#10b981" />
+                        <text x="70" y="30" text-anchor="middle" class="arch-node-text" fill="#10b981">KV-Cache Layer</text>
+                        <text x="70" y="46" text-anchor="middle" class="arch-node-sub">Autoregressive Sampling</text>
+                        <text x="70" y="58" text-anchor="middle" class="arch-node-sub">4.2x Latency Speedup</text>
+                    </g>
+                    <g transform="translate(555, 35)">
+                        <rect width="145" height="70" class="arch-node" stroke="#38bdf8" />
+                        <text x="72" y="32" text-anchor="middle" class="arch-node-text" fill="#38bdf8">FeedForward + Norm</text>
+                        <text x="72" y="48" text-anchor="middle" class="arch-node-sub">Logit Probability Gen</text>
+                    </g>
+                </svg>
+            `,
+            metrics: [
+                { label: "KV-Cache Speedup", val: "4.2x", sub: "Inference latency reduction", icon: "fa-bolt text-warning" },
+                { label: "Attention Heads", val: "12 Heads", sub: "Scaled dot-product attention", icon: "fa-network-wired text-info" },
+                { label: "Context Window", val: "512 Tokens", sub: "Learned positional embeddings", icon: "fa-layer-group text-accent" },
+                { label: "Autograd Accuracy", val: "Exact", sub: "Verified against PyTorch GPT-2", icon: "fa-check-double text-success" }
+            ],
+            highlights: `
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1.5"><strong>First-Principles Implementation:</strong> Constructed entire transformer architecture using standard PyTorch tensor math without high-level nn.Transformer modules.</li>
+                    <li class="mb-1.5"><strong>Key-Value (KV) Caching:</strong> Implemented KV-caching for efficient autoregressive sequence generation, reducing redundant self-attention computation by 4.2x.</li>
+                    <li><strong>Multi-Head Masking:</strong> Verified numerical stability across scaled dot-product attention scores and causal triangular softmax masks.</li>
+                </ul>
+            `
+        }
+    };
+
+    function getModal() {
+        return document.getElementById('arch-specs-modal');
+    }
+
+    function openModal(projectId) {
+        const modal = getModal();
+        const data = specsData[projectId];
+        if (!modal || !data) return;
+
+        const title = document.getElementById('arch-modal-title');
+        const tag = document.getElementById('arch-modal-tag');
+        const footerInfo = document.getElementById('arch-modal-footer-info');
+        const diagram = document.getElementById('arch-modal-diagram');
+        const highlights = document.getElementById('arch-modal-highlights');
+        const metricsContainer = document.getElementById('arch-modal-metrics');
+
+        if (title) title.textContent = data.title;
+        if (tag) tag.textContent = data.tag;
+        if (footerInfo) footerInfo.textContent = data.footer;
+        if (diagram) diagram.innerHTML = data.diagramSvg;
+        if (highlights) highlights.innerHTML = data.highlights;
+
+        if (metricsContainer) {
+            metricsContainer.innerHTML = data.metrics.map(m => `
+                <div class="col-6 col-md-3">
+                    <div class="arch-metric-card h-100">
+                        <div class="d-flex align-items-center gap-1.5 text-muted text-3xs mb-1">
+                            <i class="fas ${m.icon}"></i> <span>${m.label}</span>
+                        </div>
+                        <div class="arch-metric-val font-mono">${m.val}</div>
+                        <div class="text-3xs text-muted/80 mt-1">${m.sub}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        modal.style.display = 'flex';
+        setTimeout(() => modal.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = getModal();
+        if (!modal) return;
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    document.body.addEventListener('click', (e) => {
+        const trigger = e.target.closest('.arch-specs-btn, .arch-specs-link');
+        if (trigger) {
+            e.preventDefault();
+            const projectId = trigger.getAttribute('data-project');
+            openModal(projectId);
+            return;
+        }
+
+        const closeTrigger = e.target.closest('#arch-specs-close, #arch-modal-close-btn');
+        if (closeTrigger) {
+            e.preventDefault();
+            closeModal();
+            return;
+        }
+
+        const modal = getModal();
+        if (modal && e.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = getModal();
+            if (modal && modal.classList.contains('active')) {
+                closeModal();
+            }
+        }
+    });
+})();
+
+// --- 22. Nexus Graph Interactive Canvas Controller ---
+(function initNexusGraphCanvas() {
+    const canvas = document.getElementById('nexus-graph-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let animationFrameId = null;
+    let width = 0;
+    let height = 0;
+
+    function resize() {
+        if (!canvas.parentElement) return;
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const nodes = [
+        { label: "PDF Doc", x: 0.15, y: 0.5, r: 16, color: "#818cf8" },
+        { label: "Chunking", x: 0.32, y: 0.3, r: 14, color: "#38bdf8" },
+        { label: "Entity Extraction", x: 0.35, y: 0.7, r: 15, color: "#c084fc" },
+        { label: "Vector DB", x: 0.55, y: 0.35, r: 18, color: "#34d399" },
+        { label: "Knowledge Graph", x: 0.62, y: 0.72, r: 20, color: "#f472b6" },
+        { label: "Cytoscape.js", x: 0.84, y: 0.5, r: 16, color: "#fbbf24" }
+    ];
+
+    const edges = [
+        [0, 1], [0, 2], [1, 3], [2, 4], [3, 4], [3, 5], [4, 5]
+    ];
+
+    let mouseX = -1000;
+    let mouseY = -1000;
+    let hoveredNode = null;
+
+    canvas.parentElement.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    canvas.parentElement.addEventListener('mouseleave', () => {
+        mouseX = -1000;
+        mouseY = -1000;
+    });
+
+    let time = 0;
+    function render() {
+        time += 0.03;
+        ctx.clearRect(0, 0, width, height);
+
+        hoveredNode = null;
+        nodes.forEach((node, idx) => {
+            const baseX = node.x * width;
+            const baseY = node.y * height;
+            
+            const floatX = Math.sin(time + idx) * 4;
+            const floatY = Math.cos(time * 0.8 + idx) * 4;
+            
+            let curX = baseX + floatX;
+            let curY = baseY + floatY;
+
+            const dx = mouseX - curX;
+            const dy = mouseY - curY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 45) {
+                hoveredNode = node;
+                curX += (dx / dist) * (45 - dist) * 0.3;
+                curY += (dy / dist) * (45 - dist) * 0.3;
+            }
+
+            node.renderX = curX;
+            node.renderY = curY;
+        });
+
+        edges.forEach(([i, j]) => {
+            const n1 = nodes[i];
+            const n2 = nodes[j];
+
+            ctx.beginPath();
+            ctx.moveTo(n1.renderX, n1.renderY);
+            ctx.lineTo(n2.renderX, n2.renderY);
+            ctx.strokeStyle = 'rgba(129, 140, 248, 0.25)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            const pulseProgress = (time * 0.8 + i) % 1;
+            const px = n1.renderX + (n2.renderX - n1.renderX) * pulseProgress;
+            const py = n1.renderY + (n2.renderY - n1.renderY) * pulseProgress;
+
+            ctx.beginPath();
+            ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = '#38bdf8';
+            ctx.fill();
+        });
+
+        nodes.forEach(node => {
+            const isHovered = (hoveredNode === node);
+            ctx.beginPath();
+            ctx.arc(node.renderX, node.renderY, isHovered ? node.r + 3 : node.r, 0, Math.PI * 2);
+            ctx.fillStyle = isHovered ? node.color : 'rgba(15, 23, 42, 0.9)';
+            ctx.strokeStyle = node.color;
+            ctx.lineWidth = isHovered ? 2.5 : 1.5;
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.font = '500 8.5px "JetBrains Mono", monospace';
+            ctx.fillStyle = isHovered ? '#ffffff' : '#cbd5e1';
+            ctx.textAlign = 'center';
+            ctx.fillText(node.label, node.renderX, node.renderY + node.r + 10);
+        });
+
+        animationFrameId = requestAnimationFrame(render);
+    }
+
+    render();
+})();
+
+// --- 23. Real-Time Voice AI Agent Interactive Streaming Architecture Canvas Controller (Silent) ---
+(function initVoiceAiPlayer() {
+    const playBtn = document.getElementById('voice-ai-play-btn');
+    const playIcon = document.getElementById('voice-play-icon');
+    const playText = document.getElementById('voice-play-text');
+    const waveformCanvas = document.getElementById('voice-waveform-canvas');
+    const transcriptBox = document.getElementById('voice-transcript-box');
+
+    if (!playBtn || !waveformCanvas || !transcriptBox) return;
+
+    const ctx = waveformCanvas.getContext('2d');
+    let isSimulating = false;
+    let animFrame = null;
+    let startTime = 0;
+
+    const telemetryLogs = [
+        { t: 0.2, text: '<span class="text-accent font-semibold">[0.2s] Twilio WebSocket Stream connected</span> (185ms roundtrip)' },
+        { t: 0.9, text: '<span class="text-purple-400 font-semibold">[0.9s] Deepgram VAD:</span> Audio chunk received (16kHz PCM)' },
+        { t: 1.6, text: '<span class="text-amber-400 font-semibold">[1.6s] Agent Engine:</span> Executing SQL tool <span class="text-accent font-mono">check_inventory()</span>...' },
+        { t: 2.3, text: '<span class="text-emerald-400 font-semibold">[2.3s] Tool Output:</span> Table #14 reserved at Bistro for 7:00 PM.' },
+        { t: 3.1, text: '<span class="text-purple-400 font-semibold">[3.1s] FastTTS Stream:</span> Generating bidirectional audio response...' },
+        { t: 4.2, text: '<span class="text-emerald-400 font-semibold">[4.2s] Stream complete. Zero audio dropouts detected.</span>' }
+    ];
+
+    function resizeCanvas() {
+        if (!waveformCanvas.parentElement) return;
+        const rect = waveformCanvas.parentElement.getBoundingClientRect();
+        waveformCanvas.width = rect.width;
+        waveformCanvas.height = rect.height;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let time = 0;
+    const stages = [
+        { name: "Twilio WS", icon: "☎" },
+        { name: "Deepgram VAD", icon: "🎙" },
+        { name: "FastAPI Agent", icon: "⚡" },
+        { name: "TTS Stream", icon: "🔊" }
+    ];
+
+    function render() {
+        time += isSimulating ? 0.04 : 0.015;
+        ctx.clearRect(0, 0, waveformCanvas.width, waveformCanvas.height);
+
+        const width = waveformCanvas.width;
+        const height = waveformCanvas.height;
+        const margin = 40;
+        const spacing = (width - margin * 2) / (stages.length - 1);
+        const stageY = height / 2;
+
+        stages.forEach((_, i) => {
+            if (i < stages.length - 1) {
+                const x1 = margin + i * spacing;
+                const x2 = margin + (i + 1) * spacing;
+
+                ctx.beginPath();
+                ctx.moveTo(x1, stageY);
+                ctx.lineTo(x2, stageY);
+                ctx.strokeStyle = isSimulating ? 'rgba(129, 140, 248, 0.5)' : 'rgba(129, 140, 248, 0.2)';
+                ctx.lineWidth = isSimulating ? 2.5 : 1.5;
+                ctx.stroke();
+
+                const packetT = (time * 1.8 + i * 0.3) % 1;
+                const px = x1 + packetT * (x2 - x1);
+                ctx.beginPath();
+                ctx.arc(px, stageY, isSimulating ? 3.5 : 2, 0, Math.PI * 2);
+                ctx.fillStyle = isSimulating ? '#38bdf8' : 'rgba(56, 189, 248, 0.4)';
+                ctx.fill();
+
+                const backPacketT = (1 - (time * 1.5 + i * 0.25) % 1);
+                const bpx = x1 + backPacketT * (x2 - x1);
+                ctx.beginPath();
+                ctx.arc(bpx, stageY, isSimulating ? 3 : 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = isSimulating ? '#a855f7' : 'rgba(168, 85, 247, 0.3)';
+                ctx.fill();
+            }
+        });
+
+        stages.forEach((st, idx) => {
+            const x = margin + idx * spacing;
+
+            if (isSimulating) {
+                const pulseR = 14 + Math.sin(time * 4 + idx) * 3;
+                ctx.beginPath();
+                ctx.arc(x, stageY, pulseR, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            ctx.beginPath();
+            ctx.arc(x, stageY, 10, 0, Math.PI * 2);
+            ctx.fillStyle = isSimulating ? '#1e1b4b' : '#0f172a';
+            ctx.strokeStyle = isSimulating ? '#818cf8' : 'rgba(129, 140, 248, 0.4)';
+            ctx.lineWidth = 1.5;
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.font = '500 8.5px "JetBrains Mono", monospace';
+            ctx.fillStyle = isSimulating ? '#ffffff' : '#cbd5e1';
+            ctx.textAlign = 'center';
+            ctx.fillText(st.name, x, stageY + 22);
+
+            ctx.font = '9px sans-serif';
+            ctx.fillText(st.icon, x, stageY + 3);
+        });
+
+        requestAnimationFrame(render);
+    }
+
+    function updateSimulation() {
+        if (!isSimulating) return;
+
+        const elapsed = (Date.now() - startTime) / 1000;
+        const currentLogs = telemetryLogs.filter(l => elapsed >= l.t);
+        if (currentLogs.length > 0) {
+            transcriptBox.innerHTML = currentLogs.map(l => `<div class="mb-0.5">${l.text}</div>`).join('');
+            transcriptBox.scrollTop = transcriptBox.scrollHeight;
+        }
+
+        if (elapsed < 4.8) {
+            animFrame = requestAnimationFrame(updateSimulation);
+        } else {
+            stopSimulation();
+        }
+    }
+
+    function startSimulation() {
+        isSimulating = true;
+        startTime = Date.now();
+        if (playIcon) playIcon.className = 'fas fa-stop me-1 text-danger';
+        if (playText) playText.textContent = 'Stop Stream Flow';
+        updateSimulation();
+    }
+
+    function stopSimulation() {
+        isSimulating = false;
+        if (animFrame) cancelAnimationFrame(animFrame);
+        if (playIcon) playIcon.className = 'fas fa-play me-1 text-accent';
+        if (playText) playText.textContent = 'Simulate Stream Flow';
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (isSimulating) stopSimulation();
+        else startSimulation();
+    });
+
+    render();
+})();
+
+// --- 24. GPT Transformer Multi-Head Attention Canvas Controller ---
+(function initAttentionMatrixCanvas() {
+    const canvas = document.getElementById('attention-matrix-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+
+    function resize() {
+        if (!canvas.parentElement) return;
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const tokens = ["The", "transformer", "model", "uses", "attention", "KV-cache"];
+    let hoveredIdx = -1;
+    let mouseX = -1000;
+    let mouseY = -1000;
+
+    canvas.parentElement.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    canvas.parentElement.addEventListener('mouseleave', () => {
+        mouseX = -1000;
+        mouseY = -1000;
+        hoveredIdx = -1;
+    });
+
+    let time = 0;
+    function render() {
+        time += 0.02;
+        ctx.clearRect(0, 0, width, height);
+
+        const margin = 35;
+        const spacing = (width - margin * 2) / (tokens.length - 1);
+        const topY = 22;
+        const botY = height - 22;
+
+        hoveredIdx = -1;
+        tokens.forEach((_, idx) => {
+            const tx = margin + idx * spacing;
+            const dx = mouseX - tx;
+            const dy = mouseY - (topY + botY) / 2;
+            if (Math.abs(dx) < spacing * 0.45 && Math.abs(dy) < 45) {
+                hoveredIdx = idx;
+            }
+        });
+
+        tokens.forEach((_, i) => {
+            tokens.forEach((_, j) => {
+                const x1 = margin + i * spacing;
+                const x2 = margin + j * spacing;
+                const weight = Math.max(0.1, Math.sin(time + i * 0.7 + j * 0.9) * 0.5 + 0.5);
+                const isHovered = (hoveredIdx === i || hoveredIdx === j);
+
+                if (isHovered || (i === 1 && j === 4) || (i === 4 && j === 5) || (i === 0 && j === 2)) {
+                    ctx.beginPath();
+                    ctx.moveTo(x1, topY + 10);
+                    const controlY = topY + (botY - topY) / 2 + (i - j) * 6;
+                    ctx.quadraticCurveTo((x1 + x2) / 2, controlY, x2, botY - 10);
+                    
+                    ctx.strokeStyle = isHovered ? '#818cf8' : 'rgba(129, 140, 248, 0.25)';
+                    ctx.lineWidth = isHovered ? (weight * 2 + 1) : 1;
+                    ctx.stroke();
+
+                    if (isHovered) {
+                        const t = (time * 1.5 + i * 0.2) % 1;
+                        const px = (1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * ((x1 + x2) / 2) + t * t * x2;
+                        const py = (1 - t) * (1 - t) * (topY + 10) + 2 * (1 - t) * t * controlY + t * t * (botY - 10);
+                        
+                        ctx.beginPath();
+                        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+                        ctx.fillStyle = '#38bdf8';
+                        ctx.fill();
+                    }
+                }
+            });
+        });
+
+        tokens.forEach((tok, idx) => {
+            const x = margin + idx * spacing;
+            const isHov = (hoveredIdx === idx);
+
+            ctx.fillStyle = isHov ? 'rgba(129, 140, 248, 0.35)' : 'rgba(15, 23, 42, 0.85)';
+            ctx.strokeStyle = isHov ? '#38bdf8' : 'rgba(129, 140, 248, 0.4)';
+            ctx.lineWidth = isHov ? 2 : 1;
+
+            ctx.beginPath();
+            ctx.roundRect(x - 22, topY - 9, 44, 18, 4);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.font = '500 8.5px "JetBrains Mono", monospace';
+            ctx.fillStyle = isHov ? '#ffffff' : '#cbd5e1';
+            ctx.textAlign = 'center';
+            ctx.fillText(tok, x, topY + 3);
+
+            ctx.beginPath();
+            ctx.roundRect(x - 22, botY - 9, 44, 18, 4);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillText(tok, x, botY + 3);
+        });
+
+        requestAnimationFrame(render);
+    }
+
+    render();
+})();
+
+// --- 25. RSSM World Model Latent Trajectory Dreaming Canvas Controller ---
+(function initRssmDreamCanvas() {
+    const canvas = document.getElementById('rssm-dream-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+
+    function resize() {
+        if (!canvas.parentElement) return;
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let isHovered = false;
+    canvas.parentElement.addEventListener('mouseenter', () => { isHovered = true; });
+    canvas.parentElement.addEventListener('mouseleave', () => { isHovered = false; });
+
+    let time = 0;
+    const numNodes = 10;
+
+    function render() {
+        const speed = isHovered ? 0.05 : 0.02;
+        time += speed;
+        ctx.clearRect(0, 0, width, height);
+
+        const margin = 25;
+        const spacing = (width - margin * 2) / (numNodes - 1);
+        const baselineY = height * 0.65;
+
+        // Draw Imagined Latent Terrain Curve
+        ctx.beginPath();
+        ctx.moveTo(0, baselineY);
+        for (let x = 0; x <= width; x += 5) {
+            const y = baselineY + Math.sin(x * 0.02 + time * 2) * 12 + Math.cos(x * 0.01 - time) * 6;
+            ctx.lineTo(x, y);
+        }
+        ctx.lineTo(width, height);
+        ctx.lineTo(0, height);
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.08)';
+        ctx.fill();
+
+        // Terrain Edge Line
+        ctx.beginPath();
+        for (let x = 0; x <= width; x += 5) {
+            const y = baselineY + Math.sin(x * 0.02 + time * 2) * 12 + Math.cos(x * 0.01 - time) * 6;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = isHovered ? '#10b981' : 'rgba(16, 185, 129, 0.4)';
+        ctx.lineWidth = isHovered ? 2 : 1.2;
+        ctx.stroke();
+
+        // Draw Stochastic State Nodes (z_t gaussian latent states)
+        for (let i = 0; i < numNodes; i++) {
+            const nx = margin + i * spacing;
+            const ny = baselineY + Math.sin(nx * 0.02 + time * 2) * 12 + Math.cos(nx * 0.01 - time) * 6 - 22;
+
+            // Gaussian Variance Ring
+            const ringRadius = 6 + Math.sin(time * 3 + i) * 3;
+            ctx.beginPath();
+            ctx.arc(nx, ny, ringRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.25)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Core Latent Node
+            ctx.beginPath();
+            ctx.arc(nx, ny, 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = isHovered ? '#34d399' : '#10b981';
+            ctx.fill();
+
+            // Label z_t
+            ctx.font = '400 7px "JetBrains Mono", monospace';
+            ctx.fillStyle = 'rgba(203, 213, 225, 0.8)';
+            ctx.textAlign = 'center';
+            ctx.fillText(`z_${i+1}`, nx, ny - 10);
+        }
+
+        // Draw Animated Agent Torso / Trajectory Runner
+        const runnerProgress = (time * 0.35) % 1;
+        const rx = margin + runnerProgress * (width - margin * 2);
+        const ry = baselineY + Math.sin(rx * 0.02 + time * 2) * 12 + Math.cos(rx * 0.01 - time) * 6 - 14;
+
+        // Glowing Agent Core
+        ctx.beginPath();
+        ctx.arc(rx, ry, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#f59e0b';
+        ctx.shadowColor = '#f59e0b';
+        ctx.shadowBlur = 10;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Action Vector Arrows (a_t)
+        ctx.beginPath();
+        ctx.moveTo(rx, ry);
+        ctx.lineTo(rx + 14, ry - 6);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.font = '600 7.5px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#f59e0b';
+        ctx.fillText('a_t', rx + 18, ry - 8);
+
+        requestAnimationFrame(render);
+    }
+
+    render();
+})();
+
+// --- 26. LLaMA Alignment DPO Implicit Reward Canvas Controller ---
+(function initDpoRewardCanvas() {
+    const canvas = document.getElementById('dpo-reward-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+
+    function resize() {
+        if (!canvas.parentElement) return;
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let isHovered = false;
+    canvas.parentElement.addEventListener('mouseenter', () => { isHovered = true; });
+    canvas.parentElement.addEventListener('mouseleave', () => { isHovered = false; });
+
+    let time = 0;
+    function render() {
+        time += 0.025;
+        ctx.clearRect(0, 0, width, height);
+
+        const margin = 30;
+        const baselineY = height - 20;
+        const curveW = width - margin * 2;
+
+        ctx.beginPath();
+        ctx.moveTo(margin, 15);
+        ctx.lineTo(margin, baselineY);
+        ctx.lineTo(width - margin, baselineY);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.beginPath();
+        const chosenPeakX = margin + curveW * 0.72 + Math.sin(time) * 4;
+        for (let x = margin; x <= width - margin; x += 3) {
+            const dist = (x - chosenPeakX) / 32;
+            const y = baselineY - Math.exp(-dist * dist) * (height * 0.62);
+            if (x === margin) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(245, 158, 11, 0.12)';
+        ctx.lineTo(width - margin, baselineY);
+        ctx.lineTo(margin, baselineY);
+        ctx.fill();
+
+        ctx.beginPath();
+        const rejectedPeakX = margin + curveW * 0.32 - Math.sin(time) * 3;
+        for (let x = margin; x <= width - margin; x += 3) {
+            const dist = (x - rejectedPeakX) / 32;
+            const y = baselineY - Math.exp(-dist * dist) * (height * 0.48);
+            if (x === margin) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = '#c084fc';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(192, 132, 252, 0.1)';
+        ctx.lineTo(width - margin, baselineY);
+        ctx.lineTo(margin, baselineY);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(rejectedPeakX + 15, height * 0.42);
+        ctx.lineTo(chosenPeakX - 15, height * 0.42);
+        ctx.strokeStyle = isHovered ? '#38bdf8' : 'rgba(56, 189, 248, 0.6)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([3, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.font = '600 8px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#38bdf8';
+        ctx.textAlign = 'center';
+        ctx.fillText('Δ Reward = +2.84', (chosenPeakX + rejectedPeakX) / 2, height * 0.38);
+
+        ctx.font = '500 7.5px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#f59e0b';
+        ctx.fillText('Chosen (y_w)', chosenPeakX, height * 0.2);
+
+        ctx.fillStyle = '#c084fc';
+        ctx.fillText('Rejected (y_l)', rejectedPeakX, height * 0.32);
+
+        requestAnimationFrame(render);
+    }
+
+    render();
+})();
+
+// --- 27. AI Medical Chest X-Ray ViT Grad-CAM Canvas Controller ---
+(function initMedicalGradcamCanvas() {
+    const canvas = document.getElementById('medical-gradcam-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+
+    function resize() {
+        if (!canvas.parentElement) return;
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let mouseX = width * 0.62;
+    let mouseY = height * 0.5;
+
+    canvas.parentElement.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    let time = 0;
+    function render() {
+        time += 0.02;
+        ctx.clearRect(0, 0, width, height);
+
+        const cx = width / 2;
+        const cy = height / 2;
+
+        ctx.beginPath();
+        ctx.ellipse(cx - 38, cy, 26, 36, 0, 0, Math.PI * 2);
+        ctx.ellipse(cx + 38, cy, 26, 36, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+        ctx.lineWidth = 1.5;
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 42);
+        ctx.lineTo(cx, cy + 42);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        for (let r = -30; r <= 30; r += 12) {
+            ctx.beginPath();
+            ctx.moveTo(cx - 36, cy + r);
+            ctx.quadraticCurveTo(cx - 10, cy + r - 4, cx, cy + r + 2);
+            ctx.quadraticCurveTo(cx + 10, cy + r - 4, cx + 36, cy + r);
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        const targetX = mouseX > 0 && mouseX < width ? mouseX : cx + 32 + Math.sin(time) * 8;
+        const targetY = mouseY > 0 && mouseY < height ? mouseY : cy + 12 + Math.cos(time) * 6;
+
+        const grad = ctx.createRadialGradient(targetX, targetY, 2, targetX, targetY, 32);
+        grad.addColorStop(0, 'rgba(239, 68, 68, 0.85)');
+        grad.addColorStop(0.4, 'rgba(245, 158, 11, 0.6)');
+        grad.addColorStop(0.75, 'rgba(16, 185, 129, 0.3)');
+        grad.addColorStop(1, 'rgba(16, 185, 129, 0)');
+
+        ctx.beginPath();
+        ctx.arc(targetX, targetY, 32, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.rect(targetX - 22, targetY - 22, 44, 44);
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([3, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.font = '600 8px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#ef4444';
+        ctx.textAlign = 'left';
+        ctx.fillText('ViT BBox: 94.2%', targetX + 25, targetY - 10);
+
+        requestAnimationFrame(render);
+    }
+
+    render();
+})();
+
 

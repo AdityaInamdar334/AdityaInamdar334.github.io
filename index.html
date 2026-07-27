@@ -69,33 +69,115 @@
     </div>
 
     <header class="shrink-0 z-40 bg-background/95 backdrop-blur-md border-bottom border-white/10 sticky-top">
-        <div class="max-w-5xl mx-auto px-4 py-2.5 d-flex align-items-center justify-content-between flex-wrap gap-2">
-            <span class="d-flex align-items-center gap-2">
-                <span class="text-accent fs-5 select-none fw-bold" aria-hidden="true">◇</span>
-                <span class="font-serif fs-5 tracking-tight text-foreground fw-medium">Aditya Inamdar</span>
-                <span class="badge bg-success/20 text-success border border-success/30 font-mono text-xs px-2 py-1 rounded-pill ms-1 d-none d-sm-inline-flex align-items-center gap-1">
-                    <span class="pulse-dot-green">●</span> Available for AI/ML Roles
-                </span>
-            </span>
-            <nav class="d-none d-md-flex align-items-center gap-3 font-mono text-xs">
-                <a href="#about" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">01</span>About</a>
-                <a href="#experience" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">02</span>Experience</a>
-                <a href="#skills" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">03</span>Arsenal</a>
-                <a href="#projects" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">04</span>Work</a>
-                <a href="#education" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">05</span>Education</a>
-                <a href="#contact" class="text-muted text-decoration-none hover-accent"><span class="text-accent me-1">06</span>Contact</a>
-            </nav>
-            <div class="d-flex align-items-center gap-2">
-                <button id="audio-toggle-btn" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1.5 text-silver" title="Toggle Haptic UI Audio FX">
-                    <i class="fas fa-volume-up text-accent" id="audio-icon"></i> <span id="audio-status-text" class="d-none d-sm-inline">Audio: On</span>
-                </button>
-                <button id="cmd-palette-trigger" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1.5 text-silver" title="Quick Actions (⌘K or /)">
-                    <kbd class="bg-white/10 border border-white/20 px-1 py-0.5 rounded text-accent font-mono text-xs">⌘K</kbd> Quick Actions
-                </button>
-                <a href="Aditya_Inamdar_Resume.pdf" target="_blank" download class="btn btn-outline-primary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1">
-                    <i class="fas fa-file-pdf"></i> Resume PDF
+        <nav class="navbar navbar-expand-md navbar-dark px-3 px-md-4 py-2">
+            <div class="container-fluid max-w-5xl px-0 d-flex align-items-center justify-content-between">
+                <a class="navbar-brand d-flex align-items-center gap-2 m-0 p-0 text-decoration-none" href="#">
+                    <span class="text-accent fs-5 select-none fw-bold" aria-hidden="true">◇</span>
+                    <span class="font-serif fs-5 tracking-tight text-foreground fw-medium">Aditya Inamdar</span>
+                    <span class="badge bg-success/20 text-success border border-success/30 font-mono text-xs px-2 py-1 rounded-pill ms-1 d-none d-lg-inline-flex align-items-center gap-1">
+                        <span class="pulse-dot-green">●</span> Available for AI/ML Roles
+                    </span>
                 </a>
-                <a class="btn-kunj-browse" href="#about">Browse site →</a>
+
+                <!-- Mobile Action Controls & Hamburger Toggle -->
+                <div class="d-flex align-items-center gap-2 d-md-none">
+                    <button id="audio-toggle-btn-mobile" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2 py-1 rounded-pill text-silver" title="Toggle Audio FX">
+                        <i class="fas fa-volume-up text-accent" id="audio-icon-mobile"></i>
+                    </button>
+                    <button id="cmd-palette-trigger-mobile" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2 py-1 rounded-pill text-silver" title="Quick Actions">
+                        <kbd class="bg-white/10 text-accent font-mono text-xs px-1">⌘K</kbd>
+                    </button>
+                    <button class="navbar-toggler border border-white/20 px-2 py-1 text-silver shadow-none rounded-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavbarOffcanvas" aria-controls="mobileNavbarOffcanvas" aria-label="Toggle navigation">
+                        <i class="fas fa-bars text-accent"></i>
+                    </button>
+                </div>
+
+                <!-- Desktop Nav Links & Action Buttons -->
+                <div class="collapse navbar-collapse d-none d-md-flex justify-content-end align-items-center gap-3">
+                    <ul class="navbar-nav d-flex flex-row align-items-center gap-3 font-mono text-xs mb-0 me-2">
+                        <li class="nav-item"><a href="#about" class="nav-link text-muted hover-accent px-0"><span class="text-accent me-1">01</span>About</a></li>
+                        <li class="nav-item"><a href="#experience" class="nav-link text-muted hover-accent px-0"><span class="text-accent me-1">02</span>Experience</a></li>
+                        <li class="nav-item"><a href="#skills" class="nav-link text-muted hover-accent px-0"><span class="text-accent me-1">03</span>Arsenal</a></li>
+                        <li class="nav-item"><a href="#projects" class="nav-link text-muted hover-accent px-0"><span class="text-accent me-1">04</span>Work</a></li>
+                        <li class="nav-item"><a href="#education" class="nav-link text-muted hover-accent px-0"><span class="text-accent me-1">05</span>Education</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link text-muted hover-accent px-0"><span class="text-accent me-1">06</span>Contact</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-2">
+                        <button id="audio-toggle-btn" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1.5 text-silver" title="Toggle Haptic UI Audio FX">
+                            <i class="fas fa-volume-up text-accent" id="audio-icon"></i> <span id="audio-status-text" class="d-none d-sm-inline">Audio: On</span>
+                        </button>
+                        <button id="cmd-palette-trigger" class="btn btn-outline-secondary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1.5 text-silver" title="Quick Actions (⌘K or /)">
+                            <kbd class="bg-white/10 border border-white/20 px-1 py-0.5 rounded text-accent font-mono text-xs">⌘K</kbd> Quick Actions
+                        </button>
+                        <a href="Aditya_Inamdar_Resume.pdf" target="_blank" download class="btn btn-outline-primary btn-sm font-mono text-xs px-2.5 py-1 rounded-pill d-inline-flex align-items-center gap-1">
+                            <i class="fas fa-file-pdf"></i> Resume PDF
+                        </a>
+                        <a class="btn-kunj-browse" href="#about">Browse site →</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Bootstrap 5 Mobile Offcanvas Drawer Menu -->
+        <div class="offcanvas offcanvas-end text-white border-start border-white/10 d-md-none" tabindex="-1" id="mobileNavbarOffcanvas" aria-labelledby="mobileNavbarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom border-white/10 py-3 px-4">
+                <h5 class="offcanvas-title font-serif text-white d-flex align-items-center gap-2 fs-6 mb-0" id="mobileNavbarOffcanvasLabel">
+                    <span class="text-accent">◇</span> Aditya Inamdar
+                </h5>
+                <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column justify-content-between p-4 font-mono text-sm">
+                <ul class="navbar-nav space-y-2 mb-4">
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">01</span> About Me
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#experience" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">02</span> Experience
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">03</span> Technical Arsenal
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#projects" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">04</span> Selected Work
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#research" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">05</span> Research
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#education" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">06</span> Education
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#insights" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">07</span> Talks &amp; Essays
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link text-silver hover-accent d-flex align-items-center gap-2 py-2" data-bs-dismiss="offcanvas">
+                            <span class="text-accent font-semibold">08</span> Correspondence
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="border-top border-white/10 pt-4 d-flex flex-column gap-2">
+                    <a href="Aditya_Inamdar_Resume.pdf" target="_blank" download class="btn btn-warning text-dark font-mono text-xs w-100 py-2.5 fw-semibold rounded-2 d-flex align-items-center justify-content-center gap-2 shadow-sm">
+                        <i class="fas fa-file-pdf"></i> Download Resume (PDF) ↗
+                    </a>
+                    <button id="cmd-palette-trigger-offcanvas" class="btn btn-outline-secondary font-mono text-xs text-silver w-100 py-2.5 rounded-2 d-flex align-items-center justify-content-center gap-2" data-bs-dismiss="offcanvas">
+                        <kbd class="bg-white/10 text-accent font-mono text-xs px-1.5 py-0.5 rounded">⌘K</kbd> Quick Actions Palette
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -193,24 +275,24 @@
                         <p class="font-sans text-base leading-relaxed text-white mt-3">I thrive in customer-facing, ambiguous environments and take ownership of outcomes from discovery to deployment. I completed my Master's in Computer Science at <strong class="text-accent">Felician University</strong> (May 2026).</p>
                         
                         <!-- Executive Recruiter Callout Box -->
-                        <div class="mt-4 p-3 border border-amber-500/30 bg-amber-500/10 rounded-3 border-shimmer-gold">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                        <div class="mt-4 p-3 p-md-4 border border-amber-500/30 bg-amber-500/10 rounded-3 border-shimmer-gold">
+                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
                                 <div>
                                     <p class="font-mono text-xs text-accent uppercase tracking-wider mb-1"><i class="fas fa-briefcase me-1"></i> Target Roles &amp; Availability</p>
                                     <p class="font-sans text-sm text-white mb-0"><strong>AI/ML Engineer · Applied ML Scientist · Software Engineer</strong> | NY Metro / NJ (Open to Relocation &amp; Remote)</p>
                                 </div>
-                                <div class="d-flex flex-wrap gap-2">
-                                    <a href="Aditya_Inamdar_Resume.pdf" target="_blank" download class="btn btn-warning text-dark font-mono text-xs px-3 py-2 fw-semibold rounded-2 d-inline-flex align-items-center gap-1.5 shadow-sm">
+                                <div class="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
+                                    <a href="Aditya_Inamdar_Resume.pdf" target="_blank" download class="btn btn-warning text-dark font-mono text-xs px-3 py-2 fw-semibold rounded-2 d-flex align-items-center justify-content-center gap-1.5 shadow-sm">
                                         <i class="fas fa-file-pdf"></i> Download Resume (PDF) ↗
                                     </a>
-                                    <a href="mailto:adityainamdar74@gmail.com" class="btn btn-outline-light font-mono text-xs px-3 py-2 rounded-2 d-inline-flex align-items-center gap-1.5">
+                                    <a href="mailto:adityainamdar74@gmail.com" class="btn btn-outline-light font-mono text-xs px-3 py-2 rounded-2 d-flex align-items-center justify-content-center gap-1.5">
                                         <i class="fas fa-envelope"></i> Email Aditya
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mt-4 pt-3 border-top border-white/10 d-flex flex-wrap gap-3 font-mono text-xs text-silver">
+                        <div class="mt-4 pt-3 border-top border-white/10 d-flex flex-wrap gap-2 gap-sm-3 font-mono text-xs text-silver">
                             <span class="text-accent font-semibold">Available at:</span>
                             <a href="https://github.com/AdityaInamdar334" target="_blank" class="ref-link text-accent">[GitHub]</a>
                             <a href="https://linkedin.com/in/adityainamdar1/" target="_blank" class="ref-link text-accent">[LinkedIn]</a>
@@ -223,20 +305,20 @@
             </div>
 
             <!-- Executive Impact Metrics Grid -->
-            <div class="mt-4 border-top border-bottom border-white/10 py-4 row text-center text-md-start" id="metrics-grid">
-                <div class="col-6 col-md-3 py-2 border-end border-white/10">
+            <div class="mt-4 border-top border-bottom border-white/10 py-4 row row-cols-2 row-cols-md-4 g-3 text-center text-md-start" id="metrics-grid">
+                <div class="col py-2 border-end-md">
                     <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="15" data-prefix="+" data-suffix="%">+15%</p>
                     <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">Bone Cancer CNN Accuracy</p>
                 </div>
-                <div class="col-6 col-md-3 py-2 border-end border-white/10">
+                <div class="col py-2 border-end-md">
                     <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="27.4" data-decimals="1" data-suffix="x">27.4x</p>
                     <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">MPS World Model Acceleration</p>
                 </div>
-                <div class="col-6 col-md-3 py-2 border-end border-white/10">
+                <div class="col py-2 border-end-md">
                     <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="30" data-suffix="%">30%</p>
                     <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">Medical Image Pipeline Speedup</p>
                 </div>
-                <div class="col-6 col-md-3 py-2">
+                <div class="col py-2">
                     <p class="font-serif display-6 fw-semibold text-white mb-1 metric-counter" data-target="3.78" data-decimals="2">3.78</p>
                     <p class="font-mono text-xs text-muted uppercase tracking-wider mb-0">MS CS GPA (Felician)</p>
                 </div>
@@ -392,12 +474,12 @@
             </div>
 
             <!-- Arsenal Category Filter Pills -->
-            <div class="d-flex flex-wrap gap-2 mb-4 font-mono text-xs" id="arsenal-filters">
-                <button class="btn btn-sm btn-warning text-dark fw-semibold arsenal-filter-btn active" data-filter="all">All Taxonomy</button>
-                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="ai">AI &amp; ML</button>
-                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="lang">Languages</button>
-                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="infra">Backend &amp; Infra</button>
-                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn" data-filter="tools">Ops &amp; Tools</button>
+            <div class="d-flex flex-nowrap overflow-x-auto pb-2 mb-4 gap-2 font-mono text-xs text-nowrap arsenal-filters-scroll" id="arsenal-filters">
+                <button class="btn btn-sm btn-warning text-dark fw-semibold arsenal-filter-btn active text-nowrap flex-shrink-0" data-filter="all">All Taxonomy</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn text-nowrap flex-shrink-0" data-filter="ai">AI &amp; ML</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn text-nowrap flex-shrink-0" data-filter="lang">Languages</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn text-nowrap flex-shrink-0" data-filter="infra">Backend &amp; Infra</button>
+                <button class="btn btn-sm btn-outline-secondary text-silver arsenal-filter-btn text-nowrap flex-shrink-0" data-filter="tools">Ops &amp; Tools</button>
             </div>
 
             <div class="row g-4 font-mono text-xs">
@@ -553,13 +635,13 @@
                 <h2 class="font-serif text-2xl tracking-tight d-inline">Open Source Velocity</h2>
                 <span class="font-sans italic text-sm text-muted ms-auto">real-time GitHub contribution telemetry</span>
             </div>
-            <div class="stats-wrapper border border-border p-4 bg-card/40 rounded-3">
+            <div class="stats-wrapper border border-border p-3 p-md-4 bg-card/40 rounded-3 text-center">
                 <img src="https://github-readme-streak-stats.herokuapp.com/?user=AdityaInamdar334&theme=dark&background=00000000&ring=818cf8&fire=38bdf8&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=818cf8&sideLabels=94a3b8&dates=94a3b8&hide_border=true"
-                    alt="GitHub Streak Stats" class="github-widget" loading="lazy" />
-                <div class="github-widget d-flex flex-column align-items-center justify-content-center bg-transparent p-3">
+                    alt="GitHub Streak Stats" class="github-widget img-fluid mw-100" loading="lazy" />
+                <div class="github-widget d-flex flex-column align-items-center justify-content-center bg-transparent p-2 p-md-3 mt-3">
                     <p class="font-mono text-xs text-accent uppercase tracking-wider mb-2 w-100 text-start">GitHub Contribution Heatmap</p>
                     <img src="https://ghchart.rshah.org/818cf8/AdityaInamdar334" alt="GitHub Contribution Chart"
-                        style="width: 100%; max-width: 650px; filter: brightness(0.95) contrast(1.15);" loading="lazy" />
+                        class="img-fluid w-100" style="max-width: 650px; filter: brightness(0.95) contrast(1.15);" loading="lazy" />
                 </div>
             </div>
         </div>
@@ -576,203 +658,340 @@
             <div class="d-flex flex-wrap items-baseline justify-content-between gap-x-4 gap-y-1 mb-5">
                 <span class="section-mark">§4</span>
                 <h2 class="font-serif text-3xl md:text-4xl tracking-tight d-inline">Selected Work</h2>
-                <span class="font-sans italic text-sm text-muted ms-auto">figures 01–06, in order of recency</span>
+                <span class="font-sans italic text-sm text-muted ms-auto">figures 01–06, ordered by technical impact</span>
             </div>
 
             <div class="row g-4">
-                <!-- Fig 01 -->
+                <!-- Fig 01: Nexus Graph RAG -->
                 <div class="col-12 col-md-6">
-                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column" data-project-id="nexus-graph">
                         <div class="d-flex align-items-center justify-content-between mb-2">
-                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 01 — Medical MLOps</figcaption>
-                            <span class="font-mono text-xs text-muted">MLOps Pipeline</span>
-                        </div>
-                        <h3 class="font-serif text-2xl mt-1 mb-2">AI Medical Image Analysis</h3>
-                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">An end-to-end production-ready AI system for automated chest X-ray interpretation using deep learning, explainable AI (Grad-CAM), and LLMs for structured radiology reports.</p>
-                        
-                        <!-- Notebook Code Execution Preview -->
-                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
-                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
-                                <div class="d-flex items-center gap-2">
-                                    <span class="notebook-cell-btn" data-target="out-1">In [1] ▶ Run</span>
-                                    <span class="text-xs opacity-75">xray_pipeline.py</span>
-                                </div>
-                                <span class="text-xs text-accent">PyTorch ViT</span>
-                            </div>
-                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">model = ChestXRayViT.from_pretrained(<span class="text-accent">"nih-cxr14"</span>)
-gradcam = GradCAM(model, target_layer=<span class="text-accent">"block_11"</span>)</pre>
-                            <div id="out-1" class="notebook-output-box">
-                                <span class="opacity-75">Out [1]:</span> ViT-B/16 (86.4M params) loaded. Grad-CAM heatmap generated in 14.2ms. Sensitivity: 94.2% AUC.
-                            </div>
-                        </div>
-
-                        <p class="font-mono text-xs text-muted mb-3">PyTorch · FastAPI · Grad-CAM · Streamlit · Python</p>
-                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
-                            <a href="https://nih-dataset-image-ml-model-ajsudumesy56vbikf5vwsc.streamlit.app/" target="_blank" class="ref-link text-accent">demo ↗</a>
-                            <a href="https://github.com/AdityaInamdar334/NIH-dataset-image-ml-model" target="_blank" class="ref-link text-accent">source ↗</a>
-                        </div>
-                    </figure>
-                </div>
-
-                <!-- Fig 02 -->
-                <div class="col-12 col-md-6">
-                    <figure class="paper-card p-4 h-100 d-flex flex-column">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 02 — Alignment &amp; DPO</figcaption>
-                            <span class="font-mono text-xs text-muted">Apple Silicon</span>
-                        </div>
-                        <h3 class="font-serif text-2xl mt-1 mb-2">LLaMA Alignment Pipeline</h3>
-                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">End-to-end alignment pipeline for fine-tuning LLaMA models using Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO), optimized for Apple Silicon hardware.</p>
-                        
-                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
-                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
-                                <div class="d-flex items-center gap-2">
-                                    <span class="notebook-cell-btn" data-target="out-2">In [2] ▶ Run</span>
-                                    <span class="text-xs opacity-75">mlx_dpo.py</span>
-                                </div>
-                                <span class="text-xs text-accent">MLX Apple Silicon</span>
-                            </div>
-                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">trainer = DPOTrainer(model=llama_3, beta=<span class="text-accent">0.1</span>)
-trainer.train(dataset=<span class="text-accent">"ultrafeedback"</span>)</pre>
-                            <div id="out-2" class="notebook-output-box">
-                                <span class="opacity-75">Out [2]:</span> DPO Step 1200/1200 complete. Loss: 0.142 | Implicit Reward Margin: +2.84 | Speed: 42 tokens/sec (M3 Max).
-                            </div>
-                        </div>
-
-                        <p class="font-mono text-xs text-muted mb-3">MLX · LoRA · DPO · Hugging Face · Python</p>
-                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
-                            <a href="https://github.com/AdityaInamdar334/llama-mlx-alignment" target="_blank" class="ref-link text-accent">source ↗</a>
-                        </div>
-                    </figure>
-                </div>
-
-                <!-- Fig 03 -->
-                <div class="col-12 col-md-6">
-                    <figure class="paper-card p-4 h-100 d-flex flex-column">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 03 — Reinforcement Learning</figcaption>
-                            <span class="font-mono text-xs text-muted">World Model</span>
-                        </div>
-                        <h3 class="font-serif text-2xl mt-1 mb-2">RSSM World Model</h3>
-                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">Implemented a Dreamer-inspired Recurrent State Space Model (RSSM) trained on pixel observations. 5M-parameter model achieving 27.4x training acceleration using Apple Silicon MPS.</p>
-                        
-                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
-                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
-                                <div class="d-flex items-center gap-2">
-                                    <span class="notebook-cell-btn" data-target="out-3">In [3] ▶ Run</span>
-                                    <span class="text-xs opacity-75">rssm_world.py</span>
-                                </div>
-                                <span class="text-xs text-accent">MPS Metal GPU</span>
-                            </div>
-                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">rssm = RSSM(stoch=<span class="text-accent">30</span>, deter=<span class="text-accent">200</span>).to(<span class="text-accent">"mps"</span>)
-prior, post = rssm.observe(embed, action)</pre>
-                            <div id="out-3" class="notebook-output-box">
-                                <span class="opacity-75">Out [3]:</span> Latent trajectory imagined over 15 steps. Imagination reward: 894.1 | MPS Speedup: 27.4x vs CPU.
-                            </div>
-                        </div>
-
-                        <p class="font-mono text-xs text-muted mb-3">PyTorch · Metal MPS · World Models · Reinforcement Learning</p>
-                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
-                            <a href="https://adityainamdar334.github.io/cheetah-rssm-world-model" target="_blank" class="ref-link text-accent">demo ↗</a>
-                            <a href="https://github.com/AdityaInamdar334/cheetah-rssm-world-model" target="_blank" class="ref-link text-accent">source ↗</a>
-                        </div>
-                    </figure>
-                </div>
-
-                <!-- Fig 04 -->
-                <div class="col-12 col-md-6">
-                    <figure class="paper-card p-4 h-100 d-flex flex-column">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 04 — Graph Knowledge RAG</figcaption>
+                            <figcaption class="font-mono text-xs text-accent tracking-wide d-flex align-items-center gap-2">
+                                <span>Fig. 01 — Graph Knowledge RAG</span>
+                                <span class="badge bg-accent/10 text-accent border border-accent/30 font-mono text-3xs uppercase px-1.5 py-0.5 rounded">High Impact</span>
+                            </figcaption>
                             <span class="font-mono text-xs text-muted">Retrieval System</span>
                         </div>
                         <h3 class="font-serif text-2xl mt-1 mb-2">Nexus Graph RAG</h3>
                         <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">A retrieval-augmented research assistant capable of answering complex queries over document collections while dynamically constructing interactive knowledge graphs from extracted entities.</p>
-                        
-                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
-                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
-                                <div class="d-flex items-center gap-2">
-                                    <span class="notebook-cell-btn" data-target="out-4">In [4] ▶ Run</span>
-                                    <span class="text-xs opacity-75">graph_rag.py</span>
+
+                        <!-- Live Demo Preview Banner -->
+                        <div class="position-relative rounded overflow-hidden border border-border/70 my-3 group cursor-pointer">
+                            <a href="https://nexus-graph-prz0b82qs-adityainamdar334s-projects.vercel.app" target="_blank" class="d-block text-decoration-none">
+                                <img src="assets/images/nexus_graph_live.png" alt="Nexus Graph RAG Live App Preview" class="img-fluid w-100 object-fit-cover transition-transform duration-300 group-hover:scale-105" style="max-height: 145px;" loading="lazy">
+                                <div class="position-absolute top-2 right-2">
+                                    <span class="badge bg-emerald-500/90 text-white font-mono text-3xs shadow-sm d-inline-flex align-items-center gap-1.5 px-2 py-1 rounded">
+                                        <i class="fas fa-circle font-3xs text-emerald-300 animate-pulse"></i> Live Deployed Vercel App ↗
+                                    </span>
                                 </div>
-                                <span class="text-xs text-accent">LangChain + Cytoscape</span>
+                            </a>
+                        </div>
+
+                        <!-- Live Demo Preview: Interactive Graph Canvas -->
+                        <div class="border border-border bg-card/70 rounded p-2.5 mb-3 font-mono text-xs position-relative overflow-hidden">
+                            <div class="d-flex items-center justify-content-between text-muted mb-2 border-bottom pb-1.5">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn active-run" id="nexus-graph-trigger"><i class="fas fa-play me-1 text-accent"></i>Live Physics Graph</span>
+                                    <span class="text-xs opacity-75">interactive_nodes.js</span>
+                                </div>
+                                <span class="badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-3xs font-mono">Cytoscape.js Physics</span>
                             </div>
-                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">graph = KnowledgeGraph.extract(pdf_stream)
-subgraph = graph.query_neighborhood(entity=<span class="text-accent font-semibold">"Transformer"</span>)</pre>
-                            <div id="out-4" class="notebook-output-box">
-                                <span class="opacity-75">Out [4]:</span> Knowledge graph constructed: 1,420 nodes, 3,890 edges. Subgraph retrieved in 18.4ms (p95).
+                            <div class="nexus-canvas-wrapper position-relative rounded border border-border/50 bg-black/40" style="height: 110px;">
+                                <canvas id="nexus-graph-canvas" class="w-100 h-100 d-block"></canvas>
+                                <div class="canvas-hint font-mono text-3xs text-muted/70 position-absolute bottom-1 right-2 pointer-events-none">
+                                    <i class="fas fa-mouse-pointer me-1"></i>Hover &amp; Drag Nodes Live
+                                </div>
+                            </div>
+                            <div class="notebook-output-box mt-2 py-1 px-2 bg-black/40 rounded text-3xs font-mono text-foreground/80 d-flex justify-content-between align-items-center">
+                                <span><span class="text-accent font-semibold">Nodes:</span> 1,420 | <span class="text-accent font-semibold">Edges:</span> 3,890 | <span class="text-accent font-semibold">p95 Subgraph:</span> 18.4ms</span>
+                                <span class="text-emerald-400 font-mono text-3xs">● Streaming Active</span>
                             </div>
                         </div>
 
-                        <p class="font-mono text-xs text-muted mb-3">Next.js · FastAPI · LangChain · Cytoscape.js</p>
-                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
-                            <a href="https://nexus-graph-prz0b82qs-adityainamdar334s-projects.vercel.app" target="_blank" class="ref-link text-accent">demo ↗</a>
-                            <a href="https://github.com/AdityaInamdar334/Nexus-Graph-RAG" target="_blank" class="ref-link text-accent">source ↗</a>
+                        <p class="font-mono text-xs text-muted mb-3">Next.js · FastAPI · LangChain · Cytoscape.js · Vector DB</p>
+                        <div class="d-flex align-items-center justify-content-between border-top pt-3 font-mono text-xs">
+                            <div class="d-flex gap-4">
+                                <a href="https://nexus-graph-prz0b82qs-adityainamdar334s-projects.vercel.app" target="_blank" class="ref-link text-accent fw-bold"><i class="fas fa-external-link-alt me-1"></i> Live Demo ↗</a>
+                                <a href="https://github.com/AdityaInamdar334/Nexus-Graph-RAG" target="_blank" class="ref-link text-accent"><i class="fab fa-github me-1"></i> Source ↗</a>
+                            </div>
+                            <button class="text-accent/90 hover:text-accent font-mono text-xs bg-transparent border-0 p-0 cursor-pointer arch-specs-link" data-project="nexus-graph">
+                                System Specs &rarr;
+                            </button>
                         </div>
                     </figure>
                 </div>
 
-                <!-- Fig 05 -->
+                <!-- Fig 02: Real-Time Voice AI Agent -->
                 <div class="col-12 col-md-6">
-                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column" data-project-id="voice-ai">
                         <div class="d-flex align-items-center justify-content-between mb-2">
-                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 05 — Voice AI Agent</figcaption>
+                            <figcaption class="font-mono text-xs text-accent tracking-wide d-flex align-items-center gap-2">
+                                <span>Fig. 02 — Voice AI Agent</span>
+                                <span class="badge bg-purple-500/10 text-purple-400 border border-purple-500/30 font-mono text-3xs uppercase px-1.5 py-0.5 rounded">Low-Latency Stream</span>
+                            </figcaption>
                             <span class="font-mono text-xs text-muted">Conversational Systems</span>
                         </div>
                         <h3 class="font-serif text-2xl mt-1 mb-2">Real-Time Voice AI Agent</h3>
                         <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">Developed a real-time conversational voice agent supporting bidirectional streaming, tool invocation, interruption handling, and telephony integration with Twilio.</p>
-                        
-                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
-                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
+
+                        <!-- Live Demo Preview: Voice Architecture Stream Telemetry -->
+                        <div class="border border-border bg-card/70 rounded p-2.5 my-3 font-mono text-xs position-relative overflow-hidden">
+                            <div class="d-flex items-center justify-content-between text-muted mb-2 border-bottom pb-1.5">
                                 <div class="d-flex items-center gap-2">
-                                    <span class="notebook-cell-btn" data-target="out-5">In [5] ▶ Run</span>
-                                    <span class="text-xs opacity-75">voice_stream.py</span>
+                                    <button class="notebook-cell-btn voice-play-trigger active-run border-0 cursor-pointer" id="voice-ai-play-btn">
+                                        <i class="fas fa-play me-1 text-accent" id="voice-play-icon"></i><span id="voice-play-text">Simulate Stream Flow</span>
+                                    </button>
+                                    <span class="text-xs opacity-75">twilio_stream.py</span>
                                 </div>
-                                <span class="text-xs text-accent">Twilio WebSockets</span>
+                                <span class="text-xs text-accent font-mono"><i class="fas fa-bolt me-1"></i>185ms Latency</span>
                             </div>
-                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">async with websocket.connect(twilio_url) as ws:
-    audio_chunk = await ws.receive_bytes()</pre>
-                            <div id="out-5" class="notebook-output-box">
-                                <span class="opacity-75">Out [5]:</span> Twilio WebSocket audio stream connected. Bidirectional latency: 185ms. Voice VAD active.
+
+                            <!-- Animated Architecture Stream Canvas -->
+                            <div class="voice-waveform-wrapper position-relative rounded border border-border/50 bg-black/40 p-1 mb-2" style="height: 110px;">
+                                <canvas id="voice-waveform-canvas" class="w-100 h-100 d-block"></canvas>
+                                <div class="canvas-hint font-mono text-3xs text-muted/70 position-absolute bottom-1 right-2 pointer-events-none">
+                                    <i class="fas fa-mouse-pointer me-1"></i>Bidirectional Audio Chunks
+                                </div>
+                            </div>
+
+                            <!-- Live Telemetry / Transcript Output -->
+                            <div id="voice-transcript-box" class="notebook-output-box py-1.5 px-2.5 bg-black/40 rounded text-3xs font-mono text-foreground/85 leading-normal" style="min-height: 42px;">
+                                <span class="text-muted opacity-75"><i class="fas fa-satellite-dish me-1 text-accent"></i>Click ▶ Simulate Stream Flow to visualize sub-185ms audio chunk routing &amp; tool call execution.</span>
                             </div>
                         </div>
 
-                        <p class="font-mono text-xs text-muted mb-3">FastAPI · WebSockets · Twilio · Python</p>
-                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
-                            <span class="text-muted">[In Active Development]</span>
+                        <p class="font-mono text-xs text-muted mb-3">FastAPI · WebSockets · Twilio · Python · Deepgram VAD</p>
+                        <div class="d-flex align-items-center justify-content-between border-top pt-3 font-mono text-xs">
+                            <div class="d-flex gap-4">
+                                <a href="https://github.com/AdityaInamdar334/Voice-agent-local-hosting" target="_blank" class="ref-link text-accent"><i class="fab fa-github me-1"></i> Source ↗</a>
+                                <span class="text-emerald-400 font-mono text-3xs d-inline-flex align-items-center"><i class="fas fa-circle text-emerald-400 font-2xs me-1 animate-pulse"></i> Telephony Ready</span>
+                            </div>
+                            <button class="text-accent/90 hover:text-accent font-mono text-xs bg-transparent border-0 p-0 cursor-pointer arch-specs-link" data-project="voice-ai">
+                                System Specs &rarr;
+                            </button>
                         </div>
                     </figure>
                 </div>
 
-                <!-- Fig 06 -->
+                <!-- Fig 03: LLaMA Alignment Pipeline -->
                 <div class="col-12 col-md-6">
-                    <figure class="paper-card p-4 h-100 d-flex flex-column">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column" data-project-id="llama-alignment">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 03 — Alignment &amp; DPO</figcaption>
+                            <span class="font-mono text-xs text-muted">Apple Silicon</span>
+                        </div>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">LLaMA Alignment Pipeline</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">End-to-end alignment pipeline for fine-tuning LLaMA models using Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO), optimized for Apple Silicon hardware.</p>
+
+                        <!-- Preview Banner -->
+                        <div class="position-relative rounded overflow-hidden border border-border/70 my-3 group cursor-pointer">
+                            <a href="https://github.com/AdityaInamdar334/llama-mlx-alignment" target="_blank" class="d-block text-decoration-none">
+                                <img src="assets/images/llama_alignment.png" alt="LLaMA Alignment Pipeline MLX Preview" class="img-fluid w-100 object-fit-cover transition-transform duration-300 group-hover:scale-105" style="max-height: 145px;" loading="lazy">
+                                <div class="position-absolute top-2 right-2">
+                                    <span class="badge bg-amber-500/90 text-black font-mono text-3xs shadow-sm d-inline-flex align-items-center gap-1.5 px-2 py-1 rounded fw-semibold">
+                                        <i class="fas fa-microchip font-3xs text-black"></i> MLX Apple Silicon DPO
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Interactive DPO Reward Margin Visualizer Canvas -->
+                        <div class="border border-border bg-card/70 rounded p-2.5 mb-3 font-mono text-xs position-relative overflow-hidden">
+                            <div class="d-flex items-center justify-content-between text-muted mb-2 border-bottom pb-1.5">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn active-run" id="dpo-canvas-trigger"><i class="fas fa-chart-line me-1 text-accent"></i>DPO Implicit Reward Margin</span>
+                                    <span class="text-xs opacity-75">dpo_loss.js</span>
+                                </div>
+                                <span class="badge bg-amber-500/10 text-amber-400 border border-amber-500/30 text-3xs font-mono">β = 0.1 · UltraFeedback</span>
+                            </div>
+                            <div class="dpo-canvas-wrapper position-relative rounded border border-border/50 bg-black/40" style="height: 110px;">
+                                <canvas id="dpo-reward-canvas" class="w-100 h-100 d-block"></canvas>
+                                <div class="canvas-hint font-mono text-3xs text-muted/70 position-absolute bottom-1 right-2 pointer-events-none">
+                                    <i class="fas fa-mouse-pointer me-1"></i>Hover to Inspect Log Ratios
+                                </div>
+                            </div>
+                            <div class="notebook-output-box mt-2 py-1 px-2 bg-black/40 rounded text-3xs font-mono text-foreground/80 d-flex justify-content-between align-items-center">
+                                <span><span class="text-accent font-semibold">Chosen Margin r_w:</span> +2.84 | <span class="text-accent font-semibold">Rejected r_l:</span> -1.12 | <span class="text-accent font-semibold">DPO Loss:</span> 0.142</span>
+                                <span class="text-emerald-400 font-mono text-3xs">● MLX M3 Max 42 tok/s</span>
+                            </div>
+                        </div>
+
+                        <p class="font-mono text-xs text-muted mb-3">MLX · LoRA · DPO · Hugging Face · Python</p>
+                        <div class="d-flex align-items-center justify-content-between border-top pt-3 font-mono text-xs">
+                            <div class="d-flex gap-4">
+                                <a href="https://github.com/AdityaInamdar334/llama-mlx-alignment" target="_blank" class="ref-link text-accent"><i class="fab fa-github me-1"></i> Source ↗</a>
+                            </div>
+                            <button class="text-accent/90 hover:text-accent font-mono text-xs bg-transparent border-0 p-0 cursor-pointer arch-specs-link" data-project="llama-alignment">
+                                System Specs &rarr;
+                            </button>
+                        </div>
+                    </figure>
+                </div>
+
+                <!-- Fig 04: AI Medical Image Analysis -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column" data-project-id="medical-ai">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 04 — Medical MLOps</figcaption>
+                            <span class="font-mono text-xs text-muted">MLOps Pipeline</span>
+                        </div>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">AI Medical Image Analysis</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">An end-to-end production-ready AI system for automated chest X-ray interpretation using deep learning, explainable AI (Grad-CAM), and LLMs for structured radiology reports.</p>
+
+                        <!-- Live Demo Preview Banner -->
+                        <div class="position-relative rounded overflow-hidden border border-border/70 my-3 group cursor-pointer">
+                            <a href="https://nih-dataset-image-ml-model-ajsudumesy56vbikf5vwsc.streamlit.app/" target="_blank" class="d-block text-decoration-none">
+                                <img src="assets/images/nih_medical_live.png" alt="AI Medical Image Analysis Live Streamlit App" class="img-fluid w-100 object-fit-cover transition-transform duration-300 group-hover:scale-105" style="max-height: 145px;" loading="lazy">
+                                <div class="position-absolute top-2 right-2">
+                                    <span class="badge bg-emerald-500/90 text-white font-mono text-3xs shadow-sm d-inline-flex align-items-center gap-1.5 px-2 py-1 rounded">
+                                        <i class="fas fa-circle font-3xs text-emerald-300 animate-pulse"></i> Live Streamlit MLOps App ↗
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Interactive Chest X-Ray Grad-CAM Heatmap Canvas -->
+                        <div class="border border-border bg-card/70 rounded p-2.5 mb-3 font-mono text-xs position-relative overflow-hidden">
+                            <div class="d-flex items-center justify-content-between text-muted mb-2 border-bottom pb-1.5">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn active-run" id="medical-canvas-trigger"><i class="fas fa-x-ray me-1 text-accent"></i>ViT Grad-CAM Attention Map</span>
+                                    <span class="text-xs opacity-75">gradcam_xray.js</span>
+                                </div>
+                                <span class="badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-3xs font-mono">94.2% AUC ViT-B/16</span>
+                            </div>
+                            <div class="medical-canvas-wrapper position-relative rounded border border-border/50 bg-black/40" style="height: 110px;">
+                                <canvas id="medical-gradcam-canvas" class="w-100 h-100 d-block"></canvas>
+                                <div class="canvas-hint font-mono text-3xs text-muted/70 position-absolute bottom-1 right-2 pointer-events-none">
+                                    <i class="fas fa-mouse-pointer me-1"></i>Hover Bounding Scans Live
+                                </div>
+                            </div>
+                            <div class="notebook-output-box mt-2 py-1 px-2 bg-black/40 rounded text-3xs font-mono text-foreground/80 d-flex justify-content-between align-items-center">
+                                <span><span class="text-accent font-semibold">ViT Layer:</span> block_11 | <span class="text-accent font-semibold">Grad-CAM:</span> 14.2ms | <span class="text-accent font-semibold">Scan Region:</span> Right Lower Lobe</span>
+                                <span class="text-emerald-400 font-mono text-3xs">● Infiltration Detected</span>
+                            </div>
+                        </div>
+
+                        <p class="font-mono text-xs text-muted mb-3">PyTorch · FastAPI · Grad-CAM · Streamlit · Python</p>
+                        <div class="d-flex align-items-center justify-content-between border-top pt-3 font-mono text-xs">
+                            <div class="d-flex gap-4">
+                                <a href="https://nih-dataset-image-ml-model-ajsudumesy56vbikf5vwsc.streamlit.app/" target="_blank" class="ref-link text-accent fw-bold"><i class="fas fa-external-link-alt me-1"></i> Live Demo ↗</a>
+                                <a href="https://github.com/AdityaInamdar334/NIH-dataset-image-ml-model" target="_blank" class="ref-link text-accent"><i class="fab fa-github me-1"></i> Source ↗</a>
+                            </div>
+                            <button class="text-accent/90 hover:text-accent font-mono text-xs bg-transparent border-0 p-0 cursor-pointer arch-specs-link" data-project="medical-ai">
+                                System Specs &rarr;
+                            </button>
+                        </div>
+                    </figure>
+                </div>
+
+                <!-- Fig 05: RSSM World Model -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column" data-project-id="rssm-world">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 05 — Reinforcement Learning</figcaption>
+                            <span class="font-mono text-xs text-muted">World Model</span>
+                        </div>
+                        <h3 class="font-serif text-2xl mt-1 mb-2">RSSM World Model</h3>
+                        <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">Implemented a Dreamer-inspired Recurrent State Space Model (RSSM) trained on pixel observations. 5M-parameter model achieving 27.4x training acceleration using Apple Silicon MPS.</p>
+
+                        <!-- Live Demo Preview Banner -->
+                        <div class="position-relative rounded overflow-hidden border border-border/70 my-3 group cursor-pointer">
+                            <a href="https://adityainamdar334.github.io/cheetah-rssm-world-model" target="_blank" class="d-block text-decoration-none">
+                                <img src="assets/images/rssm_world_live.png" alt="RSSM World Model Live App Preview" class="img-fluid w-100 object-fit-cover transition-transform duration-300 group-hover:scale-105" style="max-height: 145px;" loading="lazy">
+                                <div class="position-absolute top-2 right-2">
+                                    <span class="badge bg-emerald-500/90 text-white font-mono text-3xs shadow-sm d-inline-flex align-items-center gap-1.5 px-2 py-1 rounded">
+                                        <i class="fas fa-circle font-3xs text-emerald-300 animate-pulse"></i> Live Github Pages App ↗
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Interactive RSSM World Model Canvas Visualizer -->
+                        <div class="border border-border bg-card/70 rounded p-2.5 mb-3 font-mono text-xs position-relative overflow-hidden">
+                            <div class="d-flex items-center justify-content-between text-muted mb-2 border-bottom pb-1.5">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn active-run" id="rssm-canvas-trigger"><i class="fas fa-microchip me-1 text-accent"></i>Latent Trajectory Dreaming</span>
+                                    <span class="text-xs opacity-75">rssm_latent.js</span>
+                                </div>
+                                <span class="badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-3xs font-mono">15-Step Imagination</span>
+                            </div>
+                            <div class="rssm-canvas-wrapper position-relative rounded border border-border/50 bg-black/40" style="height: 110px;">
+                                <canvas id="rssm-dream-canvas" class="w-100 h-100 d-block"></canvas>
+                                <div class="canvas-hint font-mono text-3xs text-muted/70 position-absolute bottom-1 right-2 pointer-events-none">
+                                    <i class="fas fa-mouse-pointer me-1"></i>Hover to Accelerate Rollouts
+                                </div>
+                            </div>
+                            <div class="notebook-output-box mt-2 py-1 px-2 bg-black/40 rounded text-3xs font-mono text-foreground/80 d-flex justify-content-between align-items-center">
+                                <span><span class="text-accent font-semibold">Deterministic h_t:</span> 200d | <span class="text-accent font-semibold">Stochastic z_t:</span> 30d | <span class="text-accent font-semibold">Reward:</span> +894.1</span>
+                                <span class="text-emerald-400 font-mono text-3xs">● MPS 27.4x GPU</span>
+                            </div>
+                        </div>
+
+                        <p class="font-mono text-xs text-muted mb-3">PyTorch · Metal MPS · World Models · Reinforcement Learning</p>
+                        <div class="d-flex align-items-center justify-content-between border-top pt-3 font-mono text-xs">
+                            <div class="d-flex gap-4">
+                                <a href="https://adityainamdar334.github.io/cheetah-rssm-world-model" target="_blank" class="ref-link text-accent fw-bold"><i class="fas fa-external-link-alt me-1"></i> Live Demo ↗</a>
+                                <a href="https://github.com/AdityaInamdar334/cheetah-rssm-world-model" target="_blank" class="ref-link text-accent"><i class="fab fa-github me-1"></i> Source ↗</a>
+                            </div>
+                            <button class="text-accent/90 hover:text-accent font-mono text-xs bg-transparent border-0 p-0 cursor-pointer arch-specs-link" data-project="rssm-world">
+                                System Specs &rarr;
+                            </button>
+                        </div>
+                    </figure>
+                </div>
+
+                <!-- Fig 06: GPT & Transformers From Scratch -->
+                <div class="col-12 col-md-6">
+                    <figure class="paper-card p-4 h-100 d-flex flex-column" data-project-id="gpt-scratch">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <figcaption class="font-mono text-xs text-accent tracking-wide">Fig. 06 — Transformer Engineering</figcaption>
                             <span class="font-mono text-xs text-muted">First Principles</span>
                         </div>
                         <h3 class="font-serif text-2xl mt-1 mb-2">GPT &amp; Transformers From Scratch</h3>
                         <p class="font-sans text-sm text-foreground/85 leading-relaxed flex-grow">Implemented GPT-style transformer architectures and sequence-to-sequence models from first principles in PyTorch to analyze multi-head attention and autoregressive KV-caching.</p>
-                        
-                        <div class="border border-border bg-card/60 rounded p-2.5 my-3 font-mono text-xs">
-                            <div class="d-flex items-center justify-content-between text-muted mb-1 border-bottom pb-1">
-                                <div class="d-flex items-center gap-2">
-                                    <span class="notebook-cell-btn" data-target="out-6">In [6] ▶ Run</span>
-                                    <span class="text-xs opacity-75">attention_mechanism.py</span>
+
+                        <!-- Transformer Architecture Preview Banner -->
+                        <div class="position-relative rounded overflow-hidden border border-border/70 my-3 group cursor-pointer">
+                            <a href="https://github.com/AdityaInamdar334/gpt-from-scratch" target="_blank" class="d-block text-decoration-none">
+                                <img src="assets/images/gpt_transformers.png" alt="GPT Transformer Architecture Preview" class="img-fluid w-100 object-fit-cover transition-transform duration-300 group-hover:scale-105" style="max-height: 145px;" loading="lazy">
+                                <div class="position-absolute top-2 right-2">
+                                    <span class="badge bg-indigo-500/90 text-white font-mono text-3xs shadow-sm d-inline-flex align-items-center gap-1.5 px-2 py-1 rounded">
+                                        <i class="fas fa-brain font-3xs text-indigo-200"></i> Multi-Head Attention Engine
+                                    </span>
                                 </div>
-                                <span class="text-xs text-accent">PyTorch Autograd</span>
+                            </a>
+                        </div>
+
+                        <!-- Multi-Head Attention Canvas Visualizer -->
+                        <div class="border border-border bg-card/70 rounded p-2.5 mb-3 font-mono text-xs position-relative overflow-hidden">
+                            <div class="d-flex items-center justify-content-between text-muted mb-2 border-bottom pb-1.5">
+                                <div class="d-flex items-center gap-2">
+                                    <span class="notebook-cell-btn active-run" id="attn-matrix-trigger"><i class="fas fa-network-wired me-1 text-accent"></i>Interactive Attention Map</span>
+                                    <span class="text-xs opacity-75">attention_matrix.js</span>
+                                </div>
+                                <span class="badge bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 text-3xs font-mono">Q × Kᵀ / √d_k</span>
                             </div>
-                            <pre class="mb-0 text-xs text-foreground/90 whitespace-pre-wrap">scores = (q @ k.transpose(-2, -1)) / math.sqrt(d_k)
-attn = F.softmax(scores.masked_fill(mask == <span class="text-accent">0</span>, <span class="text-accent">-1e9</span>))</pre>
-                            <div id="out-6" class="notebook-output-box">
-                                <span class="opacity-75">Out [6]:</span> Attention tensor shape: (batch_size=8, n_heads=12, seq_len=512, d_head=64). Softmax output verified.
+                            <div class="attn-canvas-wrapper position-relative rounded border border-border/50 bg-black/40" style="height: 110px;">
+                                <canvas id="attention-matrix-canvas" class="w-100 h-100 d-block"></canvas>
+                                <div class="canvas-hint font-mono text-3xs text-muted/70 position-absolute bottom-1 right-2 pointer-events-none">
+                                    <i class="fas fa-mouse-pointer me-1"></i>Hover Tokens Live
+                                </div>
+                            </div>
+                            <div class="notebook-output-box mt-2 py-1 px-2 bg-black/40 rounded text-3xs font-mono text-foreground/80 d-flex justify-content-between align-items-center">
+                                <span><span class="text-accent font-semibold">Heads:</span> 12 | <span class="text-accent font-semibold">d_model:</span> 768 | <span class="text-accent font-semibold">KV-Cache Latency:</span> 4.2x faster</span>
+                                <span class="text-emerald-400 font-mono text-3xs">● Softmax Masked</span>
                             </div>
                         </div>
 
                         <p class="font-mono text-xs text-muted mb-3">PyTorch · NumPy · NLP · Deep Learning</p>
-                        <div class="d-flex gap-4 border-top pt-3 font-mono text-xs">
-                            <a href="https://github.com/AdityaInamdar334/gpt-from-scratch" target="_blank" class="ref-link text-accent">gpt source ↗</a>
-                            <a href="https://github.com/AdityaInamdar334/transformer-from-scratch" target="_blank" class="ref-link text-accent">transformer source ↗</a>
+                        <div class="d-flex align-items-center justify-content-between border-top pt-3 font-mono text-xs">
+                            <div class="d-flex gap-4">
+                                <a href="https://github.com/AdityaInamdar334/gpt-from-scratch" target="_blank" class="ref-link text-accent"><i class="fab fa-github me-1"></i> GPT Source ↗</a>
+                                <a href="https://github.com/AdityaInamdar334/transformer-from-scratch" target="_blank" class="ref-link text-accent"><i class="fab fa-github me-1"></i> Transformer Source ↗</a>
+                            </div>
+                            <button class="text-accent/90 hover:text-accent font-mono text-xs bg-transparent border-0 p-0 cursor-pointer arch-specs-link" data-project="gpt-scratch">
+                                System Specs &rarr;
+                            </button>
                         </div>
                     </figure>
                 </div>
@@ -1154,6 +1373,52 @@ attn = F.softmax(scores.masked_fill(mask == <span class="text-accent">0</span>, 
             <div class="d-flex flex-wrap gap-3 border-top border-white/10 pt-3 mt-4 font-mono text-xs">
                 <a id="modal-demo-link" href="#" target="_blank" class="btn btn-warning text-dark px-3 py-1.5 fw-semibold rounded-2"><i class="fas fa-external-link-alt me-1"></i> Open Live App ↗</a>
                 <a id="modal-source-link" href="#" target="_blank" class="btn btn-outline-light px-3 py-1.5 rounded-2"><i class="fab fa-github me-1"></i> View Source Code ↗</a>
+            </div>
+    <!-- Architecture Specs Drawer / Modal (Pop-up with System Diagrams & Metrics) -->
+    <div id="arch-specs-modal" class="arch-modal-overlay" style="display: none;">
+        <div class="arch-modal-card">
+            <div class="arch-modal-header d-flex align-items-center justify-content-between border-bottom border-white/10 pb-3 mb-3">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="font-mono text-xs text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/30 uppercase tracking-wider" id="arch-modal-tag">System Specs</span>
+                    <h3 class="font-serif text-xl md:text-2xl m-0 text-foreground" id="arch-modal-title">Architecture Specs</h3>
+                </div>
+                <button class="arch-modal-close border-0 bg-transparent text-silver hover:text-accent font-mono text-lg cursor-pointer transition-colors p-1" id="arch-specs-close" aria-label="Close Architecture Specs">&times;</button>
+            </div>
+            
+            <div class="arch-modal-body" style="max-height: 72vh; overflow-y: auto;">
+                <!-- Section 1: System Pipeline Flowchart -->
+                <div class="arch-section mb-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h4 class="font-mono text-xs text-accent uppercase tracking-wider m-0"><i class="fas fa-diagram-project me-1.5"></i> End-to-End System Diagram Flowchart</h4>
+                        <span class="font-mono text-3xs text-muted">Client &rarr; API Gateway &rarr; Vector Store / LLM &rarr; Stream</span>
+                    </div>
+                    <div class="arch-diagram-box p-3 border border-border/80 bg-black/60 rounded" id="arch-modal-diagram">
+                        <!-- SVG Diagram content dynamically rendered -->
+                    </div>
+                </div>
+
+                <!-- Section 2: Quantified Performance Metrics -->
+                <div class="arch-section mb-4">
+                    <h4 class="font-mono text-xs text-accent uppercase tracking-wider mb-2.5"><i class="fas fa-tachometer-alt me-1.5"></i> Quantified Key Metrics &amp; Benchmarks</h4>
+                    <div class="row g-2.5 font-mono text-xs" id="arch-modal-metrics">
+                        <!-- Metric cards dynamically rendered -->
+                    </div>
+                </div>
+
+                <!-- Section 3: Technical Highlights & Specs -->
+                <div class="arch-section">
+                    <h4 class="font-mono text-xs text-accent uppercase tracking-wider mb-2"><i class="fas fa-microchip me-1.5"></i> System Architecture Highlights</h4>
+                    <div class="p-3 border border-border/70 bg-card/40 rounded text-xs text-foreground/85 leading-relaxed font-sans" id="arch-modal-highlights">
+                        <!-- Highlights dynamically rendered -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="arch-modal-footer d-flex align-items-center justify-content-between border-top border-white/10 pt-3 mt-3 font-mono text-xs">
+                <span class="text-muted text-3xs" id="arch-modal-footer-info">Enterprise Architecture Specs</span>
+                <button class="btn btn-outline-light text-accent border-accent/40 hover:bg-accent/10 px-3 py-1 font-mono text-xs rounded" id="arch-modal-close-btn">
+                    <i class="fas fa-times me-1"></i> Close Specs
+                </button>
             </div>
         </div>
     </div>

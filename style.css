@@ -3088,3 +3088,272 @@ input, textarea {
     20% { left: 200%; }
     100% { left: 200%; }
 }
+
+/* ==========================================================================
+   Bootstrap 5 & Mobile Responsive Enhancements
+   ========================================================================== */
+
+/* Bootstrap 5 Offcanvas Mobile Navigation Drawer Styles */
+#mobileNavbarOffcanvas {
+    background-color: #060913 !important;
+    background-image: radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.12), transparent 50%),
+                      radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.1), transparent 50%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 85vw !important;
+    max-width: 340px !important;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+#mobileNavbarOffcanvas .nav-link {
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    padding-left: 8px;
+}
+
+#mobileNavbarOffcanvas .nav-link:hover,
+#mobileNavbarOffcanvas .nav-link:focus {
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8 !important;
+    transform: translateX(4px);
+}
+
+/* Touch-friendly Horizontal Arsenal Pill Scrolling */
+.arsenal-filters-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+.arsenal-filters-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* Responsive Metric Borders */
+@media (min-width: 768px) {
+    .border-end-md {
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
+/* Mobile Overflows & Screen Sizing (< 768px) */
+@media (max-width: 768px) {
+    body {
+        font-size: 0.95rem;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    h1.display-6, .display-6 {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+    }
+
+    .text-4xl, .text-5xl {
+        font-size: 1.75rem !important;
+    }
+
+    .text-3xl {
+        font-size: 1.4rem !important;
+    }
+
+    .kunj-prompt-card {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .prompt-chips .chip-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        touch-action: manipulation;
+    }
+
+    .paper-card {
+        padding: 1.25rem !important;
+    }
+
+    /* Modal responsiveness on mobile phones */
+    .cmd-modal-card {
+        width: 94vw !important;
+        max-width: 94vw !important;
+        max-height: 88vh !important;
+        margin: 0 auto;
+    }
+
+    .back-to-top-btn {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* Small Smartphone Screen Specific Adjustments (< 480px) */
+@media (max-width: 480px) {
+    .navbar-brand span.font-serif {
+        font-size: 1.05rem !important;
+    }
+
+    .paper-timeline .paper-article {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .stats-wrapper img {
+        max-width: 100% !important;
+    }
+}
+
+/* --- Architecture Specs Modal & Live Demos System --- */
+
+.arch-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 10, 20, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arch-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.arch-modal-card {
+    width: 92vw;
+    max-width: 860px;
+    background: rgba(13, 20, 36, 0.96);
+    border: 1px solid rgba(129, 140, 248, 0.35);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(129, 140, 248, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #e2e8f0;
+    transform: scale(0.95) translateY(15px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arch-modal-overlay.active .arch-modal-card {
+    transform: scale(1) translateY(0);
+}
+
+.arch-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.arch-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(129, 140, 248, 0.3);
+    border-radius: 3px;
+}
+
+/* System Flowchart Diagram Styling */
+.arch-diagram-box {
+    overflow-x: auto;
+    background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.9), rgba(5, 10, 20, 0.98));
+}
+
+.arch-node {
+    fill: rgba(15, 23, 42, 0.95);
+    stroke: #818cf8;
+    stroke-width: 1.5;
+    rx: 6px;
+    ry: 6px;
+    transition: all 0.2s ease;
+}
+
+.arch-node:hover {
+    fill: rgba(129, 140, 248, 0.18);
+    stroke: #38bdf8;
+}
+
+.arch-node-text {
+    fill: #f8fafc;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.arch-node-sub {
+    fill: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+}
+
+.arch-flow-line {
+    stroke: rgba(129, 140, 248, 0.5);
+    stroke-width: 2;
+    stroke-dasharray: 6, 6;
+    animation: flowDash 20s linear infinite;
+}
+
+@keyframes flowDash {
+    to {
+        stroke-dashoffset: -120;
+    }
+}
+
+.arch-flow-pulse {
+    fill: #38bdf8;
+    filter: drop-shadow(0 0 6px #38bdf8);
+}
+
+/* Metrics Cards */
+.arch-metric-card {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.arch-metric-card:hover {
+    border-color: rgba(129, 140, 248, 0.4);
+    transform: translateY(-2px);
+}
+
+.arch-metric-val {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+/* Interactive Demos Styling */
+.nexus-canvas-wrapper {
+    cursor: grab;
+    background: radial-gradient(circle at center, rgba(13, 20, 36, 0.8), rgba(0, 0, 0, 0.95));
+}
+.nexus-canvas-wrapper:active {
+    cursor: grabbing;
+}
+
+.voice-waveform-wrapper {
+    background: radial-gradient(circle at left, rgba(129, 140, 248, 0.1), rgba(0, 0, 0, 0.7));
+}
+
+.text-3xs {
+    font-size: 0.68rem !important;
+}
+
+.font-2xs {
+    font-size: 0.75rem !important;
+}
+
+.animate-pulse {
+    animation: pulseGlow 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.9); }
+}
